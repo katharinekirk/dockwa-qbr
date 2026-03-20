@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q1 2026 Funnel: Engagement</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+html { scroll-behavior: smooth; scroll-padding-top: 60px; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Open Sans', sans-serif; background: #f5f7fa; color: #2d3748; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; color: #172C4D; }
+h1 { font-size: 26px; margin-bottom: 4px; }
+h2 { font-size: 20px; margin: 32px 0 14px; padding-bottom: 6px; border-bottom: 2px solid #6ACCE0; }
+h3 { font-size: 16px; margin: 20px 0 8px; color: #023C8F; }
+h4 { font-size: 15px; margin: 0 0 8px; }
+p { margin-bottom: 12px; font-size: 15px; }
+ul { margin: 8px 0 16px 20px; font-size: 15px; }
+li { margin-bottom: 6px; }
+a { color: #023C8F; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 14px; }
+th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+th { background: #172C4D; color: white; font-weight: 600; font-size: 13px; }
+td { background: white; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.green { color: #16a34a; font-weight: 600; }
+.red { color: #dc2626; font-weight: 600; }
+.yellow { color: #d97706; font-weight: 600; }
+.blue { color: #2563eb; font-weight: 600; }
+.obs-block { background: white; border-radius: 8px; padding: 20px 24px; margin: 16px 0; border-left: 4px solid #023C8F; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.obs-block.warning { border-left-color: #d97706; }
+.obs-block.risk { border-left-color: #dc2626; }
+.obs-block.positive { border-left-color: #16a34a; }
+.response-card { background: #f0f9ff; border: 1px solid #6ACCE0; border-radius: 8px; padding: 16px 20px; margin: 12px 0 24px; }
+.response-card h4 { margin-bottom: 8px; font-size: 14px; }
+.response-card p { margin-bottom: 8px; font-size: 14px; }
+.response-card ul { margin: 8px 0 12px 20px; font-size: 14px; }
+.chip { display: inline-block; background: #6ACCE0; color: #172C4D; font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 12px; margin-right: 8px; vertical-align: middle; }
+.owner-badge { display: inline-block; background: #172C4D; color: white; font-size: 12px; font-weight: 600; padding: 3px 12px; border-radius: 12px; margin-left: 8px; }
+.stage-bar { background: #172C4D; color: white; padding: 10px 20px; border-radius: 8px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; font-family: 'Poppins', sans-serif; }
+.stage-bar .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+.stage-bar .title { font-size: 20px; font-weight: 600; }
+.nav-row { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 14px; }
+.rock-box { background: #eef6fa; border: 1px solid #6ACCE0; border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+.rock-box h4 { margin-bottom: 8px; }
+.note-callout { background: #fef9ee; border: 1px solid #fde68a; border-radius: 6px; padding: 12px 16px; margin: 12px 0; font-size: 14px; }
+.note-callout strong { color: #92400e; }
+.divider { height: 2px; background: #e2e8f0; margin: 40px 0; }
+.sub-table-label { font-size: 13px; color: #023C8F; font-weight: 600; margin-top: 16px; margin-bottom: 8px; }
+.closing-note { font-size: 14px; color: #555; margin: 12px 0; font-style: italic; }
+.engineering-stats { background: white; border-radius: 8px; padding: 20px 24px; margin: 16px 0; }
+.stats-row { display: flex; gap: 24px; margin: 12px 0; flex-wrap: wrap; }
+.stat-item { flex: 1; min-width: 200px; }
+.stat-number { font-size: 24px; font-weight: 600; color: #172C4D; }
+@media print { body { background: white; } .container { padding: 20px; } }
+
+.global-nav { position: sticky; top: 0; z-index: 100; background: #172C4D; padding: 0; font-family: 'Poppins', sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.global-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; overflow-x: auto; gap: 0; padding: 0 20px; }
+.global-nav a { display: block; padding: 10px 14px; text-decoration: none; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; white-space: nowrap; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; }
+.global-nav a:hover { color: white; }
+.global-nav a.active { color: white; border-bottom-color: #6ACCE0; }
+/* Layout: sidebar + content */
+.page-layout { display: flex; max-width: 1200px; margin: 0 auto; min-height: calc(100vh - 42px); }
+.sidebar { width: 200px; flex-shrink: 0; position: sticky; top: 42px; height: calc(100vh - 42px); overflow-y: auto; padding: 32px 0 32px 0; }
+.sidebar-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #718096; font-weight: 600; padding: 0 20px 12px; font-family: 'Poppins', sans-serif; }
+.sidebar a { display: block; padding: 6px 20px; font-size: 13px; color: #4A5568; text-decoration: none; line-height: 1.4; border-left: 3px solid transparent; transition: all 0.15s; }
+.sidebar a:hover { color: #023C8F; background: #f0f4f8; }
+.sidebar a.active { color: #023C8F; font-weight: 600; border-left-color: #6ACCE0; background: #f0f9ff; }
+.content-area { flex: 1; min-width: 0; border-left: 1px solid #e2e8f0; }
+.container { max-width: 860px; padding: 40px 48px; }
+@media (max-width: 960px) { .sidebar { display: none; } .page-layout { display: block; } .container { padding: 32px 20px; } }
+</style>
+</head>
+<body>
+<nav class="global-nav">
+  <div class="global-nav-inner">
+    <a href="index.html" style="display:flex;align-items:center;padding:6px 16px 6px 4px;border:none;"><img src="https://assets.dockwa.com/assets/logo/dockwa-white-f6ced7057af8043f1db50689b3d608c81bd415a0fc483a2eb15a9586695385ba.png" alt="Dockwa" style="height:22px;"></a>
+    <a href="index.html">Home</a>
+    <a href="q1-funnel-awareness.html">Awareness</a>
+    <a href="q1-funnel-engagement.html" class="active">Engagement</a>
+    <a href="q1-funnel-acquisition.html">Acquisition</a>
+    <a href="q1-funnel-implementation.html">Implementation</a>
+    <a href="q1-funnel-activation.html">Activation</a>
+    <a href="q1-funnel-adoption.html">Adoption</a>
+    <a href="q1-funnel-retention.html">Retention</a>
+    <a href="q1-product.html">Product</a>
+    <a href="q1-support.html">Support</a>
+  </div>
+</nav>
+<div class="page-layout">
+<aside class="sidebar">
+  <div class="sidebar-title">On this page</div>
+    <a href="#marketing-pipeline-influence">Marketing: Pipeline Influence</a>
+    <a href="#marketing-observations">Marketing Observations</a>
+    <a href="#marketing-qanda">Marketing Q&A</a>
+    <a href="#marketing-key-initiatives">Marketing: Key Initiatives</a>
+    <a href="#sales-opportunity-creation">Sales: Opportunity Creation</a>
+    <a href="#sales-observations">Sales Observations</a>
+    <a href="#sales-qanda">Sales Q&A</a>
+</aside>
+<div class="content-area">
+<div class="container">
+
+<div class="stage-bar">
+  <div>
+    <div class="label">Funnel Stage 2 of 7</div>
+    <div class="title">Engagement</div>
+  </div>
+  <div>
+    <span class="owner-badge">Erin</span>
+    <span class="owner-badge">Matt</span>
+  </div>
+</div>
+
+
+<h2 id="marketing-pipeline-influence">Marketing: Pipeline Influence</h2>
+
+<h3>Marketing-Influenced Pipeline (Erin)</h3>
+<table>
+<tr><th>Metric</th><th class="num">Q1 Benchmark</th><th class="num">Q1 Actual</th></tr>
+<tr><td>MQL-to-Opp Conversion (NB)</td><td class="num">20%</td><td class="num">41%</td></tr>
+<tr><td>MQL-to-Opp Conversion (Expansion)*</td><td class="num">19%</td><td class="num">5%</td></tr>
+<tr><td>Marketing-Sourced Pipeline ARR</td><td class="num">$268.7</td><td class="num">$261.7</td></tr>
+</table>
+
+<div class="note-callout">
+<strong>*Achieved 23% Expansion MQL-to-Opp conversion rate based on benchmark modeling and includes existing</strong>
+</div>
+
+<!-- MARKETING OBSERVATIONS -->
+<h2 id="marketing-observations">Marketing Observations</h2>
+
+<div class="obs-block warning">
+  <h4>Expansion pipeline is nearly absent</h4>
+  <ul>
+    <li>54 total expansion opps vs 125 budget (43%) (across all sources). This is the single biggest pipeline gap.</li>
+    <li>Expansion MQLs are at 27% of plan (17 vs 63), and Marketing campaigns have only generated a single expansion opportunity in Q1.</li>
+    <li>The expansion playbook is still missing per the March 5 Pulse meeting. Expansion growth is opportunistic rather than systematic.</li>
+  </ul>
+</div>
+
+<!-- MARKETING Q&A -->
+<h2 id="marketing-qanda">Marketing Q&A</h2>
+
+<h3>What would it take to stand up a systematic expansion MQL engine for Q2?</h3>
+<div class="response-card">
+  <p>The building blocks exist. The work is activating them in the right sequence.</p>
+
+  <h4>Segmentation first</h4>
+  <p>The HubSpot data model already has what we need: current module subscriptions, ARR, feature adoption opportunity, and engagement history. The first step is building dynamic segments that identify which customers are expansion-ready, filtered by module gap + feasibility, tenure, product engagement. Everything downstream depends on this.</p>
+
+  <h4>Lead scoring</h4>
+  <p>A scoring framework layered on customer engagement signals (email, site behavior, in-app activity) and buyer intent data in HubSpot will surface high-potential accounts for Sales. The goal is a prioritized view of the install base rather than asking them to work through it without signal.</p>
+
+  <h4>Evergreen programs</h4>
+  <p>Drop the Lines was one segment, one season. The next phase is lifecycle programs that run automatically: enrollment triggers based on customer profile and behavior, email sequences built around specific upsell paths and seasonality, and in-app messaging via Intercom/Chameleon to reach customers inside the platform.</p>
+
+  <h4>Sales coordination</h4>
+  <p>Expansion MQLs need a different handoff than new business. The infrastructure needs to give Sales full context on each account: what modules they have, what they're missing, and what triggered the flag. The goal is targeted outreach vs. generic.</p>
+
+  <h4>Dockwa+ deal supply</h4>
+  <p>A portion of this quarter's focus goes toward supporting the Dockwa+ motion, specifically driving deal supply from existing marina customers and supporting boater activation and retention efforts. Rather than treating this as a separate workstream, the plan is to build it into the lifecycle programs and product marketing cadences we're already constructing. It's a natural fit and shouldn't require significant additional lift once the infrastructure is in place.</p>
+
+  <p>The honest constraint: the HubSpot/SFDC sync has gaps and expansion tracking isn't fully reliable yet. Marketing ops work is running in parallel to address this. It won't block progress, but it will affect how quickly we can close the attribution loop.</p>
+</div>
+
+<h3>Do you have attribution data for marketing-sourced pipeline ARR? What share of NB and expansion pipeline came from marketing?</h3>
+<div class="response-card">
+  <p><strong>New Business:</strong> 16% of pipeline ARR is marketing-sourced ($257.7K of $1,567.7 total)</p>
+  <p><strong>Expansion:</strong> 0.94% of pipeline ARR is marketing-sourced ($4K of $426.9K total)</p>
+</div>
+
+<!-- MARKETING KEY INITIATIVES -->
+<h2 id="marketing-key-initiatives">Marketing: Key Initiatives</h2>
+
+<table>
+<tr><th>Initiative</th><th>Status</th><th>Notes</th></tr>
+<tr><td>Rock: Rebuild functional foundation for scalable Marina Growth Marketing</td><td><span class="green">Milestones completed and on track</span> (see below)</td><td>This work will naturally bleed into Q2.</td></tr>
+<tr><td>Milestone 1: Align foundational work with HS migration project, establish funnel reporting framework, and complete paid media diagnostic and planning work</td><td><span class="green">Complete</span></td><td>HS migration timeline shifted, but taking an active role in marketing hub buildout alongside New Breed project.  Took ownership of funnel reporting and pulse meetings. Focused primarily on paid search, improving campaign performance through better conversion tracking and data signals to drive efficiency, lead volume and quality. Shifted to automated bidding strategy to optimize for conversions (vs clicks) in early March.</td></tr>
+<tr><td>Milestone 2: Kick off content sprint and begin phased activation of growth experiments.</td><td><span class="green">Complete</span></td><td>Slow start as I reworked the scope/brief to better align with business priorities.  Freelancer secured, kicked off content creation against a plan that solves for shortage of expansion-focused content and content gaps vs competitors.  Goal  is to drive quick SEO wins with content we can repurpose for paid media, lifecycle, and sales enablement initiatives.</td></tr>
+<tr><td>Milestone 3: Deliver POV on organizational, budget, and tooling resources needed to support 2026 Growth targets.</td><td><span class="yellow">On track</span></td><td></td></tr>
+<tr><td>Initiative: Build repeatable product marketing framework in partnership with the Product team.</td><td><span class="yellow">On track</span></td><td></td></tr>
+</table>
+
+<div class="divider"></div>
+
+<!-- SALES SECTION -->
+<h2 id="sales-opportunity-creation">Sales: Opportunity Creation</h2>
+
+<div class="rock-box">
+  <h4>Company Rock: Acquisition Rock</h4>
+  <ul>
+    <li><strong>Pipeline sufficiency benchmarks</strong> defined and rolling out to Land Team</li>
+    <li><strong>Fully ramped AEs at ≥70% monthly quota</strong></li>
+    <li>Status: <span style="color:#16a34a; font-weight:600;">On Track</span></li>
+  </ul>
+</div>
+
+<h3>Opportunity Creation (Matt)</h3>
+<table>
+<tr><th>Metric</th><th class="num">Q1 Benchmark</th><th class="num">Q1 Actual</th></tr>
+<tr><td>Opps Created (Logos)</td><td class="num">265</td><td class="num">283</td></tr>
+<tr><td>NB Opps Created</td><td class="num">140</td><td class="num">229</td></tr>
+<tr><td>Expansion Opps Created</td><td class="num">125</td><td class="num">54</td></tr>
+<tr><td>Opps Created (ARR Value)</td><td class="num">$1.4M</td><td class="num">$1.98M</td></tr>
+</table>
+
+<!-- SALES OBSERVATIONS -->
+<h2 id="sales-observations">Sales Observations</h2>
+
+<div class="obs-block positive">
+  <h4>NB pipeline creation is ahead of plan</h4>
+  <ul>
+    <li>229 NB opps at 164% of budget. Reps are self-sourcing effectively.</li>
+    <li>Opp ARR value is $1.94M vs $1.4M budget (142%), deal sizes are holding.</li>
+  </ul>
+</div>
+
+<div class="obs-block risk">
+  <h4>Expansion pipeline trailing significantly</h4>
+  <ul>
+    <li>54 expansion opps vs 125 budget (43%). This is the single biggest pipeline gap.</li>
+    <li>Top of the funnel focus from sales on accounts has been diagnosed as a primary cause and is being addressed as part of the solution.</li>
+  </ul>
+</div>
+
+<div class="obs-block warning">
+  <h4>Pipeline gap flagged in Pulse</h4>
+  <ul>
+    <li>$274K ARR gap (40 opps) vs benchmark</li>
+    <li>Senior reps are underworking accounts, per the same readout.</li>
+    <li>This directly tests the Acquisition Rock: are the pipeline sufficiency benchmarks actually driving behavior change?</li>
+  </ul>
+</div>
+
+<!-- SALES Q&A -->
+<h2 id="sales-qanda">Sales Q&A</h2>
+
+<h3>What is behind the expansion opp shortfall? Is this a targeting problem, a handoff from CS issue, or a coverage gap?</h3>
+<div class="response-card">
+  <h4>Expansion Pipeline Creation Driven by Top-of-Funnel Gap:</h4>
+  <p>Conversion from Expansion Accounts Worked to Opportunities remains on plan; however, only ~40% of install base accounts are being engaged vs. target, indicating a primary top-of-funnel activity shortfall, potentially compounded by CRM hygiene issues. Immediate focus is required to increase ToFu coverage—initial steps underway in March with a dedicated SDR targeting priority accounts during key selling windows.</p>
+
+  <h4>MSMs Leading Expansion Opportunity Sourcing in Q1:</h4>
+  <p>MSMs generated 54% (28/52) of Expansion opportunities in Q1, signaling a strong and scalable motion. At the same time, this success also highlights the gap in AE/SDR engagement, reinforcing the need to increase broader customer coverage to drive pipeline growth.</p>
+</div>
+
+
+
+</div>
+</div>
+</div>
+
+<script>
+(function() {
+  const links = document.querySelectorAll('.sidebar a');
+  const sections = [];
+  links.forEach(a => {
+    const id = a.getAttribute('href');
+    if (id && id.startsWith('#')) {
+      const el = document.querySelector(id);
+      if (el) sections.push({ el, link: a });
+    }
+  });
+  function onScroll() {
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.el.getBoundingClientRect().top <= 80) current = s;
+    }
+    links.forEach(a => a.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q1 2026 Funnel: Awareness</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+html { scroll-behavior: smooth; scroll-padding-top: 60px; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Open Sans', sans-serif; background: #f5f7fa; color: #2d3748; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; color: #172C4D; }
+h1 { font-size: 26px; margin-bottom: 4px; }
+h2 { font-size: 20px; margin: 32px 0 14px; padding-bottom: 6px; border-bottom: 2px solid #6ACCE0; }
+h3 { font-size: 16px; margin: 20px 0 8px; color: #023C8F; }
+h4 { font-size: 15px; margin: 0 0 8px; }
+p { margin-bottom: 12px; font-size: 15px; }
+ul { margin: 8px 0 16px 20px; font-size: 15px; }
+li { margin-bottom: 6px; }
+a { color: #023C8F; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 14px; }
+th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+th { background: #172C4D; color: white; font-weight: 600; font-size: 13px; }
+td { background: white; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.green { color: #16a34a; font-weight: 600; }
+.red { color: #dc2626; font-weight: 600; }
+.yellow { color: #d97706; font-weight: 600; }
+.blue { color: #2563eb; font-weight: 600; }
+.obs-block { background: white; border-radius: 8px; padding: 20px 24px; margin: 16px 0; border-left: 4px solid #023C8F; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.obs-block.warning { border-left-color: #d97706; }
+.obs-block.risk { border-left-color: #dc2626; }
+.obs-block.positive { border-left-color: #16a34a; }
+.response-card { background: #f0f9ff; border: 1px solid #6ACCE0; border-radius: 8px; padding: 16px 20px; margin: 12px 0 24px; }
+.response-card h4 { margin-bottom: 8px; font-size: 14px; }
+.response-card p { margin-bottom: 8px; font-size: 14px; }
+.response-card ul { margin: 8px 0 12px 20px; font-size: 14px; }
+.chip { display: inline-block; background: #6ACCE0; color: #172C4D; font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 12px; margin-right: 8px; vertical-align: middle; }
+.owner-badge { display: inline-block; background: #172C4D; color: white; font-size: 12px; font-weight: 600; padding: 3px 12px; border-radius: 12px; margin-left: 8px; }
+.stage-bar { background: #172C4D; color: white; padding: 10px 20px; border-radius: 8px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; font-family: 'Poppins', sans-serif; }
+.stage-bar .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+.stage-bar .title { font-size: 20px; font-weight: 600; }
+.nav-row { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 14px; }
+.rock-box { background: #eef6fa; border: 1px solid #6ACCE0; border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+.rock-box h4 { margin-bottom: 8px; }
+.note-callout { background: #fef9ee; border: 1px solid #fde68a; border-radius: 6px; padding: 12px 16px; margin: 12px 0; font-size: 14px; }
+.note-callout strong { color: #92400e; }
+.divider { height: 2px; background: #e2e8f0; margin: 40px 0; }
+.sub-table-label { font-size: 13px; color: #023C8F; font-weight: 600; margin-top: 16px; margin-bottom: 8px; }
+.closing-note { font-size: 14px; color: #555; margin: 12px 0; font-style: italic; }
+.engineering-stats { background: white; border-radius: 8px; padding: 20px 24px; margin: 16px 0; }
+.stats-row { display: flex; gap: 24px; margin: 12px 0; flex-wrap: wrap; }
+.stat-item { flex: 1; min-width: 200px; }
+.stat-number { font-size: 24px; font-weight: 600; color: #172C4D; }
+@media print { body { background: white; } .container { padding: 20px; } }
+
+.global-nav { position: sticky; top: 0; z-index: 100; background: #172C4D; padding: 0; font-family: 'Poppins', sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.global-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; overflow-x: auto; gap: 0; padding: 0 20px; }
+.global-nav a { display: block; padding: 10px 14px; text-decoration: none; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; white-space: nowrap; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; }
+.global-nav a:hover { color: white; }
+.global-nav a.active { color: white; border-bottom-color: #6ACCE0; }
+/* Layout: sidebar + content */
+.page-layout { display: flex; max-width: 1200px; margin: 0 auto; min-height: calc(100vh - 42px); }
+.sidebar { width: 200px; flex-shrink: 0; position: sticky; top: 42px; height: calc(100vh - 42px); overflow-y: auto; padding: 32px 0 32px 0; }
+.sidebar-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #718096; font-weight: 600; padding: 0 20px 12px; font-family: 'Poppins', sans-serif; }
+.sidebar a { display: block; padding: 6px 20px; font-size: 13px; color: #4A5568; text-decoration: none; line-height: 1.4; border-left: 3px solid transparent; transition: all 0.15s; }
+.sidebar a:hover { color: #023C8F; background: #f0f4f8; }
+.sidebar a.active { color: #023C8F; font-weight: 600; border-left-color: #6ACCE0; background: #f0f9ff; }
+.content-area { flex: 1; min-width: 0; border-left: 1px solid #e2e8f0; }
+.container { max-width: 860px; padding: 40px 48px; }
+@media (max-width: 960px) { .sidebar { display: none; } .page-layout { display: block; } .container { padding: 32px 20px; } }
+</style>
+</head>
+<body>
+<nav class="global-nav">
+  <div class="global-nav-inner">
+    <a href="index.html" style="display:flex;align-items:center;padding:6px 16px 6px 4px;border:none;"><img src="https://assets.dockwa.com/assets/logo/dockwa-white-f6ced7057af8043f1db50689b3d608c81bd415a0fc483a2eb15a9586695385ba.png" alt="Dockwa" style="height:22px;"></a>
+    <a href="index.html">Home</a>
+    <a href="q1-funnel-awareness.html" class="active">Awareness</a>
+    <a href="q1-funnel-engagement.html">Engagement</a>
+    <a href="q1-funnel-acquisition.html">Acquisition</a>
+    <a href="q1-funnel-implementation.html">Implementation</a>
+    <a href="q1-funnel-activation.html">Activation</a>
+    <a href="q1-funnel-adoption.html">Adoption</a>
+    <a href="q1-funnel-retention.html">Retention</a>
+    <a href="q1-product.html">Product</a>
+    <a href="q1-support.html">Support</a>
+  </div>
+</nav>
+<div class="page-layout">
+<aside class="sidebar">
+  <div class="sidebar-title">On this page</div>
+    <a href="#marketing-traffic-and-lead-gen">Marketing: Traffic & Lead Gen</a>
+    <a href="#marketing-observations">Marketing Observations</a>
+    <a href="#marketing-qanda">Marketing Q&A</a>
+    <a href="#sales-prospecting-and-sql-creation">Sales: Prospecting & SQL Creation</a>
+    <a href="#sales-observations">Sales Observations</a>
+    <a href="#sales-qanda">Sales Q&A</a>
+</aside>
+<div class="content-area">
+<div class="container">
+
+<div class="stage-bar">
+  <div>
+    <div class="label">Funnel Stage 1 of 7</div>
+    <div class="title">Awareness</div>
+  </div>
+  <div>
+    <span class="owner-badge">Erin</span>
+    <span class="owner-badge">Matt</span>
+  </div>
+</div>
+
+
+<h2 id="marketing-traffic-and-lead-gen">Marketing: Traffic &amp; Lead Gen</h2>
+
+<h3>Metrics: Traffic &amp; Lead Gen</h3>
+<table>
+<tr><th>Metric</th><th class="num">Q1 Benchmark</th><th class="num">Q1 Actual</th></tr>
+<tr><td>Marina Website Traffic</td><td class="num">9,078</td><td class="num">10,380</td></tr>
+<tr><td>MQLs (Total)</td><td class="num">127</td><td class="num">87</td></tr>
+<tr><td>&nbsp;&nbsp;New Business MQLs</td><td class="num">64</td><td class="num">60</td></tr>
+<tr><td>&nbsp;&nbsp;Expansion MQLs</td><td class="num">63</td><td class="num">17</td></tr>
+</table>
+
+<h3>MQL Conversion (% of Total MQLs)</h3>
+<table>
+<tr><th>Status</th><th class="num">Jan</th><th class="num">Feb</th><th class="num">Mar</th></tr>
+<tr><td>Converted to Opp (Total)</td><td class="num">66%</td><td class="num">71%</td><td class="num">57%</td></tr>
+<tr><td>&nbsp;&nbsp;New Business</td><td class="num">40%</td><td class="num">50%</td><td class="num">36%</td></tr>
+<tr><td>&nbsp;&nbsp;Expansion</td><td class="num">26%</td><td class="num">21%</td><td class="num">21%</td></tr>
+<tr><td>Converted to Account</td><td class="num">3%</td><td class="num">4%</td><td class="num">0%</td></tr>
+<tr><td>In Progress</td><td class="num">6%</td><td class="num">0%</td><td class="num">4%</td></tr>
+<tr><td>MQL Committed</td><td class="num">3%</td><td class="num">4%</td><td class="num">32%</td></tr>
+<tr><td>Disqualified</td><td class="num">23%</td><td class="num">17%</td><td class="num">7%</td></tr>
+</table>
+
+<h3>MQL-to-Opp Conversion Rates</h3>
+<table>
+<tr><th>Conversion Rate</th><th class="num">Jan</th><th class="num">Feb</th><th class="num">Mar</th><th class="num">QTD</th></tr>
+<tr><td>% NB MQLs to Opp</td><td class="num">67%</td><td class="num">63%</td><td class="num">50%</td><td class="num">60%</td></tr>
+</table>
+
+<!-- MARKETING OBSERVATIONS -->
+<h2 id="marketing-observations">Marketing Observations</h2>
+
+<div class="obs-block warning">
+  <h4>MQL volume is significantly below plan</h4>
+  <ul>
+    <li>Total MQLs at 69% of Q1 budget (87 vs 127 target). The gap is almost entirely in expansion MQLs (17 vs 63 target).</li>
+    <li>New business MQLs are softer too (94%) but less severe.</li>
+    <li>MQL conversion rate dropped in Feb from 0.95% to 0.63% per Pulse data, suggesting top-of-funnel quality or volume issues. We are seeing recovery in March with the conversion rate ticking back up to .94%.</li>
+  </ul>
+</div>
+
+<div class="obs-block">
+  <h4>MQL conversion is volatile month-to-month</h4>
+  <ul>
+    <li>Feb showed massive conversion spikes (NB 146%, Expansion 328%) likely from MQLs generated in prior months converting. March is very low.</li>
+    <li>The underlying MQL-to-opp conversion is working; the problem is MQL volume.</li>
+    <li>18% disqualification rate is worth monitoring. If MQL volume is already low, losing nearly 1 in 5 to disqualification compounds the problem.</li>
+  </ul>
+</div>
+
+<!-- MARKETING Q&A -->
+<h2 id="marketing-qanda">Marketing Q&amp;A</h2>
+
+<h3>What has changed in the MQL funnel? Is the drop in expansion MQLs a targeting issue, content issue, or intentional shift?</h3>
+<div class="response-card">
+  <p>The traffic-to-MQL conversion rate dip in February reflects our traffic growth more than a quality decline. Site traffic was significantly above target all quarter, and engagement metrics held: time on site, bounce rate, and pages per session all stayed consistent. The issue is a volume play, not quality.</p>
+  <p>The expansion MQL gap is a different story. It's less about what changed and more about what was never there in the first place. We did not have a systematic expansion marketing motion until Q1.</p>
+  <p>We started building in February with the launch of Dockwa Dispatch (a monthly product marketing email and blog series targeting current customers) and a positioning campaign in March. These are our first intentional expansion plays.</p>
+  <p>Was the gap a targeting issue, content issue, or intentional shift? A bit of all three. No dedicated expansion marketing person until I stepped into that role with these programs. The content and targeting are now in place and live, but the pipeline time is lagging.</p>
+  <p>The first foundational motions are live. Q2 is about expanding coverage across customer segments and building the infrastructure to be efficient at scale.</p>
+</div>
+
+<h3>What is the plan to recover MQL volume for Q2?</h3>
+<div class="response-card">
+  <p>Two tracks running in parallel.</p>
+  <p>New business — optimize, don't overhaul. The acquisition motion is working; Q2 is about incremental improvements: more agency partnerships, lower-funnel content tests, and paid channel mix refinement.</p>
+  <p>Expansion — build the engine. This is where the real work is, and it starts with segmentation. The first phase is defining customer segments and segment-specific messaging for the three programs already running (Dispatch, Drop the Lines, positioning campaign).</p>
+  <p>Two things need to happen in parallel: building onboarding and activation programs to move customers from "aware" to "engaged with Dockwa beyond their daily slip transaction" and running structured marketing campaigns (webinars, case studies, feature spotlights) that drive pipeline into the top of the funnel.</p>
+  <p>Given this approach, attribution for expansion leads won't be clean right away, but it should not and that's by design. Expansion success is measured in engaged customers and segments where we are winning, not MQL counts.</p>
+</div>
+
+<h3>What expansion marketing programs are currently running?</h3>
+<div class="response-card">
+  <p>Three programs are currently active, each playing a different role in the expansion motion.</p>
+  <p>Drop the Lines (launched March 9) — Our first multi-channel, Sales/Marketing coordinated expansion campaign. Targets existing customers who fit our Land and Expand archetype (larger harbors, multi-role users) with messages about consolidating their operations on Dockwa. This is a high-touch, pilot-phase program right now.</p>
+  <p>Dockwa Dispatch (launched February 19 + recurring monthly) — A monthly product marketing email and blog series targeting current customers. Designed to increase engagement with features and use cases beyond slip transactions, and to build a habit of customers returning to Dockwa regularly.</p>
+  <p>"We Don't Sell a Transient Slip App Here" (launched March 4) — A positioning campaign co-authored with the Sales team that challenges the positioning of transient slips as a commodity product. Targets potential expansion accounts and land accounts that may not yet understand Dockwa's full value beyond transient management. Early-stage, small audience, strong intent signals so far.</p>
+  <p>All three are early and intentionally targeted. Broader segment coverage and the evergreen infrastructure (case studies, webinars, playbooks) will expand in Q2 once we finalize segment definitions and validate messaging with Sales.</p>
+</div>
+
+<!-- PAGE DIVIDER -->
+<div class="divider"></div>
+
+<!-- SALES METRICS -->
+<h2 id="sales-prospecting-and-sql-creation">Sales: Prospecting &amp; SQL Creation</h2>
+
+<h3>Metrics: Accounts Worked &amp; SQLs</h3>
+<table>
+<tr><th>Metric</th><th class="num">Q1 Benchmark</th><th class="num">Q1 Actual</th></tr>
+<tr><td>Accounts Worked (Total)</td><td class="num">2,362</td><td class="num">2,820</td></tr>
+<tr><td>&nbsp;&nbsp;NB Accounts Worked</td><td class="num">1,536</td><td class="num">2,431</td></tr>
+<tr><td>&nbsp;&nbsp;Expansion Accounts Worked</td><td class="num">826</td><td class="num">394</td></tr>
+<tr><td>SQLs Created (Total)</td><td class="num">215</td><td class="num">214</td></tr>
+<tr><td>&nbsp;&nbsp;SQLs Created (NB)</td><td class="num">115</td><td class="num">178</td></tr>
+<tr><td>&nbsp;&nbsp;SQLs Created (Expansion)</td><td class="num">100</td><td class="num">36</td></tr>
+</table>
+
+<!-- SALES OBSERVATIONS -->
+<h2 id="sales-observations">Sales Observations</h2>
+
+<div class="obs-block positive">
+  <h4>Reps are self-sourcing effectively</h4>
+  <ul>
+    <li>SQL creation is at 128% of NB budget, meaning sales outbound is compensating for the MQL shortfall.</li>
+    <li>Canada is driving 20% of new opps, per the Acquisition Rock update.</li>
+  </ul>
+</div>
+
+<!-- SALES Q&A -->
+<h2 id="sales-qanda">Sales Q&amp;A</h2>
+
+<h3>What is our targeting strategy in Q1? What were the most successful playbooks?</h3>
+<div class="response-card">
+  <p><strong>Targeting Strategy</strong></p>
+  <ul>
+    <li>Prioritized outbound across all major coastal regions, with a focus on seasonal selling windows.</li>
+    <li>Canada expansion push (driving ~20% of NB opps)</li>
+    <li>Class A harbor focus continued</li>
+    <li>SDR weekly targeting based on above and also canvasing any harbors with recent CW deals for new business prospecting</li>
+  </ul>
+  <p><strong>Most Successful Playbooks</strong></p>
+  <ul>
+    <li>Deep engagement in South Atlantic:</li>
+  </ul>
+  <p>Reps who concentrated activity in South Atlantic with reference selling pointing to nearby Dockwa maturity in the region showed strong conversion rates. This focused approach yielded consistent results.</p>
+  <ul>
+    <li>Institutional account pursuit with direct decision-maker access:</li>
+  </ul>
+  <p>Deals that reached an owner or GM in the first two activities converted at the highest rate; Institutional buyers require fewer touches to close once you have the right person.</p>
+  <ul>
+    <li>Class A harbors outperformed Class B by 15pp on ARR win rate (54.6% vs. 39.5%). Continued drum beat here.</li>
+    <li>Multi-module platform sale in Canada:</li>
+  </ul>
+  <p>The consolidation value prop + network exposure lead to significant opp creation in Canada with high close rates and strong deal size.</p>
+  <p><strong>Most Unsuccessful Plays</strong></p>
+  <ul>
+    <li>Yacht Club prospecting:</li>
+  </ul>
+  <p>Nearly 500 activities logged against Yacht Club accounts returned $500 in won ARR — a 0.0% ARR win rate. These accounts are a poor fit for our current product positioning and remain a resource drain.</p>
+  <ul>
+    <li>High-volume, low-quality connects:</li>
+  </ul>
+  <p>62% of all logged activities were no-answers, voicemails, or unreplied emails. Certain reps running high-volume, low-quality outbound need coaching on list quality and call quality. These are activities that kill conversion rates and demoralize reps.</p>
+  <ul>
+    <li>Expansion Accounts worked:</li>
+  </ul>
+  <p>Below benchmarks. While we are exceeding NB accounts worked and opp creation, expansion continues to underperform. Too many reps are chasing new business; expansion requires focus and product fluency that we need to invest in.</p>
+</div>
+
+<!-- NAV -->
+
+
+</div>
+</div>
+</div>
+
+<script>
+(function() {
+  const links = document.querySelectorAll('.sidebar a');
+  const sections = [];
+  links.forEach(a => {
+    const id = a.getAttribute('href');
+    if (id && id.startsWith('#')) {
+      const el = document.querySelector(id);
+      if (el) sections.push({ el, link: a });
+    }
+  });
+  function onScroll() {
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.el.getBoundingClientRect().top <= 80) current = s;
+    }
+    links.forEach(a => a.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+})();
+</script>
+</body>
+</html>

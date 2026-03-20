@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q1 2026 Product QBR</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+html { scroll-behavior: smooth; scroll-padding-top: 60px; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Open Sans', sans-serif; background: #f5f7fa; color: #2d3748; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; color: #172C4D; }
+h1 { font-size: 26px; margin-bottom: 4px; }
+h2 { font-size: 20px; margin: 32px 0 14px; padding-bottom: 6px; border-bottom: 2px solid #6ACCE0; }
+h3 { font-size: 16px; margin: 20px 0 8px; color: #023C8F; }
+h4 { font-size: 15px; margin: 0 0 8px; }
+p { margin-bottom: 12px; font-size: 15px; }
+ul { margin: 8px 0 16px 20px; font-size: 15px; }
+li { margin-bottom: 6px; }
+a { color: #023C8F; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 14px; }
+th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+th { background: #172C4D; color: white; font-weight: 600; font-size: 13px; }
+td { background: white; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.green { color: #16a34a; font-weight: 600; }
+.red { color: #dc2626; font-weight: 600; }
+.yellow { color: #d97706; font-weight: 600; }
+.blue { color: #2563eb; font-weight: 600; }
+.obs-block { background: white; border-radius: 8px; padding: 20px 24px; margin: 16px 0; border-left: 4px solid #023C8F; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.obs-block.warning { border-left-color: #d97706; }
+.obs-block.risk { border-left-color: #dc2626; }
+.obs-block.positive { border-left-color: #16a34a; }
+.response-card { background: #f0f9ff; border: 1px solid #6ACCE0; border-radius: 8px; padding: 16px 20px; margin: 12px 0 24px; }
+.response-card h4 { margin-bottom: 8px; font-size: 14px; }
+.response-card p { margin-bottom: 8px; font-size: 14px; }
+.response-card ul { margin: 8px 0 12px 20px; font-size: 14px; }
+.chip { display: inline-block; background: #6ACCE0; color: #172C4D; font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 12px; margin-right: 8px; vertical-align: middle; }
+.owner-badge { display: inline-block; background: #172C4D; color: white; font-size: 12px; font-weight: 600; padding: 3px 12px; border-radius: 12px; margin-left: 8px; }
+.stage-bar { background: #172C4D; color: white; padding: 10px 20px; border-radius: 8px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; font-family: 'Poppins', sans-serif; }
+.stage-bar .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+.stage-bar .title { font-size: 20px; font-weight: 600; }
+.nav-row { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 14px; }
+.rock-box { background: #eef6fa; border: 1px solid #6ACCE0; border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+.rock-box h4 { margin-bottom: 8px; }
+.note-callout { background: #fef9ee; border: 1px solid #fde68a; border-radius: 6px; padding: 12px 16px; margin: 12px 0; font-size: 14px; }
+.note-callout strong { color: #92400e; }
+.divider { height: 2px; background: #e2e8f0; margin: 40px 0; }
+.sub-table-label { font-size: 13px; color: #023C8F; font-weight: 600; margin-top: 16px; margin-bottom: 8px; }
+.closing-note { font-size: 14px; color: #555; margin: 12px 0; font-style: italic; }
+.engineering-stats { background: white; border-radius: 8px; padding: 20px 24px; margin: 16px 0; }
+.stats-row { display: flex; gap: 24px; margin: 12px 0; flex-wrap: wrap; }
+.stat-item { flex: 1; min-width: 200px; }
+.stat-number { font-size: 24px; font-weight: 600; color: #172C4D; }
+@media print { body { background: white; } .container { padding: 20px; } }
+
+.global-nav { position: sticky; top: 0; z-index: 100; background: #172C4D; padding: 0; font-family: 'Poppins', sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.global-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; overflow-x: auto; gap: 0; padding: 0 20px; }
+.global-nav a { display: block; padding: 10px 14px; text-decoration: none; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; white-space: nowrap; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; }
+.global-nav a:hover { color: white; }
+.global-nav a.active { color: white; border-bottom-color: #6ACCE0; }
+/* Layout: sidebar + content */
+.page-layout { display: flex; max-width: 1200px; margin: 0 auto; min-height: calc(100vh - 42px); }
+.sidebar { width: 200px; flex-shrink: 0; position: sticky; top: 42px; height: calc(100vh - 42px); overflow-y: auto; padding: 32px 0 32px 0; }
+.sidebar-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #718096; font-weight: 600; padding: 0 20px 12px; font-family: 'Poppins', sans-serif; }
+.sidebar a { display: block; padding: 6px 20px; font-size: 13px; color: #4A5568; text-decoration: none; line-height: 1.4; border-left: 3px solid transparent; transition: all 0.15s; }
+.sidebar a:hover { color: #023C8F; background: #f0f4f8; }
+.sidebar a.active { color: #023C8F; font-weight: 600; border-left-color: #6ACCE0; background: #f0f9ff; }
+.content-area { flex: 1; min-width: 0; border-left: 1px solid #e2e8f0; }
+.container { max-width: 860px; padding: 40px 48px; }
+@media (max-width: 960px) { .sidebar { display: none; } .page-layout { display: block; } .container { padding: 32px 20px; } }
+</style>
+</head>
+<body>
+<nav class="global-nav">
+  <div class="global-nav-inner">
+    <a href="index.html" style="display:flex;align-items:center;padding:6px 16px 6px 4px;border:none;"><img src="https://assets.dockwa.com/assets/logo/dockwa-white-f6ced7057af8043f1db50689b3d608c81bd415a0fc483a2eb15a9586695385ba.png" alt="Dockwa" style="height:22px;"></a>
+    <a href="index.html">Home</a>
+    <a href="q1-funnel-awareness.html">Awareness</a>
+    <a href="q1-funnel-engagement.html">Engagement</a>
+    <a href="q1-funnel-acquisition.html">Acquisition</a>
+    <a href="q1-funnel-implementation.html">Implementation</a>
+    <a href="q1-funnel-activation.html">Activation</a>
+    <a href="q1-funnel-adoption.html">Adoption</a>
+    <a href="q1-funnel-retention.html">Retention</a>
+    <a href="q1-product.html" class="active">Product</a>
+    <a href="q1-support.html">Support</a>
+  </div>
+</nav>
+<div class="page-layout">
+<aside class="sidebar">
+  <div class="sidebar-title">On this page</div>
+    <a href="#delivery-status">Delivery Status</a>
+    <a href="#observations">Observations</a>
+    <a href="#qanda">Q&A</a>
+    <a href="#key-initiatives">Key Initiatives</a>
+    <a href="#engineering-output-q1-2026">Engineering Output — Q1 2026</a>
+</aside>
+<div class="content-area">
+<div class="container">
+
+<div class="stage-bar">
+  <div class="label">Q1 2026</div>
+  <div class="title">Product</div>
+</div>
+
+<h2 id="delivery-status">Delivery Status</h2>
+
+<h3>Cycle Bets</h3>
+<table>
+<tr><th>Commissioned Bet</th><th>Cycle</th><th>EOQ Status</th></tr>
+<tr><td>Dromo Migration</td><td>1</td><td><span class="yellow">Partially Shipped</span> (2 outstanding: LT waitlist, Meters)</td></tr>
+<tr><td>Bulk Messaging</td><td>1</td><td><span class="green">Shipped</span></td></tr>
+<tr><td>Drystack Improvements</td><td>1</td><td><span class="green">Shipped</span></td></tr>
+<tr><td>Native Dockwalk</td><td>1</td><td><span class="green">Shipped</span> (GA planned 4/1)</td></tr>
+<tr><td>iOS Invoices and Payments</td><td>1</td><td><span class="green">Shipped</span></td></tr>
+<tr><td>Tax Migration</td><td>1</td><td><span class="green">Shipped</span></td></tr>
+<tr><td>Analytics v2 (Thoughtspot)</td><td>1</td><td><span class="green">Shipped</span> - New Dashboards (GA) - Spotter (EA planned for Safe Harbor)</td></tr>
+<tr><td>Accounting Integration V2</td><td>1</td><td><span class="yellow">Partially Shipped</span> (EA 1/6, GA planned 3/18)</td></tr>
+<tr><td>Service MVP</td><td>2</td><td><span class="yellow">Building</span></td></tr>
+<tr><td>Trip Insurance</td><td>2</td><td><span class="yellow">Building</span></td></tr>
+<tr><td>MFA via Work OS</td><td>2</td><td><span class="yellow">Building</span></td></tr>
+</table>
+
+<!-- OBSERVATIONS -->
+<h2 id="observations">Observations</h2>
+
+<div class="obs-block warning">
+  <h4>Insight #1 - Project delivery plagued by rolling deadlines, no timeboxing of deliverables and constant unexpected edge cases</h4>
+  <ul>
+    <li>No hard timeboxing allowing scope to expand and projects to flow beyond cycle ends</li>
+    <li>Engineering estimates weren't treated as commitments — escalation surfaced late, creating a pattern of rolling deadlines</li>
+  </ul>
+</div>
+
+<div class="obs-block positive">
+  <h4>Insight #2 - Reid has demonstrated strong momentum on feature shipping to drive GTM motions and churn prevention mechanisms</h4>
+  <ul>
+    <li>Shipped Dockwalk and Bulk Messaging in his first cycle, both with strong customer reception</li>
+    <li>His sales background brings direct customer knowledge that sharpens feature prioritization and GTM planning</li>
+  </ul>
+</div>
+
+<div class="obs-block risk">
+  <h4>Insight #3 - We have talent gaps to fill</h4>
+  <ul>
+    <li>Three(ish) PM pods running lean, with no coverage on the boater product and thin expertise in payments and accounting</li>
+    <li>No product designer or engineering lead on the team leaves gaps in execution quality and throughput</li>
+  </ul>
+</div>
+
+<div class="obs-block">
+  <h4>Insight #4 - Activation is the next frontier</h4>
+  <ul>
+    <li>Features are shipping but we're not consistently tracking whether they're landing with customers</li>
+    <li>Chameleon signed, implementation starts April — this is the foundation for building that muscle</li>
+  </ul>
+</div>
+
+<div class="obs-block positive">
+  <h4>Insight #5 - AI is changing what a small team can do</h4>
+  <ul>
+    <li>PM AI adoption is strong — shaping, prototyping, and design work are all evolving with AI tooling</li>
+    <li>Engineering adoption is mixed; building that culture will require a leader who actively champions it</li>
+  </ul>
+</div>
+
+<!-- Q&A SECTION -->
+<h2 id="qanda">Q&amp;A</h2>
+
+<h3>What did we commit to delivering in Cycle 1 and Cycle 2, and where did we land against that plan?</h3>
+<div class="response-card">
+  <p style="color: #666666; font-size: 13px; margin-bottom: 12px;"><strong>Context:</strong> For anything that slipped or was cut, what was the tradeoff and who made the call? Was scope changed mid-cycle?</p>
+  <p>Cycle 1 committed to iOS Invoices & Payments, Dromo Migration, Bulk Messaging, Drystack Improvements, Native Dockwalk, Accounting Integration V2, Tax on Convenience Fees, and Analytics Dashboards. MFA/WorkOS was scoped for research only.</p>
+  <p>iOS Invoices, Tax on Convenience Fees, and Bulk Messaging core MVP fully shipped. Everything else partially shipped or carried into Cycle 2 — Dromo, Accounting fast follows, and Drystack all delivered meaningful progress but not full scope. Analytics Dashboards was blocked by an external vendor dependency. Native Dockwalk reached early access but not GA.</p>
+  <p>Cycle 2 scoped Service MVP, Trip Insurance, and MFA/WorkOS. All three are in progress. Service MVP and MFA/WorkOS are running behind plan — an extended shaping period for Service and engineering disruption from Accounting Integration issues both contributed to a delayed start. Trip Insurance kicked off on schedule in March following the Vertical Insure scoping call and is progressing as planned.</p>
+</div>
+
+<h3>Of what shipped in Q1, what is already showing up in customer feedback, activation rates, or sales conversations?</h3>
+<div class="response-card">
+  <p style="color: #666666; font-size: 13px; margin-bottom: 12px;"><strong>Context:</strong> Specifically: is iOS Invoices being used? Is the accounting integration driving wins beyond US Marina Group? Any adoption data on delivered features?</p>
+  <p>iOS Invoices & Payments — Shipped January 16, creating a net new channel for invoice viewing that previously didn't exist on iOS. iOS now accounts for ~36% of all invoice page views in the most recent week, peaking at 45% on March 14 - the iOS share shows boaters are adopting the native experience quickly.</p>
+  <p>Accounting Integration V2 — Early rollout with mixed signals. 18 marinas live, 28 set up. Windward experiencing significant issues causing refactoring; a few others reporting problems. Healthy pipeline of interested customers but stability needs to be proven out before accelerating.</p>
+  <p>Bulk Messaging — Strong early adoption for an off-season launch. 44 marinas sending across 115 total sends, reaching 4,318 boaters with an average of 85 boaters per bulk send. Nearly 2x growth since last check. Expect meaningful acceleration as season ramps.</p>
+  <p>Dromo Import Tool — Well-received by the implementation team, saving ~50% of time vs. EasyCSV. One parity gap (complete in-house capability) holding back full adoption. Broader import tooling needs identified.</p>
+  <p>Drystack Improvements — Limited performance data available. Impact expected to show as lagging indicators in churn prevention and sales over time.</p>
+  <p>Native Dockwalk — In early access. Positive anecdotal feedback. Awaiting adoption data.</p>
+  <p>Bulk Messaging and Dockwalk have been bright spots in customer conversations — positive reception to both features, and a reminder that consistent feature shipping builds confidence in the platform overall.</p>
+</div>
+
+<h3>What did not ship that was expected to, and what was the tradeoff?</h3>
+<div class="response-card">
+  <p>See Q1 above for full delivery summary. In each case, scope expanded mid-cycle without a formal cut decision or timeboxing — work continued on a rolling basis rather than being explicitly deferred.</p>
+</div>
+
+<h3>Are there product gaps that came up repeatedly in churn conversations, sales losses, or support tickets this quarter?</h3>
+<div class="response-card">
+  <p style="color: #666666; font-size: 13px; margin-bottom: 12px;"><strong>Context:</strong> What is the pattern? Is there a feature or capability whose absence is costing us customers or deals?</p>
+  <p>Service is the dominant and recurring product gap — showing up consistently across closed-lost deals, churn conversations, and customer feature requests. In Q1 2026, functionality-based closed-lost opportunities totaled ~$220K in ARR across 30 deals. Service-related gaps account for $144K of that — 65% of all functionality losses across 14 opportunities. The pattern in the notes is consistent: marinas like the product but won't buy without a service module. Several are actively waiting for it before reconsidering.</p>
+  <p>The Jira feature request board reinforces this signal at scale. Service & Work Order Management is the most-associated idea on the board with 242 marina associations — nearly 70% more than the next closest item (Boat Rentals at 146). This has been building for years and continues to grow.</p>
+  <p>Beyond service, two additional gaps are worth flagging: Credit card fee pass-through is an emerging pressure point, with ~197 combined marina associations across two related ideas — and it generated 31 new billing-related feature requests in Q1 alone, the most active category this quarter. Boat Rentals (146 associations) is a meaningful gap that falls outside our near-term roadmap but represents a real surface area of lost and at-risk business.</p>
+  <p>The good news: the two most active ideas after service — Bulk Messaging (99 associations) and Accounting Integration V2 (80 associations) — are now shipped or in flight.</p>
+</div>
+
+<h3>How well is the new development process working? Are we betting on the right things at the right scope?</h3>
+<div class="response-card">
+  <p style="color: #666666; font-size: 13px; margin-bottom: 12px;"><strong>Context:</strong> Any process friction, estimation misses, or patterns in what goes over scope?</p>
+  <p>The development process for the majority of the quarter lacked structure, and we shipped below expected capacity as a result. Prioritization wasn't ROI-driven, effort estimates weren't enforced, and features shipped without GTM or activation plans.</p>
+  <p>The PDE playbook is now in place and being adopted. Future sprints will reflect tighter scoping and clearer prioritization — this will improve as the team internalizes the operating model.</p>
+</div>
+
+<h3>What is the single most important product investment for Q2?</h3>
+<div class="response-card">
+  <p style="color: #666666; font-size: 13px; margin-bottom: 12px;"><strong>Context:</strong> Given churn drivers, activation stalls, sales needs, and technical debt, where should we focus?</p>
+  <ul>
+    <li>Service Build — The most important investment we can make this year. Service is the dominant reason we lose deals and the #1 customer request by a wide margin. Getting to MVP is a meaningful step toward becoming the full system of record for marina operations.</li>
+    <li>Dockwa Network — Critical to building a defensible moat in an AI era that continues to lower the bar on SaaS builds. Any competitor can replicate features; no one can replicate the network. Focus here means capturing more of the marina market and growing the boater population on both sides of the platform.</li>
+    <li>Hiring Pipeline — First priority: a marina product designer and a PM with payments and commerce expertise. Next tranche: a boater-side PM and designer to close the consumer product coverage gap.</li>
+  </ul>
+</div>
+
+<!-- KEY INITIATIVES -->
+<h2 id="key-initiatives">Key Initiatives</h2>
+
+<table>
+<tr><th>Initiative</th><th>Status</th><th>Notes</th></tr>
+<tr><td>Product Playbook</td><td><span class="green">Activated</span></td><td>Live and being adopted. Will evolve continuously as AI changes how we work — staying current is on us</td></tr>
+<tr><td>Product Activation Tool</td><td><span class="yellow">Chameleon signed</span></td><td>Implementation starts April. GTM engineering owner identified</td></tr>
+<tr><td>Hiring and Outlining Ownership Domains</td><td><span class="yellow">Roles aligned and posted</span></td><td>Recruiting pipeline is active but slow — filling design and payments PM are top priority</td></tr>
+<tr><td>AI Enablement for PMs</td><td><span class="yellow">Ongoing</span></td><td>Adoption is strong across shaping, prototyping, and analysis.</td></tr>
+<tr><td>Product Scoring Process</td><td><span class="yellow">Framework Built Testing phase</span></td><td>Framework complete. Future work with finance to validate the ARR calculation methodology</td></tr>
+</table>
+
+<!-- ENGINEERING OUTPUT -->
+<h2 id="engineering-output-q1-2026">Engineering Output — Q1 2026</h2>
+
+<p>131 PRs merged across January 1 – March 18, delivered by 8 contributors.</p>
+
+<div class="engineering-stats">
+  <h3>Output by month:</h3>
+  <div class="stats-row">
+    <div class="stat-item">
+      <p>January</p>
+      <p class="stat-number">64 PRs</p>
+    </div>
+    <div class="stat-item">
+      <p>February</p>
+      <p class="stat-number">67 PRs</p>
+    </div>
+    <div class="stat-item">
+      <p>March</p>
+      <p class="stat-number">42 PRs</p>
+      <p style="font-size: 13px; color: #666666; margin-bottom: 4px;">(cycle still open)</p>
+    </div>
+  </div>
+</div>
+
+<div class="engineering-stats">
+  <h3>Output by type:</h3>
+  <div class="stats-row">
+    <div class="stat-item">
+      <p>Stories / Features</p>
+      <p class="stat-number">102 <span style="font-size: 14px; color: #666666;">(57%)</span></p>
+    </div>
+    <div class="stat-item">
+      <p>Bugs / Fixes</p>
+      <p class="stat-number">40 <span style="font-size: 14px; color: #666666;">(22%)</span></p>
+    </div>
+    <div class="stat-item">
+      <p>Infra / No ticket</p>
+      <p class="stat-number">38 <span style="font-size: 14px; color: #666666;">(21%)</span></p>
+    </div>
+  </div>
+  <p style="margin-top: 16px; margin-bottom: 0;">The 22% bug and fix rate is worth watching — not alarming but represents meaningful unplanned capacity consumption. The 21% infra and no-ticket work is largely accounted for by the DataTable V2 migration, a significant foundational investment across the quarter.</p>
+</div>
+
+<div class="engineering-stats">
+  <h3>Output by product theme:</h3>
+  <ul>
+    <li>DataTable V2 migration: 22 tickets — foundational infra, improves performance and accessibility across the app</li>
+    <li>Dromo Imports: 15 tickets</li>
+    <li>iOS Invoices & Payments: 12 tickets</li>
+    <li>Drystack / Launch: 12 tickets</li>
+    <li>Accounting Integration: 9 tickets</li>
+    <li>Bulk Messaging / Tonight's Boats: 7 tickets</li>
+    <li>Native Dockwalk: 6 tickets</li>
+    <li>Tax on Convenience Fees: 5 tickets</li>
+    <li>Analytics / Spotter: 5 tickets</li>
+    <li>MFA / WorkOS: 2 tickets</li>
+  </ul>
+</div>
+
+<!-- NAV -->
+
+
+</div>
+</div>
+</div>
+
+<script>
+(function() {
+  const links = document.querySelectorAll('.sidebar a');
+  const sections = [];
+  links.forEach(a => {
+    const id = a.getAttribute('href');
+    if (id && id.startsWith('#')) {
+      const el = document.querySelector(id);
+      if (el) sections.push({ el, link: a });
+    }
+  });
+  function onScroll() {
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.el.getBoundingClientRect().top <= 80) current = s;
+    }
+    links.forEach(a => a.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+})();
+</script>
+</body>
+</html>

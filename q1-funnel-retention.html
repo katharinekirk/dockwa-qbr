@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q1 2026 Funnel: Retention</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+html { scroll-behavior: smooth; scroll-padding-top: 60px; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Open Sans', sans-serif; background: #f5f7fa; color: #2d3748; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; color: #172C4D; }
+h1 { font-size: 26px; margin-bottom: 4px; }
+h2 { font-size: 20px; margin: 32px 0 14px; padding-bottom: 6px; border-bottom: 2px solid #6ACCE0; }
+h3 { font-size: 16px; margin: 20px 0 8px; color: #023C8F; }
+h4 { font-size: 15px; margin: 0 0 8px; }
+p { margin-bottom: 12px; font-size: 15px; }
+ul { margin: 8px 0 16px 20px; font-size: 15px; }
+li { margin-bottom: 6px; }
+a { color: #023C8F; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 14px; }
+th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+th { background: #172C4D; color: white; font-weight: 600; font-size: 13px; }
+td { background: white; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.green { color: #16a34a; font-weight: 600; }
+.red { color: #dc2626; font-weight: 600; }
+.yellow { color: #d97706; font-weight: 600; }
+.blue { color: #2563eb; font-weight: 600; }
+.obs-block { background: white; border-radius: 8px; padding: 20px 24px; margin: 16px 0; border-left: 4px solid #023C8F; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.obs-block.warning { border-left-color: #d97706; }
+.obs-block.risk { border-left-color: #dc2626; }
+.obs-block.positive { border-left-color: #16a34a; }
+.response-card { background: #f0f9ff; border: 1px solid #6ACCE0; border-radius: 8px; padding: 16px 20px; margin: 12px 0 24px; }
+.response-card h4 { margin-bottom: 8px; font-size: 14px; }
+.response-card p { margin-bottom: 8px; font-size: 14px; }
+.response-card ul { margin: 8px 0 12px 20px; font-size: 14px; }
+.chip { display: inline-block; background: #6ACCE0; color: #172C4D; font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 12px; margin-right: 8px; vertical-align: middle; }
+.owner-badge { display: inline-block; background: #172C4D; color: white; font-size: 12px; font-weight: 600; padding: 3px 12px; border-radius: 12px; margin-left: 8px; }
+.stage-bar { background: #172C4D; color: white; padding: 10px 20px; border-radius: 8px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; font-family: 'Poppins', sans-serif; }
+.stage-bar .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+.stage-bar .title { font-size: 20px; font-weight: 600; }
+.nav-row { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 14px; }
+.rock-box { background: #eef6fa; border: 1px solid #6ACCE0; border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+.rock-box h4 { margin-bottom: 8px; }
+.note-callout { background: #fef9ee; border: 1px solid #fde68a; border-radius: 6px; padding: 12px 16px; margin: 12px 0; font-size: 14px; }
+.note-callout strong { color: #92400e; }
+.divider { height: 2px; background: #e2e8f0; margin: 40px 0; }
+.sub-table-label { font-size: 13px; color: #023C8F; font-weight: 600; margin-top: 16px; margin-bottom: 8px; }
+.closing-note { font-size: 14px; color: #555; margin: 12px 0; font-style: italic; }
+.engineering-stats { background: white; border-radius: 8px; padding: 20px 24px; margin: 16px 0; }
+.stats-row { display: flex; gap: 24px; margin: 12px 0; flex-wrap: wrap; }
+.stat-item { flex: 1; min-width: 200px; }
+.stat-number { font-size: 24px; font-weight: 600; color: #172C4D; }
+@media print { body { background: white; } .container { padding: 20px; } }
+
+.global-nav { position: sticky; top: 0; z-index: 100; background: #172C4D; padding: 0; font-family: 'Poppins', sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.global-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; overflow-x: auto; gap: 0; padding: 0 20px; }
+.global-nav a { display: block; padding: 10px 14px; text-decoration: none; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; white-space: nowrap; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; }
+.global-nav a:hover { color: white; }
+.global-nav a.active { color: white; border-bottom-color: #6ACCE0; }
+/* Layout: sidebar + content */
+.page-layout { display: flex; max-width: 1200px; margin: 0 auto; min-height: calc(100vh - 42px); }
+.sidebar { width: 200px; flex-shrink: 0; position: sticky; top: 42px; height: calc(100vh - 42px); overflow-y: auto; padding: 32px 0 32px 0; }
+.sidebar-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #718096; font-weight: 600; padding: 0 20px 12px; font-family: 'Poppins', sans-serif; }
+.sidebar a { display: block; padding: 6px 20px; font-size: 13px; color: #4A5568; text-decoration: none; line-height: 1.4; border-left: 3px solid transparent; transition: all 0.15s; }
+.sidebar a:hover { color: #023C8F; background: #f0f4f8; }
+.sidebar a.active { color: #023C8F; font-weight: 600; border-left-color: #6ACCE0; background: #f0f9ff; }
+.content-area { flex: 1; min-width: 0; border-left: 1px solid #e2e8f0; }
+.container { max-width: 860px; padding: 40px 48px; }
+@media (max-width: 960px) { .sidebar { display: none; } .page-layout { display: block; } .container { padding: 32px 20px; } }
+</style>
+</head>
+<body>
+<nav class="global-nav">
+  <div class="global-nav-inner">
+    <a href="index.html" style="display:flex;align-items:center;padding:6px 16px 6px 4px;border:none;"><img src="https://assets.dockwa.com/assets/logo/dockwa-white-f6ced7057af8043f1db50689b3d608c81bd415a0fc483a2eb15a9586695385ba.png" alt="Dockwa" style="height:22px;"></a>
+    <a href="index.html">Home</a>
+    <a href="q1-funnel-awareness.html">Awareness</a>
+    <a href="q1-funnel-engagement.html">Engagement</a>
+    <a href="q1-funnel-acquisition.html">Acquisition</a>
+    <a href="q1-funnel-implementation.html">Implementation</a>
+    <a href="q1-funnel-activation.html">Activation</a>
+    <a href="q1-funnel-adoption.html">Adoption</a>
+    <a href="q1-funnel-retention.html" class="active">Retention</a>
+    <a href="q1-product.html">Product</a>
+    <a href="q1-support.html">Support</a>
+  </div>
+</nav>
+<div class="page-layout">
+<aside class="sidebar">
+  <div class="sidebar-title">On this page</div>
+    <a href="#q1-headlines">Q1 Headlines</a>
+    <a href="#q1-2026-churn-as-reported-financial-view">Q1 2026 Churn — As Reported (Financial View)</a>
+    <a href="#q1-2026-churn-adjusted-view">Q1 2026 Churn — Adjusted View</a>
+    <a href="#q1-churn-drivers-by-category">Q1 Churn Drivers by Category</a>
+    <a href="#q2-2026-churn-early-forecast">Q2 2026 Churn — Early Forecast</a>
+    <a href="#issues">Issues</a>
+</aside>
+<div class="content-area">
+<div class="container">
+
+<div class="stage-bar">
+  <div>
+    <div class="label">Funnel Stage 7 of 7</div>
+    <div class="title">Retention</div>
+  </div>
+  <div>
+    <span class="owner-badge">Abby</span>
+  </div>
+</div>
+
+
+<h2 id="q1-headlines">Q1 Headlines</h2>
+
+<div class="obs-block positive">
+  <h4><span class="green">Q1 churn beats plan on an adjusted basis</span></h4>
+  <p>Adjusted ARR beats plan by $39K and logo churn beats plan by 4, as outlined in the Executive summary.</p>
+</div>
+
+<div class="obs-block warning">
+  <h4><span class="yellow">Price/Value Gap continues to be the leading ARR churn driver</span></h4>
+  <p>Accounts failing to launch or not seeing value remains a consistent theme also seen in 2025.</p>
+</div>
+
+<!-- Q1 CHURN AS REPORTED -->
+<h2 id="q1-2026-churn-as-reported-financial-view">Q1 2026 Churn — As Reported (Financial View)</h2>
+
+<table>
+<tr><th>Month</th><th class="num">ARR Target</th><th class="num">Reported ARR</th><th class="num">ARR Variance</th><th class="num">Logos</th><th class="num">Logo Target</th></tr>
+<tr><td>January</td><td class="num">$65,279</td><td class="num">$56,322</td><td class="num"><span class="green">− $8,957 </span></td><td class="num">8</td><td class="num"><span class="green">8 </span></td></tr>
+<tr><td>February</td><td class="num">$72,075</td><td class="num">$104,989</td><td class="num"><span class="yellow">+$32,914 </span></td><td class="num">12</td><td class="num"><span class="yellow">10 </span></td></tr>
+<tr><td>March</td><td class="num">$77,938</td><td class="num">$ 84,025  (fcst)</td><td class="num"><span class="yellow">+$ 6,087</span></td><td class="num">11</td><td class="num"><span class="yellow">10 </span></td></tr>
+<tr><td>Q1 Total</td><td class="num">$215,292</td><td class="num">$2 45,337  (fcst)</td><td class="num"><span class="yellow">+$ 30,045  </span></td><td class="num">31</td><td class="num"><span class="yellow">28 </span></td></tr>
+</table>
+
+<!-- Q1 ADJUSTED VIEW -->
+<h2 id="q1-2026-churn-adjusted-view">Q1 2026 Churn — Adjusted View</h2>
+
+<table>
+<tr><th>Month</th><th class="num">Reported ARR</th><th class="num">Adj. ARR</th><th class="num">Adj. Logos</th><th class="num">Logo Target</th><th>Adjustment</th></tr>
+<tr><td>January</td><td class="num">$56,322</td><td class="num"><span class="green">$ 27,700  </span></td><td class="num"><span class="green">5 </span></td><td class="num">8</td><td>Remove 3 same-month churn/returns (Bahia Mar, Marina at Pelican Bay - Cherry Creek, Las Olas Mooring Area)</td></tr>
+<tr><td>February</td><td class="num">$104,989</td><td class="num"><span class="green">$69,977 </span></td><td class="num"><span class="green">9 </span></td><td class="num">10</td><td>Remove 4 corporate group renegotiations ( − $35K ARR); remove 3 Marinas.com-only logo churns (not Dockwa product)</td></tr>
+<tr><td>March</td><td class="num">$ 84,025  (fcst)</td><td class="num"><span class="green">$ 78,025 </span></td><td class="num"><span class="green">10 </span></td><td class="num">10</td><td>Remove Toba Wilderness ( − $6K, USD → CAD currency conversion  —  not a real churn; offset by net-new account)</td></tr>
+<tr><td>Q1 Adj. Total</td><td class="num">$2 45,337</td><td class="num"><span class="green">~$ 175,703  </span></td><td class="num"><span class="green">24 </span></td><td class="num">28</td><td>Adjusted Q1 beats both ARR target ( − $ 40 K vs plan) and logo target ( − 4 vs plan)</td></tr>
+</table>
+
+<!-- Q1 CHURN DRIVERS BY CATEGORY -->
+<h2 id="q1-churn-drivers-by-category">Q1 Churn Drivers by Category</h2>
+
+<p style="margin-bottom: 20px;">All churn drivers are categorized using the revised framework: (1) Competitive Loss via M&A, (2) Price/Value Gap, (3) Product Friction, (4) Failure to Launch, and Other for accounts that don't fit any category.</p>
+
+<div class="sub-table-label">January (5 net adjusted logo churns)</div>
+<table>
+<tr><th>Category</th><th class="num">Logos</th><th>Key Accounts</th></tr>
+<tr><td>(4) Failure to Launch</td><td class="num">3</td><td>Buenaventura Marina  —  Panama (no reservations received); Cooley's Landing Marina; New River Downtown Docks</td></tr>
+<tr><td>(1) Competitive Loss via M&A</td><td class="num">2</td><td>Seahaven Marina (Suntex acquisition); North Point Marina (Suntex acquisition)</td></tr>
+</table>
+
+<div class="sub-table-label">February (12 logos, $71K ARR adjusted)</div>
+<table>
+<tr><th>Category</th><th class="num">ARR</th><th class="num">Logos</th><th>Key Accounts</th></tr>
+<tr><td>Failure to Launch / No Return</td><td class="num">$22,414 (31%)</td><td class="num">5 (42%)</td><td>Greenwich Waterside ($2.8K), Mariners Club ($4.8K), others</td></tr>
+<tr><td>Competitive Loss via M&A</td><td class="num">$19,944 (28%)</td><td class="num">2 (17%)</td><td>Hinckley Bay Bridge ($15.4K to Molo), Seaview House</td></tr>
+<tr><td>Product Friction</td><td class="num">$19,635 (27%)</td><td class="num">2 (17%)</td><td>Boater log-in to sign contract (Gateway, $8.6K), price increase + lack of Dockwalk improvements (Westport, $11K)</td></tr>
+<tr><td>Group Renegotiation</td><td class="num">$36,456 (adj. out)</td><td class="num">0</td><td>Grove Point, TPG, DiMillo's, Bowline  —  corporate-level decisions, partially offset by expansions</td></tr>
+<tr><td>Other</td><td class="num">$6,540 (9%)</td><td class="num">3 (25%)</td><td>Hurricane recovery (Fishermens Village), mcom-only</td></tr>
+</table>
+
+<div class="sub-table-label">March (11 logos, $84K ARR forecast)</div>
+<table>
+<tr><th>Category</th><th class="num">ARR</th><th class="num">Logos</th><th>Key Accounts</th></tr>
+<tr><td>(2) Price/Value Gap</td><td class="num">$31.7K</td><td class="num">8</td><td>Apache Lake ($10K); Stock Island ($8.5K  —  Telescope fit); Albertson ($4.9K, save in progress); Legendary ($2.4K); Marina Village at Bahia Mar ($2K); MAR Marina ($1.9K); Vineyard Haven Marina ($1.2K  —  Telescope); New Bedford YC ($748)</td></tr>
+<tr><td>(4) Failure to Launch</td><td class="num">$ 31.8 K</td><td class="num">4</td><td>Liberty Harbor Marina ($11.9K); Shake-a-Leg Miami ($5.3K); Crooked Island Lodge & Marina ($2K) ; Bayside Marine ($5.4K); West Shore ($7.3K)</td></tr>
+<tr><td>(1) Competitive Loss via M&A</td><td class="num">$14.3K</td><td class="num">3</td><td>Keys Marina ($6.1K  —  Bowline group); Two Georges Marina ($4.9K  —  sold to Suntex); Black Hall Marina ($3.2K  —  sold)</td></tr>
+<tr><td>[Toba Wilderness  —  adjusted out]</td><td class="num">− $6K</td><td class="num">− 1 logo</td><td>USD → CAD currency conversion  —  not a real churn; offset by net-new account created in CAD.</td></tr>
+</table>
+
+<p class="closing-note">Price/Value Gap is the dominant Q1 ARR churn driver — concentrated in March.</p>
+
+<!-- Q2 EARLY FORECAST -->
+<h2 id="q2-2026-churn-early-forecast">Q2 2026 Churn — Early Forecast</h2>
+
+<p>May and June are work-in-progress. May currently includes $173K from Windward Marina Group — a single large account being actively monitored. Removing Windward, May would be ~$120K vs. $85K target. May and June require further triage.</p>
+
+<div class="sub-table-label">ARR Forecast</div>
+<table>
+<tr><th>Month</th><th class="num">Target</th><th class="num">Forecast</th><th class="num">Variance</th><th class="num">Saves in Progress</th><th>Best Case</th></tr>
+<tr><td>April</td><td class="num">$67,000</td><td class="num">$88,226</td><td class="num"><span class="yellow">+$21,226 </span></td><td class="num">$18,672</td><td>$69,554 ( − 2.5K vs target)</td></tr>
+<tr><td>May (WIP)</td><td class="num">$85,000</td><td class="num">$293,051**</td><td class="num"><span class="yellow">+$208,051 </span></td><td class="num">$249,870</td><td>$173k Windward (included in working to save)</td></tr>
+<tr><td>June (WIP)</td><td class="num">$87,100</td><td class="num">$157,482</td><td class="num"><span class="yellow">+$70,382 </span></td><td class="num">$63,244</td><td>$40k confirmed - $23k Boatyard deal KB2S & $20k loss of 2 locations to Molo</td></tr>
+<tr><td>Q2 Total</td><td class="num">$239,100</td><td class="num">$538,759</td><td class="num"><span class="yellow">+$299,659 </span></td><td class="num">$18,672</td><td>$520,087</td></tr>
+</table>
+
+<p style="margin-top: 12px; margin-bottom: 16px; font-size: 13px; color: #666;">**May forecast currently includes $173K from Windward (single account, ongoing implementation). Removing Windward, May ARR would be ~$120K vs. $85K target.</p>
+
+<div class="sub-table-label">Logo Forecast</div>
+<table>
+<tr><th>Month</th><th class="num">Target</th><th class="num">Forecast</th><th class="num">Variance</th><th class="num">Saves in Progress</th><th>Best Case</th></tr>
+<tr><td>April</td><td class="num">8</td><td class="num">13</td><td class="num"><span class="yellow">+5 </span></td><td class="num">5</td><td>8 (at target)</td></tr>
+<tr><td>May (WIP)</td><td class="num">10</td><td class="num">14</td><td class="num"><span class="yellow">+4 </span></td><td class="num">24</td><td>WIP</td></tr>
+<tr><td>June (WIP)</td><td class="num">11</td><td class="num">8</td><td class="num"><span class="green">− 3 </span></td><td class="num">11</td><td>WIP</td></tr>
+<tr><td>Q2 Total</td><td class="num">29</td><td class="num">35</td><td class="num"><span class="yellow">+6 </span></td><td class="num">5</td><td>30 (+1 vs target)</td></tr>
+</table>
+
+<ul style="margin-top: 16px;">
+  <li>April is the most mature Q2 month: $88,226 forecast vs. $67,000 target. $18,672 in saves actively in progress — best case brings April within target ($69,554).</li>
+  <li>The Q2 logo picture is more favorable than ARR. June is actually forecasting below target (8 vs. 11). April save success could bring Q2 logos to near-target.</li>
+  <li>Windward ($173K ARR, May) is the single largest Q2 risk.</li>
+</ul>
+
+<!-- ISSUES -->
+<h2 id="issues">Issues</h2>
+
+<div class="obs-block risk">
+  <h4><span class="red">Windward Q2 risk ($173K)</span></h4>
+  <p>Executive team working, but presents large risk to Q2 churn targets.</p>
+</div>
+
+<div class="obs-block warning">
+  <h4><span class="yellow">Price/Value Gap</span></h4>
+  <p>Ongoing ARR churn driver in Q1. Low transient ROI is a recurring theme. Requires Success, Marketing, Sales, and Product alignment on improvement strategy.</p>
+</div>
+
+<div class="obs-block warning">
+  <h4><span class="yellow">SMB cohort Q4 product commitments not delivered in Q1</span></h4>
+  <p>The SMB cohort (300 accounts, $736K ARR, no MSM coverage) entered Q1 with expectations that product features would be delivered. With 22 at-risk accounts renewing in Q2 ($48.5K ARR), the team needs clarity on which SMB-critical features will ship in Q2 and a plan for targeted outreach to at-risk renewals.</p>
+</div>
+
+<div class="obs-block warning">
+  <h4><span class="yellow">POS feature gaps at Zeke's and large ship stores</span></h4>
+  <p>Top request (merging invoices) escalated to Product. Pain points may affect other recently sold high-volume POS accounts if not addressed in Q2 ahead of busy season.</p>
+</div>
+
+<!-- NAV -->
+
+
+</div>
+</div>
+</div>
+
+<script>
+(function() {
+  const links = document.querySelectorAll('.sidebar a');
+  const sections = [];
+  links.forEach(a => {
+    const id = a.getAttribute('href');
+    if (id && id.startsWith('#')) {
+      const el = document.querySelector(id);
+      if (el) sections.push({ el, link: a });
+    }
+  });
+  function onScroll() {
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.el.getBoundingClientRect().top <= 80) current = s;
+    }
+    links.forEach(a => a.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+})();
+</script>
+</body>
+</html>

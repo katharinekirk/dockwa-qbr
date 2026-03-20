@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q1 2026 Funnel: Activation</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+html { scroll-behavior: smooth; scroll-padding-top: 60px; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Open Sans', sans-serif; background: #f5f7fa; color: #2d3748; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; color: #172C4D; }
+h1 { font-size: 26px; margin-bottom: 4px; }
+h2 { font-size: 20px; margin: 32px 0 14px; padding-bottom: 6px; border-bottom: 2px solid #6ACCE0; }
+h3 { font-size: 16px; margin: 20px 0 8px; color: #023C8F; }
+h4 { font-size: 15px; margin: 0 0 8px; }
+p { margin-bottom: 12px; font-size: 15px; }
+ul { margin: 8px 0 16px 20px; font-size: 15px; }
+li { margin-bottom: 6px; }
+a { color: #023C8F; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 14px; }
+th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+th { background: #172C4D; color: white; font-weight: 600; font-size: 13px; }
+td { background: white; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.green { color: #16a34a; font-weight: 600; }
+.red { color: #dc2626; font-weight: 600; }
+.yellow { color: #d97706; font-weight: 600; }
+.blue { color: #2563eb; font-weight: 600; }
+.obs-block { background: white; border-radius: 8px; padding: 20px 24px; margin: 16px 0; border-left: 4px solid #023C8F; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.obs-block.warning { border-left-color: #d97706; }
+.obs-block.risk { border-left-color: #dc2626; }
+.obs-block.positive { border-left-color: #16a34a; }
+.response-card { background: #f0f9ff; border: 1px solid #6ACCE0; border-radius: 8px; padding: 16px 20px; margin: 12px 0 24px; }
+.response-card h4 { margin-bottom: 8px; font-size: 14px; }
+.response-card p { margin-bottom: 8px; font-size: 14px; }
+.response-card ul { margin: 8px 0 12px 20px; font-size: 14px; }
+.chip { display: inline-block; background: #6ACCE0; color: #172C4D; font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 12px; margin-right: 8px; vertical-align: middle; }
+.owner-badge { display: inline-block; background: #172C4D; color: white; font-size: 12px; font-weight: 600; padding: 3px 12px; border-radius: 12px; margin-left: 8px; }
+.stage-bar { background: #172C4D; color: white; padding: 10px 20px; border-radius: 8px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; font-family: 'Poppins', sans-serif; }
+.stage-bar .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+.stage-bar .title { font-size: 20px; font-weight: 600; }
+.nav-row { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 14px; }
+.rock-box { background: #eef6fa; border: 1px solid #6ACCE0; border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+.rock-box h4 { margin-bottom: 8px; }
+.note-callout { background: #fef9ee; border: 1px solid #fde68a; border-radius: 6px; padding: 12px 16px; margin: 12px 0; font-size: 14px; }
+.note-callout strong { color: #92400e; }
+.divider { height: 2px; background: #e2e8f0; margin: 40px 0; }
+.sub-table-label { font-size: 13px; color: #023C8F; font-weight: 600; margin-top: 16px; margin-bottom: 8px; }
+.closing-note { font-size: 14px; color: #555; margin: 12px 0; font-style: italic; }
+.engineering-stats { background: white; border-radius: 8px; padding: 20px 24px; margin: 16px 0; }
+.stats-row { display: flex; gap: 24px; margin: 12px 0; flex-wrap: wrap; }
+.stat-item { flex: 1; min-width: 200px; }
+.stat-number { font-size: 24px; font-weight: 600; color: #172C4D; }
+@media print { body { background: white; } .container { padding: 20px; } }
+
+.global-nav { position: sticky; top: 0; z-index: 100; background: #172C4D; padding: 0; font-family: 'Poppins', sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.global-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; overflow-x: auto; gap: 0; padding: 0 20px; }
+.global-nav a { display: block; padding: 10px 14px; text-decoration: none; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; white-space: nowrap; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; }
+.global-nav a:hover { color: white; }
+.global-nav a.active { color: white; border-bottom-color: #6ACCE0; }
+/* Layout: sidebar + content */
+.page-layout { display: flex; max-width: 1200px; margin: 0 auto; min-height: calc(100vh - 42px); }
+.sidebar { width: 200px; flex-shrink: 0; position: sticky; top: 42px; height: calc(100vh - 42px); overflow-y: auto; padding: 32px 0 32px 0; }
+.sidebar-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #718096; font-weight: 600; padding: 0 20px 12px; font-family: 'Poppins', sans-serif; }
+.sidebar a { display: block; padding: 6px 20px; font-size: 13px; color: #4A5568; text-decoration: none; line-height: 1.4; border-left: 3px solid transparent; transition: all 0.15s; }
+.sidebar a:hover { color: #023C8F; background: #f0f4f8; }
+.sidebar a.active { color: #023C8F; font-weight: 600; border-left-color: #6ACCE0; background: #f0f9ff; }
+.content-area { flex: 1; min-width: 0; border-left: 1px solid #e2e8f0; }
+.container { max-width: 860px; padding: 40px 48px; }
+@media (max-width: 960px) { .sidebar { display: none; } .page-layout { display: block; } .container { padding: 32px 20px; } }
+</style>
+</head>
+<body>
+<nav class="global-nav">
+  <div class="global-nav-inner">
+    <a href="index.html" style="display:flex;align-items:center;padding:6px 16px 6px 4px;border:none;"><img src="https://assets.dockwa.com/assets/logo/dockwa-white-f6ced7057af8043f1db50689b3d608c81bd415a0fc483a2eb15a9586695385ba.png" alt="Dockwa" style="height:22px;"></a>
+    <a href="index.html">Home</a>
+    <a href="q1-funnel-awareness.html">Awareness</a>
+    <a href="q1-funnel-engagement.html">Engagement</a>
+    <a href="q1-funnel-acquisition.html">Acquisition</a>
+    <a href="q1-funnel-implementation.html">Implementation</a>
+    <a href="q1-funnel-activation.html" class="active">Activation</a>
+    <a href="q1-funnel-adoption.html">Adoption</a>
+    <a href="q1-funnel-retention.html">Retention</a>
+    <a href="q1-product.html">Product</a>
+    <a href="q1-support.html">Support</a>
+  </div>
+</nav>
+<div class="page-layout">
+<aside class="sidebar">
+  <div class="sidebar-title">On this page</div>
+    <a href="#rock-review">Rock Review</a>
+    <a href="#activation-strategy">Activation Strategy</a>
+    <a href="#module-activation-q1-results-and-current-backlog">Module Activation — Q1 Results & Current Backlog</a>
+    <a href="#mid-market-required-meetings-q1-total">Mid-Market Required Meetings — Q1 Total</a>
+</aside>
+<div class="content-area">
+<div class="container">
+
+<div class="stage-bar">
+  <div>
+    <div class="label">Funnel Stage 5 of 7</div>
+    <div class="title">Activation</div>
+  </div>
+  <div>
+    <span class="owner-badge">Abby</span>
+  </div>
+</div>
+
+
+<h2 id="rock-review">Rock Review</h2>
+
+<table>
+<tr><th>Rock / Milestone</th><th>Target</th><th>Status</th><th>Q1 Update</th></tr>
+<tr><td colspan="4"><strong>Company Rock: Define, monitor, execute Retention Ceremonies</strong> — Target: 3/27/2026 — Status: <span class="green">On Track</span></td></tr>
+<tr><td colspan="4" style="padding: 8px 24px; background: #f9fafb;"><ul style="margin: 8px 0; padding-left: 20px;"><li>→ Retention Ceremonies defined per tier — 1/30 — <span class="green">Complete</span></li><li>Operating cadence published — 2/27 — <span class="green">Complete</span></li><li>Marina Ceremony + MSM Activity reports active — 2/27 — <span class="green">Complete</span></li><li>→ 80% of Jan impl. cohort have activation meeting by 3/27 — 3/27 — <span class="yellow">On track (40% complete, 11% scheduled, 22% scheduling in progress)</span></li></ul></td></tr>
+<tr><td colspan="4"><strong>Team Rock: Activation SOPs + nurturing plan</strong> — Target: 3/27/2026 — Status: <span class="green">On Track</span></td></tr>
+<tr><td colspan="4" style="padding: 8px 24px; background: #f9fafb;"><ul style="margin: 8px 0; padding-left: 20px;"><li>→ Activation SOPs published — 1/30 — <span class="green">Complete</span></li><li>Engagement standards live — 2/20 — <span class="green">Complete</span></li><li>Activation Checklist deployed to all MSMs — In use on every Activation call — 2/20 — <span class="green">Complete</span></li></ul></td></tr>
+</table>
+
+<h3>Jan Cohort Activation Meeting Detail</h3>
+
+<p>Of 10 accounts that exited implementation in January, 2 have completed activation meetings. 7 MSM-covered accounts have had recent outreach — Valentines Resort & Marina and Sandpiper Cove have activation call emails sent with scheduling in progress; Cove Cay, Tampa Bay Marina, Waypoint Marina, and Higgins Yacht Yard have had email/support outreach. The Marina at Edisto Beach declined an activation call on 3/18, checklist and additional training documentation was sent. IGY Savannah Harbor Marina has no outreach logged. Secret Cove Marina is Support Only and excluded from the MSM target. 8 calendar days remain before the 3/27 deadline.</p>
+
+<!-- ACTIVATION STRATEGY CONTEXT -->
+<h2 id="activation-strategy">Activation Strategy</h2>
+
+<p>Dockwa's 2026 Customer Success strategy is focused on proactive activation and adoption, centered on driving module activation within the first 60–90 days post-implementation, delivering 169 module activations.</p>
+
+<!-- Q1 HEADLINE CALLOUT -->
+<div class="obs-block positive">
+  <h4>92 module activations completed in Q1</h4>
+  <p>C&C led with 25, Transient 21, Storage 12. Several long-stuck accounts finally converted (Storage: 677d, 767d; Insights: 598d; Telescope: 315d). Team is focused on throughput — time-to-activation from implementation close — while working down backlog count.</p>
+</div>
+
+<!-- MODULE ACTIVATION TABLE -->
+<h2 id="module-activation-q1-results-and-current-backlog">Module Activation — Q1 Results & Current Backlog</h2>
+
+<p>Q1 activations reflect modules where the activation date falls January 1 – March 31, 2026. Team focus is throughput (time from implementation close to activation) while working down backlog count.</p>
+
+<table>
+<tr><th>Module</th><th class="num">Q1 Activations</th><th class="num">In Activation (Now)</th><th class="num">60+ Day Backlog</th><th>Notes</th></tr>
+<tr><td>C&C</td><td class="num">37</td><td class="num">51</td><td class="num">13</td><td></td></tr>
+<tr><td>Transient</td><td class="num">33</td><td class="num">113</td><td class="num">35</td><td></td></tr>
+<tr><td>Storage</td><td class="num">18</td><td class="num">134</td><td class="num">72</td><td></td></tr>
+<tr><td>Insights</td><td class="num">11</td><td class="num">62</td><td class="num">46</td><td></td></tr>
+<tr><td>POS</td><td class="num">10</td><td class="num">10</td><td class="num">3</td><td></td></tr>
+<tr><td>Integration</td><td class="num">43</td><td class="num">36</td><td class="num">20</td><td></td></tr>
+<tr><td>Telescope</td><td class="num">5</td><td class="num">12</td><td class="num">6</td><td></td></tr>
+<tr><td>Fuel</td><td class="num">8</td><td class="num">15</td><td class="num">4</td><td></td></tr>
+<tr><td>Drystack</td><td class="num">4</td><td class="num">3</td><td class="num">1</td><td>3 of 4 at risk and stuck >200 days; team addressing but downgrades likely</td></tr>
+<tr><td><strong>TOTAL</strong></td><td class="num"><strong>169</strong></td><td class="num"><strong>436</strong></td><td class="num"><strong>200</strong></td><td><strong>Focus: throughput (time to activation), while working down aged backlog</strong></td></tr>
+</table>
+
+<div class="response-card">
+  <ul>
+    <li>Activation criteria under active review. This is especially critical for Storage (usage under-reported due to screen persistence), Transient (claimed accounts entering activation directly), and Insights (Amplitude event concerns). These revisions will improve reporting accuracy.</li>
+    <li>The 60+ day backlog is being worked down. MSM outreach has touched 29% of this cohort since 2/12.</li>
+  </ul>
+</div>
+
+<!-- MID-MARKET MEETINGS -->
+<h2 id="mid-market-required-meetings-q1-total">Mid-Market Required Meetings — Q1 Total</h2>
+
+<p>Required cadence meetings include: Activation, Renewal, Pre-Season, and Post-Season. Mid-market MSM target: 10 meetings/week.</p>
+
+<table>
+<tr><th>MSM</th><th class="num">Booked</th><th class="num">Completed</th><th class="num">No-Shows</th></tr>
+<tr><td>Autumn Shaughnessy</td><td class="num">29</td><td class="num">22</td><td class="num">0</td></tr>
+<tr><td>Hanna Rameau (Strategic)</td><td class="num">20</td><td class="num">9</td><td class="num">0</td></tr>
+<tr><td>Morgan Ball</td><td class="num">65</td><td class="num">52</td><td class="num">3</td></tr>
+<tr><td>Olivia Hennedy</td><td class="num">61</td><td class="num">39</td><td class="num">6</td></tr>
+<tr><td><strong>TOTAL</strong></td><td class="num"><strong>175</strong></td><td class="num"><strong>122</strong></td><td class="num"><strong>9</strong></td></tr>
+</table>
+
+<div class="response-card">
+  <ul>
+    <li>By type: 84 Renewal meetings, 26 Pre-Season, 14 Activation, 47 General/Check-in, 1 Post-Season Review.</li>
+    <li>While team is not yet hitting 10 meetings per Mid-Market MSM per week targets, meeting volume has consistently improved over the quarter with Olivia & Morgan averaging 7 per week; Autumn, still ramping now averaging about 4.</li>
+    <li>NOTE: Bandwidth constraints making the 10+ meeting target likely unattainable has been brought to Matt's attention for review and further discussion.</li>
+  </ul>
+</div>
+
+<!-- BOTTOM NAV -->
+
+
+</div>
+</div>
+</div>
+
+<script>
+(function() {
+  const links = document.querySelectorAll('.sidebar a');
+  const sections = [];
+  links.forEach(a => {
+    const id = a.getAttribute('href');
+    if (id && id.startsWith('#')) {
+      const el = document.querySelector(id);
+      if (el) sections.push({ el, link: a });
+    }
+  });
+  function onScroll() {
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.el.getBoundingClientRect().top <= 80) current = s;
+    }
+    links.forEach(a => a.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+})();
+</script>
+</body>
+</html>

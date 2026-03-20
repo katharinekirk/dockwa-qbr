@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q1 2026 Funnel: Implementation</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+html { scroll-behavior: smooth; scroll-padding-top: 60px; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Open Sans', sans-serif; background: #f5f7fa; color: #2d3748; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; color: #172C4D; }
+h1 { font-size: 26px; margin-bottom: 4px; }
+h2 { font-size: 20px; margin: 32px 0 14px; padding-bottom: 6px; border-bottom: 2px solid #6ACCE0; }
+h3 { font-size: 16px; margin: 20px 0 8px; color: #023C8F; }
+h4 { font-size: 15px; margin: 0 0 8px; }
+p { margin-bottom: 12px; font-size: 15px; }
+ul { margin: 8px 0 16px 20px; font-size: 15px; }
+li { margin-bottom: 6px; }
+a { color: #023C8F; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 14px; }
+th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+th { background: #172C4D; color: white; font-weight: 600; font-size: 13px; }
+td { background: white; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.green { color: #16a34a; font-weight: 600; }
+.red { color: #dc2626; font-weight: 600; }
+.yellow { color: #d97706; font-weight: 600; }
+.blue { color: #2563eb; font-weight: 600; }
+.obs-block { background: white; border-radius: 8px; padding: 20px 24px; margin: 16px 0; border-left: 4px solid #023C8F; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.obs-block.warning { border-left-color: #d97706; }
+.obs-block.risk { border-left-color: #dc2626; }
+.obs-block.positive { border-left-color: #16a34a; }
+.response-card { background: #f0f9ff; border: 1px solid #6ACCE0; border-radius: 8px; padding: 16px 20px; margin: 12px 0 24px; }
+.response-card h4 { margin-bottom: 8px; font-size: 14px; }
+.response-card p { margin-bottom: 8px; font-size: 14px; }
+.response-card ul { margin: 8px 0 12px 20px; font-size: 14px; }
+.chip { display: inline-block; background: #6ACCE0; color: #172C4D; font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 12px; margin-right: 8px; vertical-align: middle; }
+.owner-badge { display: inline-block; background: #172C4D; color: white; font-size: 12px; font-weight: 600; padding: 3px 12px; border-radius: 12px; margin-left: 8px; }
+.stage-bar { background: #172C4D; color: white; padding: 10px 20px; border-radius: 8px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; font-family: 'Poppins', sans-serif; }
+.stage-bar .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+.stage-bar .title { font-size: 20px; font-weight: 600; }
+.nav-row { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 14px; }
+.rock-box { background: #eef6fa; border: 1px solid #6ACCE0; border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+.rock-box h4 { margin-bottom: 8px; }
+.note-callout { background: #fef9ee; border: 1px solid #fde68a; border-radius: 6px; padding: 12px 16px; margin: 12px 0; font-size: 14px; }
+.note-callout strong { color: #92400e; }
+.divider { height: 2px; background: #e2e8f0; margin: 40px 0; }
+.sub-table-label { font-size: 13px; color: #023C8F; font-weight: 600; margin-top: 16px; margin-bottom: 8px; }
+.closing-note { font-size: 14px; color: #555; margin: 12px 0; font-style: italic; }
+.engineering-stats { background: white; border-radius: 8px; padding: 20px 24px; margin: 16px 0; }
+.stats-row { display: flex; gap: 24px; margin: 12px 0; flex-wrap: wrap; }
+.stat-item { flex: 1; min-width: 200px; }
+.stat-number { font-size: 24px; font-weight: 600; color: #172C4D; }
+@media print { body { background: white; } .container { padding: 20px; } }
+
+.global-nav { position: sticky; top: 0; z-index: 100; background: #172C4D; padding: 0; font-family: 'Poppins', sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.global-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; overflow-x: auto; gap: 0; padding: 0 20px; }
+.global-nav a { display: block; padding: 10px 14px; text-decoration: none; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; white-space: nowrap; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; }
+.global-nav a:hover { color: white; }
+.global-nav a.active { color: white; border-bottom-color: #6ACCE0; }
+/* Layout: sidebar + content */
+.page-layout { display: flex; max-width: 1200px; margin: 0 auto; min-height: calc(100vh - 42px); }
+.sidebar { width: 200px; flex-shrink: 0; position: sticky; top: 42px; height: calc(100vh - 42px); overflow-y: auto; padding: 32px 0 32px 0; }
+.sidebar-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #718096; font-weight: 600; padding: 0 20px 12px; font-family: 'Poppins', sans-serif; }
+.sidebar a { display: block; padding: 6px 20px; font-size: 13px; color: #4A5568; text-decoration: none; line-height: 1.4; border-left: 3px solid transparent; transition: all 0.15s; }
+.sidebar a:hover { color: #023C8F; background: #f0f4f8; }
+.sidebar a.active { color: #023C8F; font-weight: 600; border-left-color: #6ACCE0; background: #f0f9ff; }
+.content-area { flex: 1; min-width: 0; border-left: 1px solid #e2e8f0; }
+.container { max-width: 860px; padding: 40px 48px; }
+@media (max-width: 960px) { .sidebar { display: none; } .page-layout { display: block; } .container { padding: 32px 20px; } }
+</style>
+</head>
+<body>
+<nav class="global-nav">
+  <div class="global-nav-inner">
+    <a href="index.html" style="display:flex;align-items:center;padding:6px 16px 6px 4px;border:none;"><img src="https://assets.dockwa.com/assets/logo/dockwa-white-f6ced7057af8043f1db50689b3d608c81bd415a0fc483a2eb15a9586695385ba.png" alt="Dockwa" style="height:22px;"></a>
+    <a href="index.html">Home</a>
+    <a href="q1-funnel-awareness.html">Awareness</a>
+    <a href="q1-funnel-engagement.html">Engagement</a>
+    <a href="q1-funnel-acquisition.html">Acquisition</a>
+    <a href="q1-funnel-implementation.html" class="active">Implementation</a>
+    <a href="q1-funnel-activation.html">Activation</a>
+    <a href="q1-funnel-adoption.html">Adoption</a>
+    <a href="q1-funnel-retention.html">Retention</a>
+    <a href="q1-product.html">Product</a>
+    <a href="q1-support.html">Support</a>
+  </div>
+</nav>
+<div class="page-layout">
+<aside class="sidebar">
+  <div class="sidebar-title">On this page</div>
+    <a href="#company-rock-implementation-rock">Company Rock: Implementation Rock</a>
+    <a href="#throughput-standard-implementation">Throughput: Standard Implementation</a>
+    <a href="#throughput-post-implementation-support">Throughput: Post-Implementation Support</a>
+    <a href="#implementation-success">Implementation Success</a>
+    <a href="#key-declined-implementations">Key Declined Implementations</a>
+    <a href="#modules-in-implementation">Modules in Implementation</a>
+    <a href="#time-in-implementation-days">Time in Implementation (days)</a>
+    <a href="#observations">Observations</a>
+    <a href="#questions-and-responses">Questions & Responses</a>
+    <a href="#key-initiatives-this-quarter">Key Initiatives This Quarter</a>
+</aside>
+<div class="content-area">
+<div class="container">
+
+<div class="stage-bar">
+  <div>
+    <div class="label">Funnel Stage 4 of 7</div>
+    <div class="title">Implementation</div>
+  </div>
+  <div>
+    <span class="owner-badge">Jared</span>
+  </div>
+</div>
+
+
+<h2 id="company-rock-implementation-rock">Company Rock: Implementation Rock</h2>
+<ul>
+  <li><strong>Standardize metrics for throughput:</strong> <span class="green">Complete</span></li>
+  <li><strong>Analyze bottlenecks at module and team level:</strong> <span class="green">Complete</span></li>
+  <li><strong>Map implementation workflow to identify delays:</strong> <span class="green">Complete</span></li>
+  <li><strong>Quantify impact of top 3-5 bottlenecks:</strong> <span class="green">Complete</span></li>
+  <li><strong>Compare actual vs. ideal capacity allocation:</strong> <span class="green">Complete</span></li>
+  <li><strong>Assess Contracts import tool effectiveness:</strong> <span class="green">Complete</span></li>
+</ul>
+
+<!-- THROUGHPUT: STANDARD IMPLEMENTATION -->
+<h2 id="throughput-standard-implementation">Throughput: Standard Implementation</h2>
+<table>
+<tr>
+  <th>Metric</th>
+  <th class="num">Q1 Benchmark / Target</th>
+  <th class="num">Q1 Actual</th>
+  <th>Notes</th>
+</tr>
+<tr>
+  <td>Cases Created</td>
+  <td class="num">-</td>
+  <td class="num">217</td>
+  <td></td>
+</tr>
+<tr>
+  <td>Cases Closed</td>
+  <td class="num">-</td>
+  <td class="num">198</td>
+  <td></td>
+</tr>
+<tr>
+  <td>Current Backlog</td>
+  <td class="num">< 300</td>
+  <td class="num">281</td>
+  <td></td>
+</tr>
+<tr>
+  <td>Marinas in Backlog</td>
+  <td class="num">-</td>
+  <td class="num">128</td>
+  <td>34 have one module remaining; 23 are strategic accounts</td>
+</tr>
+<tr>
+  <td>30-Day Backlog Ratio</td>
+  <td class="num">1 : 1</td>
+  <td class="num">0.76 : 1</td>
+  <td></td>
+</tr>
+<tr>
+  <td>90-Day Backlog Ratio</td>
+  <td class="num">1 : 1</td>
+  <td class="num">1.11 : 1</td>
+  <td></td>
+</tr>
+<tr>
+  <td>% Backlog Under 60 Days</td>
+  <td class="num">60%</td>
+  <td class="num">35%</td>
+  <td>79 Marina-Deferred & On-Hold cases in backlog, which is 28% of the entire backlog. Taking those out of ratio counts,  40.9% of unblocked backlog under is 60 days old.</td>
+</tr>
+</table>
+
+<!-- THROUGHPUT: POST-IMPLEMENTATION SUPPORT -->
+<h2 id="throughput-post-implementation-support">Throughput: Post-Implementation Support</h2>
+<table>
+<tr>
+  <th>Metric</th>
+  <th class="num">Q1 Benchmark / Target</th>
+  <th class="num">Q1 Actual</th>
+  <th>Notes</th>
+</tr>
+<tr>
+  <td>Cases Created</td>
+  <td class="num">-</td>
+  <td class="num">37</td>
+  <td></td>
+</tr>
+<tr>
+  <td>Cases Closed</td>
+  <td class="num">-</td>
+  <td class="num">121</td>
+  <td>Majority were expected contract sends that went successfully for marinas in year 2 and above with Dockwa.</td>
+</tr>
+<tr>
+  <td>Current Backlog</td>
+  <td class="num">-</td>
+  <td class="num">313</td>
+  <td></td>
+</tr>
+<tr>
+  <td>Marinas in Backlog</td>
+  <td class="num">-</td>
+  <td class="num">185</td>
+  <td>Majority are marinas expecting to have 30+ contract sends on a given date at some point in 2026.</td>
+</tr>
+</table>
+
+<!-- IMPLEMENTATION SUCCESS -->
+<h2 id="implementation-success">Implementation Success</h2>
+<p><em>86.2% success rate in Q1 so far. March declines are all Failures to Launch.</em></p>
+<table>
+<tr>
+  <th>Metric</th>
+  <th class="num">Q1 Benchmark / Target</th>
+  <th class="num">Q1 Actual</th>
+  <th>Notes</th>
+</tr>
+<tr>
+  <td>Implementations Completed</td>
+  <td class="num">-</td>
+  <td class="num">169</td>
+  <td>Represents 90.1% of ARR of modules implemented</td>
+</tr>
+<tr>
+  <td>Implementations Declined</td>
+  <td class="num">-</td>
+  <td class="num">27</td>
+  <td>$50k ARR represented in modules declined</td>
+</tr>
+<tr>
+  <td>Success Rate</td>
+  <td class="num">83.3% (FY2025 average)</td>
+  <td class="num">86.2%</td>
+  <td></td>
+</tr>
+</table>
+
+<!-- KEY DECLINED IMPLEMENTATIONS -->
+<h2 id="key-declined-implementations">Key Declined Implementations</h2>
+<p><em>Please add any post-2/27 or high-profile/learning value declines through end of Q1.</em></p>
+<table>
+<tr>
+  <th>Group</th>
+  <th>Marinas</th>
+  <th>Module(s)</th>
+  <th>Reason</th>
+</tr>
+<tr>
+  <td></td>
+  <td>St Michaels Harbour Inn Marina & Spa</td>
+  <td>Telescope</td>
+  <td>Failure to Launch - unresponsive to reachouts from IS/MSM teams</td>
+</tr>
+<tr>
+  <td></td>
+  <td>Avista Marina</td>
+  <td>Integration</td>
+  <td>Failure to Launch - no expected use for LIL integration right now after 3/11 discussion</td>
+</tr>
+<tr>
+  <td>Bluewater Marinas Group</td>
+  <td>Kent Narrows Boatel</td>
+  <td>Storage</td>
+  <td>Failure to Launch - Corporate MMS sale, but onsite team using BoatCloud for managing drystack assignments and launches</td>
+</tr>
+<tr>
+  <td></td>
+  <td>Bayside Marine</td>
+  <td>Storage, POS/Fuel</td>
+  <td>Failure to Launch - Corporate MMS sale, but onsite team just implemented new POS shortly before acquisition; also using BoatCloud for managing drystack assignments</td>
+</tr>
+</table>
+
+<!-- MODULES IN IMPLEMENTATION -->
+<h2 id="modules-in-implementation">Modules in Implementation</h2>
+<table>
+<tr>
+  <th>Module</th>
+  <th class="num">Logos</th>
+  <th>Change since 2/25</th>
+  <th class="num">% of Base</th>
+  <th class="num">ARR ($K)</th>
+  <th>ARR Chg since 2/25</th>
+</tr>
+<tr>
+  <td>Transient</td>
+  <td class="num">16</td>
+  <td>↓ 3</td>
+  <td class="num">2%</td>
+  <td class="num">29.2</td>
+  <td>↓ 6.7</td>
+</tr>
+<tr>
+  <td>Storage</td>
+  <td class="num">74</td>
+  <td>↑ 13</td>
+  <td class="num">15%</td>
+  <td class="num">181.2</td>
+  <td>↑ 9.4</td>
+</tr>
+<tr>
+  <td>C&C</td>
+  <td class="num">37</td>
+  <td>↓ 26</td>
+  <td class="num">8%</td>
+  <td class="num">99.4</td>
+  <td>↓ 85.4</td>
+</tr>
+<tr>
+  <td>Fuel</td>
+  <td class="num">18</td>
+  <td>↓ 18</td>
+  <td class="num">18%</td>
+  <td class="num">16</td>
+  <td>↓ 37.8</td>
+</tr>
+<tr>
+  <td>POS</td>
+  <td class="num">20</td>
+  <td>↓ 10</td>
+  <td class="num">22%</td>
+  <td class="num">31.3</td>
+  <td>↓ 10.9</td>
+</tr>
+<tr>
+  <td>Dry Stack</td>
+  <td class="num">18</td>
+  <td>↓ 12</td>
+  <td class="num">43%</td>
+  <td class="num">15.9</td>
+  <td>↓ 5.9</td>
+</tr>
+<tr>
+  <td>Integrations</td>
+  <td class="num">25</td>
+  <td>↓ 43</td>
+  <td class="num">13%</td>
+  <td class="num">8.9</td>
+  <td>↓ 26.9</td>
+</tr>
+<tr>
+  <td>Telescope</td>
+  <td class="num">8</td>
+  <td>↓ 7</td>
+  <td class="num">13%</td>
+  <td class="num">54.4</td>
+  <td>↓ 42.7</td>
+</tr>
+</table>
+
+<!-- TIME IN IMPLEMENTATION -->
+<h2 id="time-in-implementation-days">Time in Implementation (days)</h2>
+<table>
+<tr>
+  <th>Module</th>
+  <th class="num">Q1 Avg (days)</th>
+  <th class="num">TTM Avg (days)</th>
+</tr>
+<tr>
+  <td>Transient</td>
+  <td class="num">57</td>
+  <td class="num">50</td>
+</tr>
+<tr>
+  <td>Storage</td>
+  <td class="num">71</td>
+  <td class="num">80</td>
+</tr>
+<tr>
+  <td>C&C</td>
+  <td class="num">71</td>
+  <td class="num">88</td>
+</tr>
+<tr>
+  <td>Fuel</td>
+  <td class="num">170</td>
+  <td class="num">89</td>
+</tr>
+<tr>
+  <td>POS</td>
+  <td class="num">79</td>
+  <td class="num">84</td>
+</tr>
+<tr>
+  <td>Dry Stack</td>
+  <td class="num">110</td>
+  <td class="num">107</td>
+</tr>
+<tr>
+  <td>Integrations</td>
+  <td class="num">68</td>
+  <td class="num">74</td>
+</tr>
+<tr>
+  <td>Telescope</td>
+  <td class="num">66</td>
+  <td class="num">53</td>
+</tr>
+<tr>
+  <td><strong>OVERALL</strong></td>
+  <td class="num"><strong>72.8</strong></td>
+  <td class="num"><strong>75.0</strong></td>
+</tr>
+</table>
+
+<!-- OBSERVATIONS -->
+<h2 id="observations">Observations</h2>
+
+<div class="obs-block positive">
+  <h4>Backlog is improving but still above target</h4>
+  <ul>
+    <li>30-day backlog ratio hit 0.76:1 (on track). 90-day ratio is 1.11:1 (off track but trending down).</li>
+    <li>The improvement is partly driven by lower February case volume (43% below forecast), not just increased throughput.</li>
+    <li>If case volume returns to January levels (75% above forecast), the current team can only close ~65% of cases opened per month.</li>
+  </ul>
+</div>
+
+<div class="obs-block positive">
+  <h4>Success rate at 86.2% with a mix of decline reasons</h4>
+  <ul>
+    <li>169 completed ($454K ARR) vs. 27 declined ($50K ARR) in Q1 so far.</li>
+    <li>Decline causes are a blend: Product Limitations (QuickBooks Desktop, POS for service/parts), KB2S (ownership changes, wrong product fit), and Failure to Launch (no staff buy-in).</li>
+    <li>Shake-a-Leg Miami (all 5 modules declined) was a clear bad-fit sale. Worth flagging to sales as a customer type to screen for.</li>
+  </ul>
+</div>
+
+<div class="obs-block positive">
+  <h4>26.6% of backlog marinas have only 1 module left</h4>
+  <ul>
+    <li>10 marinas have only Integrations remaining; 7 marinas have only Transient remaining. These are flagged for focus to close ASAP.</li>
+    <li>This is a good leading indicator that throughput focus is working on the tail end of implementations.</li>
+  </ul>
+</div>
+
+<div class="obs-block warning">
+  <h4>Fuel module is a major outlier on implementation time</h4>
+  <ul>
+    <li>Q1 average: 170.3 days vs. TTM average of 89.6 days. This is nearly double the TTM and 2.4x the overall Q1 average of 70.4 days.</li>
+    <li>Worth understanding if this is a handful of stuck cases or a systemic issue with Fuel implementations.</li>
+  </ul>
+</div>
+
+<div class="obs-block warning">
+  <h4>Post-implementation support volume is high (403 cases T90)</h4>
+  <ul>
+    <li>V1-to-V2 QBO migration cases represent 33% of Q1 non-IS volume. Additional maps requests are 23%.</li>
+    <li>These are essentially implementation rework, not new implementation. They compete for the same team's attention.</li>
+  </ul>
+</div>
+
+<div class="obs-block warning">
+  <h4>Rock progress is mixed</h4>
+  <ul>
+    <li>2 of 6 sub-items complete (standardize metrics, map workflow). 1 on track. 1 off track. 2 TBD/in progress.</li>
+    <li>The off-track item (quantify impact of top bottlenecks) was delayed by month-end escalations on accounting, reporting, and integrations.</li>
+    <li>This is the pattern: operational fires pull time away from the strategic Rock work.</li>
+  </ul>
+</div>
+
+<!-- Q&A SECTION -->
+<h2 id="questions-and-responses">Questions & Responses</h2>
+
+<h3>How are we tracking to increasing baseline per-rep capacity?</h3>
+<p style="font-size: 13px; color: #666; margin-bottom: 12px;">The Pulse data shows 203 closed cases in 90 days (roughly 63/month).</p>
+<div class="response-card">
+  We're currently making minor improvements to increase capacity, but there are blockers related to staffing that may impact our progress (Jake offboarding 4/2 and needing a backfill hired, Emma with 2 weeks of  PTO in March, Richie with 1 week of PTO in March, Torey just starting ramp-up).  To make major improvements with baseline per-rep capacity, major processes and tooling infrastructure will need to be changed to optimize how we create, assign, and manage cases to close, which could take weeks to months to implement and adapt to the new implementation experience internally. This is outlined in my bottleneck analysis doc.
+</div>
+
+<h3>What is driving the Fuel module implementation time of 170 days?</h3>
+<p style="font-size: 13px; color: #666; margin-bottom: 12px;">This is 2.4x the Q1 overall average. Is it a few stuck cases or a systemic issue? What would fix it?</p>
+<div class="response-card">
+  This is a result of 3 Fuel modules finally ending implementation in January (out of 7 total fuel modules closed in Q1) that took between 208 and 352 days to complete. Common threads between the outliers:  - all of them are year-round marinas sold on multi-module deals (5 modules each) to consolidate systems… usually transient / contracts / storage is prioritized for implementation before moving onto POS and/or Fuel.  - each happened to be sold by Becca
+</div>
+
+<h3>What happened with the Rock item on quantifying top bottlenecks?</h3>
+<p style="font-size: 13px; color: #666; margin-bottom: 12px;">Is this recoverable before EOQ?</p>
+<div class="response-card">
+  This is now complete. This was delayed due to managing integration implementation & support requests.
+</div>
+
+<h3>Are there any declined implementations that should have been screened out earlier in the sales process?</h3>
+<p style="font-size: 13px; color: #666; margin-bottom: 12px;">Shake-a-Leg Miami (sailing fleet, no staff buy-in) seems like a bad-fit sale. Is there a pattern we should flag to Matt's team?</p>
+<div class="response-card">
+  Shake-a-Leg Miami did seem like a bad fit for our usage of the product to start. Although the bad product-fit has been a rare occurrence as of recent, IS is noticing a different pattern that Sales should be aware of: when there isn't a Dockwa "promoter" onsite at marina identified before CW, chances of Failure to Launch increase, as well as implementation time. Onsite operators not being on the same page as the decision makers in the sale led to the declines at Kent Narrows Boatel & Bayside Marine; Shake-a-Leg did churn partly because there was no onsite staff aware that Shake-a-Leg had purchased Dockwa, so there was no motive for them to work with us.
+</div>
+
+<!-- KEY INITIATIVES -->
+<h2 id="key-initiatives-this-quarter">Key Initiatives This Quarter</h2>
+<table>
+<tr>
+  <th>Initiative</th>
+  <th>Status</th>
+  <th>Notes</th>
+</tr>
+<tr>
+  <td>Rates Reachout</td>
+  <td><span class="yellow">In progress</span></td>
+  <td>Year-round marinas live; seasonal marinas being outreached</td>
+</tr>
+<tr>
+  <td>Line Item Integrations</td>
+  <td><span class="yellow">Waiting</span></td>
+  <td>Refund and invoice dating logic pending</td>
+</tr>
+<tr>
+  <td>Contracts Import Tool</td>
+  <td><span class="yellow">In progress</span></td>
+  <td>Initial go-live 1/21; waiting on "Complete In-House" functionality to achieve full IS adoption</td>
+</tr>
+<tr>
+  <td>IS handling KO calls solo</td>
+  <td><span class="green">Complete</span></td>
+  <td>Effective 2/1</td>
+</tr>
+</table>
+
+
+
+</div>
+</div>
+</div>
+
+<script>
+(function() {
+  const links = document.querySelectorAll('.sidebar a');
+  const sections = [];
+  links.forEach(a => {
+    const id = a.getAttribute('href');
+    if (id && id.startsWith('#')) {
+      const el = document.querySelector(id);
+      if (el) sections.push({ el, link: a });
+    }
+  });
+  function onScroll() {
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.el.getBoundingClientRect().top <= 80) current = s;
+    }
+    links.forEach(a => a.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+})();
+</script>
+</body>
+</html>

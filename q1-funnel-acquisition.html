@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q1 2026 Funnel: Acquisition</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+html { scroll-behavior: smooth; scroll-padding-top: 60px; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Open Sans', sans-serif; background: #f5f7fa; color: #2d3748; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; color: #172C4D; }
+h1 { font-size: 26px; margin-bottom: 4px; }
+h2 { font-size: 20px; margin: 32px 0 14px; padding-bottom: 6px; border-bottom: 2px solid #6ACCE0; }
+h3 { font-size: 16px; margin: 20px 0 8px; color: #023C8F; }
+h4 { font-size: 15px; margin: 0 0 8px; }
+p { margin-bottom: 12px; font-size: 15px; }
+ul { margin: 8px 0 16px 20px; font-size: 15px; }
+li { margin-bottom: 6px; }
+a { color: #023C8F; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 14px; }
+th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+th { background: #172C4D; color: white; font-weight: 600; font-size: 13px; }
+td { background: white; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.green { color: #16a34a; font-weight: 600; }
+.red { color: #dc2626; font-weight: 600; }
+.yellow { color: #d97706; font-weight: 600; }
+.blue { color: #2563eb; font-weight: 600; }
+.obs-block { background: white; border-radius: 8px; padding: 20px 24px; margin: 16px 0; border-left: 4px solid #023C8F; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.obs-block.warning { border-left-color: #d97706; }
+.obs-block.risk { border-left-color: #dc2626; }
+.obs-block.positive { border-left-color: #16a34a; }
+.response-card { background: #f0f9ff; border: 1px solid #6ACCE0; border-radius: 8px; padding: 16px 20px; margin: 12px 0 24px; }
+.response-card h4 { margin-bottom: 8px; font-size: 14px; }
+.response-card p { margin-bottom: 8px; font-size: 14px; }
+.response-card ul { margin: 8px 0 12px 20px; font-size: 14px; }
+.chip { display: inline-block; background: #6ACCE0; color: #172C4D; font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 12px; margin-right: 8px; vertical-align: middle; }
+.owner-badge { display: inline-block; background: #172C4D; color: white; font-size: 12px; font-weight: 600; padding: 3px 12px; border-radius: 12px; margin-left: 8px; }
+.stage-bar { background: #172C4D; color: white; padding: 10px 20px; border-radius: 8px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; font-family: 'Poppins', sans-serif; }
+.stage-bar .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+.stage-bar .title { font-size: 20px; font-weight: 600; }
+.nav-row { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 14px; }
+.rock-box { background: #eef6fa; border: 1px solid #6ACCE0; border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+.rock-box h4 { margin-bottom: 8px; }
+.note-callout { background: #fef9ee; border: 1px solid #fde68a; border-radius: 6px; padding: 12px 16px; margin: 12px 0; font-size: 14px; }
+.note-callout strong { color: #92400e; }
+.divider { height: 2px; background: #e2e8f0; margin: 40px 0; }
+.sub-table-label { font-size: 13px; color: #023C8F; font-weight: 600; margin-top: 16px; margin-bottom: 8px; }
+.closing-note { font-size: 14px; color: #555; margin: 12px 0; font-style: italic; }
+.engineering-stats { background: white; border-radius: 8px; padding: 20px 24px; margin: 16px 0; }
+.stats-row { display: flex; gap: 24px; margin: 12px 0; flex-wrap: wrap; }
+.stat-item { flex: 1; min-width: 200px; }
+.stat-number { font-size: 24px; font-weight: 600; color: #172C4D; }
+@media print { body { background: white; } .container { padding: 20px; } }
+
+.global-nav { position: sticky; top: 0; z-index: 100; background: #172C4D; padding: 0; font-family: 'Poppins', sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.global-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; overflow-x: auto; gap: 0; padding: 0 20px; }
+.global-nav a { display: block; padding: 10px 14px; text-decoration: none; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; white-space: nowrap; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; }
+.global-nav a:hover { color: white; }
+.global-nav a.active { color: white; border-bottom-color: #6ACCE0; }
+/* Layout: sidebar + content */
+.page-layout { display: flex; max-width: 1200px; margin: 0 auto; min-height: calc(100vh - 42px); }
+.sidebar { width: 200px; flex-shrink: 0; position: sticky; top: 42px; height: calc(100vh - 42px); overflow-y: auto; padding: 32px 0 32px 0; }
+.sidebar-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #718096; font-weight: 600; padding: 0 20px 12px; font-family: 'Poppins', sans-serif; }
+.sidebar a { display: block; padding: 6px 20px; font-size: 13px; color: #4A5568; text-decoration: none; line-height: 1.4; border-left: 3px solid transparent; transition: all 0.15s; }
+.sidebar a:hover { color: #023C8F; background: #f0f4f8; }
+.sidebar a.active { color: #023C8F; font-weight: 600; border-left-color: #6ACCE0; background: #f0f9ff; }
+.content-area { flex: 1; min-width: 0; border-left: 1px solid #e2e8f0; }
+.container { max-width: 860px; padding: 40px 48px; }
+@media (max-width: 960px) { .sidebar { display: none; } .page-layout { display: block; } .container { padding: 32px 20px; } }
+</style>
+</head>
+<body>
+<nav class="global-nav">
+  <div class="global-nav-inner">
+    <a href="index.html" style="display:flex;align-items:center;padding:6px 16px 6px 4px;border:none;"><img src="https://assets.dockwa.com/assets/logo/dockwa-white-f6ced7057af8043f1db50689b3d608c81bd415a0fc483a2eb15a9586695385ba.png" alt="Dockwa" style="height:22px;"></a>
+    <a href="index.html">Home</a>
+    <a href="q1-funnel-awareness.html">Awareness</a>
+    <a href="q1-funnel-engagement.html">Engagement</a>
+    <a href="q1-funnel-acquisition.html" class="active">Acquisition</a>
+    <a href="q1-funnel-implementation.html">Implementation</a>
+    <a href="q1-funnel-activation.html">Activation</a>
+    <a href="q1-funnel-adoption.html">Adoption</a>
+    <a href="q1-funnel-retention.html">Retention</a>
+    <a href="q1-product.html">Product</a>
+    <a href="q1-support.html">Support</a>
+  </div>
+</nav>
+<div class="page-layout">
+<aside class="sidebar">
+  <div class="sidebar-title">On this page</div>
+    <a href="#new-business-closed-won">New Business Closed-Won</a>
+    <a href="#expansion-closed-won">Expansion Closed-Won</a>
+    <a href="#combined">Combined</a>
+    <a href="#observations">Observations</a>
+    <a href="#questions-and-responses">Questions & Responses</a>
+    <a href="#key-initiatives-this-quarter">Key Initiatives This Quarter</a>
+</aside>
+<div class="content-area">
+<div class="container">
+
+<div class="stage-bar">
+  <div>
+    <div class="label">Funnel Stage 3 of 7</div>
+    <div class="title">Acquisition</div>
+  </div>
+  <div>
+    <span class="owner-badge">Matt</span>
+  </div>
+</div>
+
+
+<h2 id="new-business-closed-won">New Business Closed-Won</h2>
+<table>
+<tr><th>Metric</th><th class="num">Q1 Benchmark</th><th class="num">Q1 Actual</th></tr>
+<tr><td>CW New Business Logos</td><td class="num">51</td><td class="num">52</td></tr>
+<tr><td>CW New Business ARR</td><td class="num">$332K</td><td class="num">$320k (no SHM)</td></tr>
+<tr><td>NB ACV (avg deal)</td><td class="num">$6,510</td><td class="num">$6,100</td></tr>
+</table>
+
+<h2 id="expansion-closed-won">Expansion Closed-Won</h2>
+<table>
+<tr><th>Metric</th><th class="num">Q1 Benchmark</th><th class="num">Q1 Actual</th></tr>
+<tr><td>CW Expansion Logos</td><td class="num">45</td><td class="num">94</td></tr>
+<tr><td>CW Expansion ARR</td><td class="num">$221K</td><td class="num">$243k</td></tr>
+<tr><td>Expansion ACV (avg deal)</td><td class="num">$4,917</td><td class="num">$2,700</td></tr>
+</table>
+
+<h2 id="combined">Combined</h2>
+<table>
+<tr><th>Metric</th><th class="num">Q1 Benchmark</th><th class="num">Q1 Actual</th></tr>
+<tr><td>Gross ARR (NB + Expansion)</td><td class="num">$553K</td><td class="num">$833k / $563k (No SHM)</td></tr>
+</table>
+
+<!-- OBSERVATIONS -->
+<h2 id="observations">Observations</h2>
+
+<div class="obs-block warning">
+  <h4>NB acquisition decelerated mid Q1</h4>
+  <ul>
+    <li>January was strong (150% logos, 164% ARR), but February softened (88% logos, 67% ARR). Back on pace for March</li>
+    <li>NB ACV is roughly on plan ($6,425 vs $6,510), so deal size is not the issue</li>
+  </ul>
+</div>
+
+<div class="obs-block positive">
+  <h4>SHM Deal Blows out Expansion Number on scorecards</h4>
+  <ul>
+    <li>With SHM deal, 188 CW expansion logos at 418% attainment, $501K ARR at 226%.</li>
+    <li>We need to remove the deal to get a true sense of sales team performance in Q1.</li>
+  </ul>
+</div>
+
+<div class="obs-block warning">
+  <h4>Expansion quality needs a closer look</h4>
+  <ul>
+    <li>Expansion ACV is $2,665 vs $4,917 budget (54%). Lots of small deals.</li>
+    <li>The 150 expansion logos in February may include auto-renewals or bulk module adds. Needs breakdown.</li>
+  </ul>
+</div>
+
+<!-- Q&A SECTION -->
+<h2 id="questions-and-responses">Questions & Responses</h2>
+
+<h3>What is driving the NB slowdown in Feb/Mar? Pipeline quality issue or conversion issue?</h3>
+<div class="response-card">
+  <ul>
+    <li><strong>Feb softness was real but context-dependent, not a structural break.</strong> February closed at 14 of 16 logos — a dip that was largely a hangover from an outsized January, which benefited from accounts warmed and worked in Q4.</li>
+    <li><strong>March is tracking ahead of plan, which reframes the narrative.</strong> At the halfway point of the month, we're at 74% to budget on a logo basis and forecasting to exceed 100% for March — indicating the NB funnel has been rebuilt and the Feb dip was timing-related, not indicative of a demand problem.</li>
+    <li><strong>The underlying issue to watch is quality connects, not volume.</strong> 62% of Q1 prospecting activity yielded poor engagement (ie- no connect with decision makers or people of influence at the marina), and ghosting/disengagement after discovery or demo was the leading closed-lost theme. These are qualification issues at entry that need to be addressed even as the topline recovers.</li>
+    <li><strong>Great Lakes remain a specific risk.</strong> 28 opps created, 1 closed won, 8 closed lost, 19 stalled — this market has structural conversion challenges and the open pipeline here is flattering funnel optics</li>
+  </ul>
+</div>
+
+<h3>Can you break down the 188 expansion CW logos? How many are proactive upsells vs renewals that added a module?</h3>
+<div class="response-card">
+  <ul>
+    <li><strong>Safe Harbor deal is included in some scorecards</strong> The February spike (150 expansion logos in a single month) and the depressed expansion ACV ($2,665 vs. $4,917 budget — 54%) are explained by the Safe Harbor Marinas enterprise license deal. That contract was logged as approximately 100 individual location-level records, each appearing as a separate CW expansion logo in the CRM. These are sub-records of a single enterprise agreement, not 100 independent upsells.</li>
+    <li><strong>Actual proactive upsells is 60-66% of plan (QTD)</strong> Proactive upsells exclude renewals from strict price increases who are not adding modules. We budgeted that 100 modules would be sold to the install base across 45 unique marinas in Q1. Sales has sold 60 add on modules- 60% of plan (excluding SHM) across 30 unique marinas (66% of plan). We are able to sell, on average, 2 additional modules to a marina, but we're not upselling as many marinas as we anticipated and at lower ACV.</li>
+  </ul>
+</div>
+
+<h3>What is the March close forecast?</h3>
+<div class="response-card">
+  <p>The March committee forecast is currently projected at approximately <strong>100% of plan</strong>, totaling <strong>$203K in Gross ARR</strong>.</p>
+  <ul>
+    <li><strong>New Business:</strong> Forecasted at <strong>113% of budget</strong>, indicating overperformance against plan.</li>
+    <li><strong>Expansion:</strong> Forecasted at <strong>84% of budget</strong>, reflecting a shortfall relative to target.</li>
+  </ul>
+  <p>Overall performance is being supported by strength in New Business, offsetting underperformance in Expansion. There are still several expansion deals that have potential to pull into the month that would increase Expansion performance materially.</p>
+</div>
+
+<!-- KEY INITIATIVES -->
+<h2 id="key-initiatives-this-quarter">Key Initiatives This Quarter</h2>
+<table>
+<tr><th>Initiative</th><th>Status</th><th>Notes</th></tr>
+<tr><td>Establish pipeline sufficiency benchmarks at org, band, and rep level</td><td><span class="green">Complete</span></td><td>Partnered with finance to analyze historical performance and establish benchmarks. Created weekly tracker to measure current total funnel and individual reps funnels vs benchmarks.</td></tr>
+<tr><td>Deliver monitoring mechanism for pipeline health and coaching gaps</td><td><span class="green">Complete</span></td><td>Use rep-to-band gap analysis to identify coaching opportunities and inform 1:1 development plans.</td></tr>
+<tr><td>Use rep-to-band gap analysis to build and execute individualized coaching plans for all AEs performing below band benchmark</td><td><span class="yellow">In progress</span></td><td>Benchmarks have been woven into team and 1:1 ceremonies. Everyone is aware on where their funnel size is relative to benchmarks on a weekly basis. Junior reps (Griffin and JD) funnels are currently the most problematic, with the new Land Team roll out it has changed how we view their funnels relative to these benchmarks however.</td></tr>
+</table>
+
+
+
+</div>
+</div>
+</div>
+
+<script>
+(function() {
+  const links = document.querySelectorAll('.sidebar a');
+  const sections = [];
+  links.forEach(a => {
+    const id = a.getAttribute('href');
+    if (id && id.startsWith('#')) {
+      const el = document.querySelector(id);
+      if (el) sections.push({ el, link: a });
+    }
+  });
+  function onScroll() {
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.el.getBoundingClientRect().top <= 80) current = s;
+    }
+    links.forEach(a => a.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+})();
+</script>
+</body>
+</html>
