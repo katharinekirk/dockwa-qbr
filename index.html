@@ -69,11 +69,12 @@
   .hero::after {
     content: '';
     position: absolute;
-    bottom: -2px;
+    bottom: -1px;
     left: 0;
     right: 0;
     height: 80px;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 80"><path d="M0,30 Q150,15 300,30 T600,30 T900,30 T1200,30 L1200,80 L0,80 Z" fill="white"/></svg>') repeat-x;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 80" preserveAspectRatio="none"><path d="M0,30 Q150,15 300,30 T600,30 T900,30 T1200,30 L1200,80 L0,80 Z" fill="white"/></svg>') no-repeat;
+    background-size: 100% 100%;
   }
 
   .hero-content {
@@ -572,6 +573,80 @@
 </section>
 
 <!-- ════════════════════════════════════════════
+     DAY 1 AGENDA
+     ════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Day 1 Agenda</div>
+      <h2>Q1 Business Review</h2>
+      <p class="section-desc">Tuesday, March 24, 2026 / 10:00 AM - 3:00 PM</p>
+    </div>
+
+    <table style="margin-top: 8px;">
+      <thead>
+        <tr>
+          <th style="width: 130px;">Time</th>
+          <th style="width: 220px;">Block</th>
+          <th>Description</th>
+          <th style="width: 160px;">Owner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>10:00 - 10:15</td>
+          <td><strong>Opening & Ground Rules</strong></td>
+          <td>Set the frame: today is about honest assessment and surfacing everything, not solving.</td>
+          <td>Katharine</td>
+        </tr>
+        <tr>
+          <td>10:15 - 11:45</td>
+          <td><strong>Funnel Review: Where Did We Land?</strong></td>
+          <td>Walk through each team's Q1 retro. Cover metrics, Rocks, and key issues identified.</td>
+          <td>Katharine (facilitates), team owners present</td>
+        </tr>
+        <tr>
+          <td>11:45 - 12:00</td>
+          <td><strong>Break</strong></td>
+          <td>Thoughtspot Demo</td>
+          <td>Rich</td>
+        </tr>
+        <tr>
+          <td>12:30 - 1:00</td>
+          <td><strong>Lunch</strong></td>
+          <td><a href="https://www.newportsandwichco.com/" target="_blank" style="color: var(--medium-blue); font-weight: 600;">Newport Sandwich Co</a> - DM KK your order</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>1:00 - 1:45</td>
+          <td><strong>Funnel Stage Retros (Part 1)</strong></td>
+          <td>Split into two concurrent groups. Each group walks their funnel stages and refines issues.<br><br><span style="color: var(--medium-blue); font-weight: 600;">Group A (Pre-Sale):</span> Awareness, Engagement, Acquisition<br><span style="color: var(--medium-blue); font-weight: 600;">Group B (Post-Sale):</span> Implementation, Activation, Adoption, Retention</td>
+          <td>Group A: Matt leads<br>Group B: Jared/Abby lead</td>
+        </tr>
+        <tr>
+          <td>1:45 - 2:30</td>
+          <td><strong>Funnel Stage Retros (Part 2)</strong></td>
+          <td>Groups swap and review each other's issues. Add, clarify, challenge.</td>
+          <td>Same leads</td>
+        </tr>
+        <tr>
+          <td>2:30 - 2:45</td>
+          <td><strong>Functional Issue Generation</strong></td>
+          <td>Team gets 15 min to add issues that don't fit neatly into the funnel. Think: people gaps, process breakdowns, tool limitations, capability needs, cross-functional friction.</td>
+          <td>All</td>
+        </tr>
+        <tr>
+          <td>2:45 - 3:00</td>
+          <td><strong>Issue Bank Read-Out & Close</strong></td>
+          <td>Read the full list aloud. Do a first-pass grouping into rough themes. Identify obvious duplicates. The goal is a visible, comprehensive issue bank that leadership can work from tomorrow.</td>
+          <td>Katharine</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
      COMPANY SCORECARD VISUALS
      ════════════════════════════════════════════ -->
 <section class="section section-alt">
@@ -740,77 +815,6 @@
 </section>
 
 
-<!-- ════════════════════════════════════════════
-     Q2 ROCKS & ISSUES
-     ════════════════════════════════════════════ -->
-<div id="q2-rocks" class="wave-divider"></div>
-<section class="section">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-badge">Q2 Planning</div>
-      <h2>Q2 Rocks & Strategic Issues</h2>
-      <p class="section-desc">Key initiatives and blockers for Q2 execution.</p>
-    </div>
-
-    <div class="rock-grid">
-
-      <div class="rock-card">
-        <h4>Service MVP Launch</h4>
-        <div class="rock-status at-risk">Priority</div>
-        <p style="font-size: 13px; margin-top: 8px; color: var(--text-secondary);">Most important product investment. Dominant reason for closed losses and #1 customer request. 242 marina Jira associations.</p>
-        <div class="key-insight" style="margin-top: 12px;">
-          <strong>Why it matters:</strong> $144K of $220K Q1 functionality losses came from service gaps (65% of all losses).
-        </div>
-      </div>
-
-      <div class="rock-card">
-        <h4>Expansion Pipeline Recovery</h4>
-        <div class="rock-status at-risk">Critical</div>
-        <p style="font-size: 13px; margin-top: 8px; color: var(--text-secondary);">54 opps vs 125 budget (43%). Single biggest revenue risk. Top-of-funnel coverage gap + CRM hygiene issues.</p>
-        <div class="key-insight" style="margin-top: 12px;">
-          <strong>Action:</strong> Dedicated SDR targeting priority accounts. Lead scoring framework for account engagement signals.
-        </div>
-      </div>
-
-      <div class="rock-card">
-        <h4>Windward Account Resolution</h4>
-        <div class="rock-status at-risk">Critical</div>
-        <p style="font-size: 13px; margin-top: 8px; color: var(--text-secondary);">$173K Q2 churn risk. Accounting integration stability issues. Represents 32% of Q2 forecast.</p>
-        <div class="key-insight" style="margin-top: 12px;">
-          <strong>Dependency:</strong> Accounting Integration V2 stabilization needed immediately.
-        </div>
-      </div>
-
-      <div class="rock-card">
-        <h4>Mobile FIN Integration</h4>
-        <div class="rock-status on-track">Operational</div>
-        <p style="font-size: 13px; margin-top: 8px; color: var(--text-secondary);">Integrate Intercom mobile SDK into iOS/Android. 68% of reservations originate from mobile but no in-app support exists.</p>
-        <div class="key-insight" style="margin-top: 12px;">
-          <strong>Why it matters:</strong> Peak season capacity leaves zero buffer. Mobile FIN is primary deflection mechanism.
-        </div>
-      </div>
-
-      <div class="rock-card">
-        <h4>Activation Infrastructure Build</h4>
-        <div class="rock-status on-track">Product</div>
-        <p style="font-size: 13px; margin-top: 8px; color: var(--text-secondary);">Chameleon activation tooling implementation. Build systematic tracking of feature adoption and customer activation.</p>
-        <div class="key-insight" style="margin-top: 12px;">
-          <strong>Status:</strong> Implementation starts April. Critical foundation for measuring feature impact.
-        </div>
-      </div>
-
-      <div class="rock-card">
-        <h4>Dockwa Network Defense</h4>
-        <div class="rock-status on-track">Strategic</div>
-        <p style="font-size: 13px; margin-top: 8px; color: var(--text-secondary);">Capture more of marina market and grow boater population. This is the defensible moat against AI era feature replication.</p>
-        <div class="key-insight" style="margin-top: 12px;">
-          <strong>Why it matters:</strong> Competitors can replicate features; no one can replicate the network effect.
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <!-- ════════════════════════════════════════════
      FOOTER
