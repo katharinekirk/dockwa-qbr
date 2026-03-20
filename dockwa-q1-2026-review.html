@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dockwa Q1 2026 Business Review</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark-blue: #172C4D;
+    --navy: #1F2632;
+    --brand-red: #DD272C;
+    --light-blue: #6ACCE0;
+    --medium-blue: #023C8F;
+    --ice-blue: #f2fbfc;
+    --light-grey-blue: #EFF4FA;
+    --secondary-grey: #f1f5f8;
+    --white: #ffffff;
+    --text-primary: #172C4D;
+    --text-secondary: #4A5568;
+    --text-light: #718096;
+    --green: #38A169;
+    --yellow: #D69E2E;
+    --red-soft: #E53E3E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 98px;
+  }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--text-primary);
+    background: var(--white);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  /* ── Hero Section ── */
+  .hero {
+    background: linear-gradient(135deg, var(--dark-blue) 0%, var(--navy) 40%, var(--medium-blue) 100%);
+    color: white;
+    padding: 80px 0 100px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(106,204,224,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 80"><path d="M0,30 Q150,15 300,30 T600,30 T900,30 T1200,30 L1200,80 L0,80 Z" fill="white"/></svg>') repeat-x;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .hero p {
+    font-size: 18px;
+    opacity: 0.95;
+    max-width: 600px;
+  }
+
+  /* ── Section Styles ── */
+  .section {
+    padding: 80px 0;
+    position: relative;
+  }
+
+  .section-alt {
+    background: var(--light-grey-blue);
+  }
+
+  .section-header {
+    margin-bottom: 48px;
+  }
+
+  .section-badge {
+    display: inline-block;
+    background: var(--medium-blue);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .section-header h2 {
+    font-size: 36px;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+  }
+
+  .section-desc {
+    font-size: 16px;
+    color: var(--text-secondary);
+    max-width: 600px;
+  }
+
+  /* ── Metrics Grid ── */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .metric-card {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    border-left: 4px solid var(--medium-blue);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .metric-card .label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .metric-card .value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+
+  .metric-card .target {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  .progress-bar {
+    height: 4px;
+    background: var(--secondary-grey);
+    border-radius: 2px;
+    margin: 12px 0;
+    overflow: hidden;
+  }
+
+  .progress-bar .fill {
+    height: 100%;
+    border-radius: 2px;
+  }
+
+  .fill-blue { background: var(--medium-blue); }
+  .fill-green { background: var(--green); }
+  .fill-teal { background: var(--light-blue); }
+  .fill-yellow { background: var(--yellow); }
+
+  .status-at-risk {
+    background: rgba(229, 62, 62, 0.1);
+    color: var(--red-soft);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+
+  .status-on-track {
+    background: rgba(56, 161, 105, 0.1);
+    color: var(--green);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+
+  /* ── Funnel Cards ── */
+  .funnel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .funnel-card {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .funnel-card.full-width {
+    grid-column: 1 / -1;
+  }
+
+  .funnel-card h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+  }
+
+  .funnel-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 16px;
+  }
+
+  .kpi-item {
+    padding: 16px;
+    background: var(--light-grey-blue);
+    border-radius: 6px;
+  }
+
+  .kpi-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .kpi-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .callout {
+    background: var(--ice-blue);
+    padding: 16px;
+    border-radius: 6px;
+    border-left: 4px solid var(--light-blue);
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .callout strong {
+    color: var(--text-primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+
+  table thead {
+    background: var(--light-grey-blue);
+  }
+
+  table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  table th {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  table tbody tr:hover {
+    background: var(--secondary-grey);
+  }
+
+  /* ── Wave Divider ── */
+  .wave-divider {
+    height: 80px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 80"><path d="M0,30 Q150,15 300,30 T600,30 T900,30 T1200,30 L1200,80 L0,80 Z" fill="%23EFF4FA"/></svg>') repeat-x;
+    background-size: auto 100%;
+  }
+
+  /* ── TOC Styles ── */
+  .toc-nav {
+    position: sticky;
+    top: 0;
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .toc-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    overflow-x: auto;
+    gap: 24px;
+  }
+
+  .toc-inner::-webkit-scrollbar { display: none; }
+
+  .toc-nav a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 0;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color 0.2s;
+    border-bottom: 2px solid transparent;
+  }
+
+  .toc-nav a:hover {
+    color: var(--text-primary);
+  }
+
+  .toc-nav a.active {
+    color: var(--text-primary);
+    border-bottom-color: var(--medium-blue);
+  }
+
+  .toc-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .toc-dot-blue { background: var(--medium-blue); }
+  .toc-dot-green { background: var(--green); }
+  .toc-dot-teal { background: var(--light-blue); }
+  .toc-dot-yellow { background: var(--yellow); }
+  .toc-dot-purple { background: #805AD5; }
+  .toc-dot-red { background: var(--brand-red); }
+
+  /* ── Footer ── */
+  .footer {
+    background: var(--navy);
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 80px;
+  }
+
+  .footer p {
+    margin: 8px 0;
+  }
+
+  .footer a {
+    color: var(--light-blue);
+    text-decoration: none;
+  }
+
+  .footer a:hover {
+    text-decoration: underline;
+  }
+
+  /* ── Rock/Issue Cards ── */
+  .rock-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  .rock-card {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    border-left: 4px solid var(--medium-blue);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .rock-card h4 {
+    font-size: 15px;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+  }
+
+  .rock-status {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 3px;
+    margin-bottom: 12px;
+  }
+
+  .rock-status.on-track {
+    background: rgba(56, 161, 105, 0.1);
+    color: var(--green);
+  }
+
+  .rock-status.at-risk {
+    background: rgba(229, 62, 62, 0.1);
+    color: var(--red-soft);
+  }
+
+  .rock-status.complete {
+    background: rgba(56, 161, 105, 0.1);
+    color: var(--green);
+  }
+
+  .key-insight {
+    background: var(--ice-blue);
+    padding: 12px 16px;
+    border-radius: 6px;
+    border-left: 3px solid var(--light-blue);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-top: 12px;
+  }
+
+  .key-insight strong {
+    color: var(--text-primary);
+  }
+
+  .deepdive-link {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 12px;
+    background: var(--light-grey-blue);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--medium-blue);
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+
+  .deepdive-link:hover {
+    background: var(--secondary-grey);
+  }
+
+  /* ── Chart Section ── */
+  .chart-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  .chart-card {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .chart-card.full-width {
+    grid-column: 1 / -1;
+  }
+  .chart-card h3 {
+    font-size: 16px;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+  }
+  .chart-card .chart-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+  .chart-card canvas {
+    width: 100% !important;
+    max-height: 280px;
+  }
+  .scorecard-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .scorecard-stat {
+    text-align: center;
+    padding: 12px 8px;
+    background: var(--light-grey-blue);
+    border-radius: 6px;
+  }
+  .scorecard-stat .stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .scorecard-stat .stat-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+  .scorecard-stat .stat-delta {
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .stat-delta.positive { color: var(--green); }
+  .stat-delta.negative { color: var(--red-soft); }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 32px; }
+    .section-header h2 { font-size: 24px; }
+    .metrics-grid { grid-template-columns: 1fr; }
+    .toc-inner { gap: 12px; }
+    .chart-grid { grid-template-columns: 1fr; }
+  }
+
+  .global-nav { position: sticky; top: 0; z-index: 200; background: var(--dark-blue); padding: 0; font-family: 'Poppins', sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+  .global-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; overflow-x: auto; gap: 0; padding: 0 12px; }
+  .global-nav a { display: block; padding: 10px 14px; text-decoration: none; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; white-space: nowrap; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; }
+  .global-nav a:hover { color: white; }
+  .global-nav a.active { color: white; border-bottom-color: var(--light-blue); }
+</style>
+</head>
+<body>
+<nav class="global-nav">
+  <div class="global-nav-inner">
+    <a href="dockwa-q1-2026-review.html" style="display:flex;align-items:center;padding:6px 16px 6px 4px;border:none;"><img src="https://assets.dockwa.com/assets/logo/dockwa-white-f6ced7057af8043f1db50689b3d608c81bd415a0fc483a2eb15a9586695385ba.png" alt="Dockwa" style="height:22px;"></a>
+    <a href="dockwa-q1-2026-review.html" class="active">Home</a>
+    <a href="q1-funnel-awareness.html">Awareness</a>
+    <a href="q1-funnel-engagement.html">Engagement</a>
+    <a href="q1-funnel-acquisition.html">Acquisition</a>
+    <a href="q1-funnel-implementation.html">Implementation</a>
+    <a href="q1-funnel-activation.html">Activation</a>
+    <a href="q1-funnel-adoption.html">Adoption</a>
+    <a href="q1-funnel-retention.html">Retention</a>
+    <a href="q1-product.html">Product</a>
+    <a href="q1-support.html">Support</a>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════
+     HERO SECTION
+     ════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="container hero-content">
+    <h1>Dockwa Q1 2026 Business Review</h1>
+    <p>Quarterly business performance across all key business drivers and strategic initiatives. Performance through March 31, 2026.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     COMPANY SCORECARD VISUALS
+     ════════════════════════════════════════════ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">L10 Company Scorecard</div>
+      <h2>Quarterly Performance</h2>
+      <p class="section-desc">Budget vs. Actual across key metrics, Q1 2025 through Q1 2026.</p>
+    </div>
+
+    <div class="chart-grid">
+
+      <!-- Total ARR Trend -->
+      <div class="chart-card">
+        <h3>Total ARR</h3>
+        <p class="chart-subtitle">Budget vs. Actual by quarter ($M)</p>
+        <canvas id="chartTotalARR"></canvas>
+        <div class="scorecard-summary">
+          <div class="scorecard-stat">
+            <div class="stat-value">$10.6M</div>
+            <div class="stat-label">Q1 2026 Actual</div>
+            <div class="stat-delta positive">+3.8% vs budget</div>
+          </div>
+          <div class="scorecard-stat">
+            <div class="stat-value">+41%</div>
+            <div class="stat-label">YoY Growth</div>
+            <div class="stat-delta positive">$7.5M Q1'25 to $10.6M Q1'26</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARR Composition -->
+      <div class="chart-card">
+        <h3>ARR Composition</h3>
+        <p class="chart-subtitle">Marina Sub + Payments + Boater ARR ($M)</p>
+        <canvas id="chartARRComp"></canvas>
+        <div class="scorecard-summary">
+          <div class="scorecard-stat">
+            <div class="stat-value">$7.8M</div>
+            <div class="stat-label">Marina Sub ARR</div>
+            <div class="stat-delta positive">+4.0% vs budget</div>
+          </div>
+          <div class="scorecard-stat">
+            <div class="stat-value">$2.5M</div>
+            <div class="stat-label">Payments ARR</div>
+            <div class="stat-delta positive">+4.5% vs budget</div>
+          </div>
+          <div class="scorecard-stat">
+            <div class="stat-value">$335K</div>
+            <div class="stat-label">Boater ARR</div>
+            <div class="stat-delta negative">-5.2% vs budget</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GPV by Type -->
+      <div class="chart-card">
+        <h3>Gross Payment Volume</h3>
+        <p class="chart-subtitle">GPV by transaction type ($M)</p>
+        <canvas id="chartGPV"></canvas>
+        <div class="scorecard-summary">
+          <div class="scorecard-stat">
+            <div class="stat-value">$90.5M</div>
+            <div class="stat-label">Q1 2026 GPV</div>
+            <div class="stat-delta positive">+5.8% vs budget</div>
+          </div>
+          <div class="scorecard-stat">
+            <div class="stat-value">$63.4M</div>
+            <div class="stat-label">Contracts</div>
+            <div class="stat-delta positive">70% of total</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Net Change in Marina Sub ARR -->
+      <div class="chart-card">
+        <h3>Net Change in Marina Sub ARR</h3>
+        <p class="chart-subtitle">Gross ARR adds minus churn and downgrades ($K)</p>
+        <canvas id="chartNetChange"></canvas>
+        <div class="scorecard-summary">
+          <div class="scorecard-stat">
+            <div class="stat-value">$624K</div>
+            <div class="stat-label">Q1 2026 Net Change</div>
+            <div class="stat-delta positive">183% of budget</div>
+          </div>
+          <div class="scorecard-stat">
+            <div class="stat-value">$833K</div>
+            <div class="stat-label">Gross ARR Adds</div>
+            <div class="stat-delta positive">151% of budget</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sales Pipeline: NB + Expansion CW -->
+      <div class="chart-card">
+        <h3>Closed-Won ARR</h3>
+        <p class="chart-subtitle">New Business + Expansion closed-won ($K)</p>
+        <canvas id="chartSalesCW"></canvas>
+        <div class="scorecard-summary">
+          <div class="scorecard-stat">
+            <div class="stat-value">$320K</div>
+            <div class="stat-label">NB Closed-Won</div>
+            <div class="stat-delta negative">96% of budget</div>
+          </div>
+          <div class="scorecard-stat">
+            <div class="stat-value">$514K</div>
+            <div class="stat-label">Expansion CW</div>
+            <div class="stat-delta positive">232% of budget</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Churn & Downgrade -->
+      <div class="chart-card">
+        <h3>Churn & Downgrade ARR</h3>
+        <p class="chart-subtitle">Total churned + downgraded ARR by quarter ($K)</p>
+        <canvas id="chartChurn"></canvas>
+        <div class="scorecard-summary">
+          <div class="scorecard-stat">
+            <div class="stat-value">-$139K</div>
+            <div class="stat-label">Q1 Churned</div>
+            <div class="stat-delta positive">65% of budget (better)</div>
+          </div>
+          <div class="scorecard-stat">
+            <div class="stat-value">-$70K</div>
+            <div class="stat-label">Q1 Downgraded</div>
+            <div class="stat-delta negative">No budget set</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paying Marinas + Avg ARR -->
+      <div class="chart-card full-width">
+        <h3>Marina Customer Base</h3>
+        <p class="chart-subtitle">Paying marinas and average ARR per marina over time</p>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <canvas id="chartMarinas"></canvas>
+          <canvas id="chartAvgARR"></canvas>
+        </div>
+        <div class="scorecard-summary">
+          <div class="scorecard-stat">
+            <div class="stat-value">1,128</div>
+            <div class="stat-label">Paying Marinas</div>
+            <div class="stat-delta positive">+0.3% vs budget</div>
+          </div>
+          <div class="scorecard-stat">
+            <div class="stat-value">3,700</div>
+            <div class="stat-label">Marinas Claimed</div>
+            <div class="stat-delta positive">+17.5% vs budget</div>
+          </div>
+          <div class="scorecard-stat">
+            <div class="stat-value">$9,116</div>
+            <div class="stat-label">Avg ARR/Marina</div>
+            <div class="stat-delta positive">+3.9% vs budget</div>
+          </div>
+          <div class="scorecard-stat">
+            <div class="stat-value">4,627</div>
+            <div class="stat-label">Dockwa+ Subs</div>
+            <div class="stat-delta negative">-3.2% vs budget</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     Q2 ROCKS & ISSUES
+     ════════════════════════════════════════════ -->
+<div id="q2-rocks" class="wave-divider"></div>
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge">Q2 Planning</div>
+      <h2>Q2 Rocks & Strategic Issues</h2>
+      <p class="section-desc">Key initiatives and blockers for Q2 execution.</p>
+    </div>
+
+    <div class="rock-grid">
+
+      <div class="rock-card">
+        <h4>Service MVP Launch</h4>
+        <div class="rock-status at-risk">Priority</div>
+        <p style="font-size: 13px; margin-top: 8px; color: var(--text-secondary);">Most important product investment. Dominant reason for closed losses and #1 customer request. 242 marina Jira associations.</p>
+        <div class="key-insight" style="margin-top: 12px;">
+          <strong>Why it matters:</strong> $144K of $220K Q1 functionality losses came from service gaps (65% of all losses).
+        </div>
+      </div>
+
+      <div class="rock-card">
+        <h4>Expansion Pipeline Recovery</h4>
+        <div class="rock-status at-risk">Critical</div>
+        <p style="font-size: 13px; margin-top: 8px; color: var(--text-secondary);">54 opps vs 125 budget (43%). Single biggest revenue risk. Top-of-funnel coverage gap + CRM hygiene issues.</p>
+        <div class="key-insight" style="margin-top: 12px;">
+          <strong>Action:</strong> Dedicated SDR targeting priority accounts. Lead scoring framework for account engagement signals.
+        </div>
+      </div>
+
+      <div class="rock-card">
+        <h4>Windward Account Resolution</h4>
+        <div class="rock-status at-risk">Critical</div>
+        <p style="font-size: 13px; margin-top: 8px; color: var(--text-secondary);">$173K Q2 churn risk. Accounting integration stability issues. Represents 32% of Q2 forecast.</p>
+        <div class="key-insight" style="margin-top: 12px;">
+          <strong>Dependency:</strong> Accounting Integration V2 stabilization needed immediately.
+        </div>
+      </div>
+
+      <div class="rock-card">
+        <h4>Mobile FIN Integration</h4>
+        <div class="rock-status on-track">Operational</div>
+        <p style="font-size: 13px; margin-top: 8px; color: var(--text-secondary);">Integrate Intercom mobile SDK into iOS/Android. 68% of reservations originate from mobile but no in-app support exists.</p>
+        <div class="key-insight" style="margin-top: 12px;">
+          <strong>Why it matters:</strong> Peak season capacity leaves zero buffer. Mobile FIN is primary deflection mechanism.
+        </div>
+      </div>
+
+      <div class="rock-card">
+        <h4>Activation Infrastructure Build</h4>
+        <div class="rock-status on-track">Product</div>
+        <p style="font-size: 13px; margin-top: 8px; color: var(--text-secondary);">Chameleon activation tooling implementation. Build systematic tracking of feature adoption and customer activation.</p>
+        <div class="key-insight" style="margin-top: 12px;">
+          <strong>Status:</strong> Implementation starts April. Critical foundation for measuring feature impact.
+        </div>
+      </div>
+
+      <div class="rock-card">
+        <h4>Dockwa Network Defense</h4>
+        <div class="rock-status on-track">Strategic</div>
+        <p style="font-size: 13px; margin-top: 8px; color: var(--text-secondary);">Capture more of marina market and grow boater population. This is the defensible moat against AI era feature replication.</p>
+        <div class="key-insight" style="margin-top: 12px;">
+          <strong>Why it matters:</strong> Competitors can replicate features; no one can replicate the network effect.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <p><strong>Dockwa Q1 2026 Business Review</strong></p>
+    <p>Performance through March 31, 2026</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(function() {
+  const Q = ['Q1 2025','Q2 2025','Q3 2025','Q4 2025','Q1 2026'];
+  const brandBlue = '#023C8F';
+  const brandTeal = '#6ACCE0';
+  const brandRed = '#DD272C';
+  const brandDark = '#172C4D';
+  const grey = '#cbd5e1';
+  const green = '#38A169';
+  const yellow = '#D69E2E';
+
+  const defaultOpts = {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { family: 'Open Sans', size: 11 }, padding: 12, usePointStyle: true, pointStyleWidth: 8 } },
+      tooltip: { titleFont: { family: 'Poppins' }, bodyFont: { family: 'Open Sans' } }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { family: 'Open Sans', size: 11 } } },
+      y: { grid: { color: '#f1f5f9' }, ticks: { font: { family: 'Open Sans', size: 11 } }, beginAtZero: true }
+    }
+  };
+
+  // 1. Total ARR
+  new Chart(document.getElementById('chartTotalARR'), {
+    type: 'bar',
+    data: {
+      labels: Q,
+      datasets: [
+        { label: 'Budget', data: [7.29, 7.84, 8.44, 8.99, 10.23], backgroundColor: grey, borderRadius: 4 },
+        { label: 'Actual', data: [7.55, 8.44, 9.12, 9.71, 10.62], backgroundColor: brandBlue, borderRadius: 4 }
+      ]
+    },
+    options: { ...defaultOpts, scales: { ...defaultOpts.scales, y: { ...defaultOpts.scales.y, ticks: { ...defaultOpts.scales.y.ticks, callback: v => '$' + v.toFixed(1) + 'M' } } } }
+  });
+
+  // 2. ARR Composition (stacked)
+  new Chart(document.getElementById('chartARRComp'), {
+    type: 'bar',
+    data: {
+      labels: Q,
+      datasets: [
+        { label: 'Marina Sub', data: [5.87, 6.42, 6.80, 7.12, 7.76], backgroundColor: brandBlue, borderRadius: 0 },
+        { label: 'Payments', data: [1.64, 1.89, 2.11, 2.30, 2.52], backgroundColor: brandTeal, borderRadius: 0 },
+        { label: 'Boater', data: [0.04, 0.13, 0.21, 0.29, 0.33], backgroundColor: yellow, borderRadius: 4 }
+      ]
+    },
+    options: {
+      ...defaultOpts,
+      scales: { ...defaultOpts.scales, x: { ...defaultOpts.scales.x, stacked: true }, y: { ...defaultOpts.scales.y, stacked: true, ticks: { ...defaultOpts.scales.y.ticks, callback: v => '$' + v.toFixed(1) + 'M' } } }
+    }
+  });
+
+  // 3. GPV by type (stacked)
+  new Chart(document.getElementById('chartGPV'), {
+    type: 'bar',
+    data: {
+      labels: Q,
+      datasets: [
+        { label: 'Contracts', data: [46.9, 39.9, 34.1, 47.5, 63.4], backgroundColor: brandBlue, borderRadius: 0 },
+        { label: 'Transient', data: [22.4, 38.4, 43.4, 16.5, 21.7], backgroundColor: brandTeal, borderRadius: 0 },
+        { label: 'Fuel+POS', data: [4.4, 11.8, 19.4, 7.1, 5.3], backgroundColor: yellow, borderRadius: 4 }
+      ]
+    },
+    options: {
+      ...defaultOpts,
+      scales: { ...defaultOpts.scales, x: { ...defaultOpts.scales.x, stacked: true }, y: { ...defaultOpts.scales.y, stacked: true, ticks: { ...defaultOpts.scales.y.ticks, callback: v => '$' + v + 'M' } } }
+    }
+  });
+
+  // 4. Net Change in Marina Sub ARR
+  new Chart(document.getElementById('chartNetChange'), {
+    type: 'bar',
+    data: {
+      labels: Q,
+      datasets: [
+        { label: 'Gross ARR Adds', data: [625, 670, 515, 498, 833], backgroundColor: green, borderRadius: 4 },
+        { label: 'Churn + Downgrade', data: [-169, -114, -138, -177, -210], backgroundColor: brandRed, borderRadius: 4 },
+        { label: 'Net Change', data: [456, 556, 376, 321, 624], type: 'line', borderColor: brandDark, backgroundColor: 'transparent', pointBackgroundColor: brandDark, pointRadius: 5, borderWidth: 2, tension: 0.3 }
+      ]
+    },
+    options: { ...defaultOpts, scales: { ...defaultOpts.scales, y: { ...defaultOpts.scales.y, beginAtZero: false, ticks: { ...defaultOpts.scales.y.ticks, callback: v => (v >= 0 ? '$' : '-$') + Math.abs(v) + 'K' } } } }
+  });
+
+  // 5. Closed-Won ARR (NB + Expansion)
+  new Chart(document.getElementById('chartSalesCW'), {
+    type: 'bar',
+    data: {
+      labels: Q,
+      datasets: [
+        { label: 'New Business', data: [320, 442, 331, 328, 320], backgroundColor: brandBlue, borderRadius: 4 },
+        { label: 'Expansion', data: [305, 228, 183, 170, 514], backgroundColor: brandTeal, borderRadius: 4 }
+      ]
+    },
+    options: { ...defaultOpts, scales: { ...defaultOpts.scales, y: { ...defaultOpts.scales.y, ticks: { ...defaultOpts.scales.y.ticks, callback: v => '$' + v + 'K' } } } }
+  });
+
+  // 6. Churn & Downgrade
+  new Chart(document.getElementById('chartChurn'), {
+    type: 'bar',
+    data: {
+      labels: Q,
+      datasets: [
+        { label: 'Budget', data: [153, 174, 170, 171, 213], backgroundColor: grey, borderRadius: 4 },
+        { label: 'Churned (Actual)', data: [134, 79, 101, 131, 139], backgroundColor: brandRed, borderRadius: 4 },
+        { label: 'Downgraded (Actual)', data: [35, 35, 37, 45, 70], backgroundColor: yellow, borderRadius: 4 }
+      ]
+    },
+    options: { ...defaultOpts, scales: { ...defaultOpts.scales, y: { ...defaultOpts.scales.y, ticks: { ...defaultOpts.scales.y.ticks, callback: v => '$' + v + 'K' } } } }
+  });
+
+  // 7. Paying Marinas
+  new Chart(document.getElementById('chartMarinas'), {
+    type: 'line',
+    data: {
+      labels: Q,
+      datasets: [
+        { label: 'Budget', data: [1007, 1032, 1058, 1086, 1125], borderColor: grey, backgroundColor: 'transparent', pointBackgroundColor: grey, pointRadius: 4, borderWidth: 2, borderDash: [5,3] },
+        { label: 'Actual', data: [1010, 1057, 1085, 1103, 1128], borderColor: brandBlue, backgroundColor: 'rgba(2,60,143,0.08)', fill: true, pointBackgroundColor: brandBlue, pointRadius: 4, borderWidth: 2 }
+      ]
+    },
+    options: { ...defaultOpts, scales: { ...defaultOpts.scales, y: { ...defaultOpts.scales.y, beginAtZero: false, min: 950 } } }
+  });
+
+  // 8. Avg ARR per Marina
+  new Chart(document.getElementById('chartAvgARR'), {
+    type: 'line',
+    data: {
+      labels: Q,
+      datasets: [
+        { label: 'Budget', data: [7243, 7596, 7830, 7997, 8777], borderColor: grey, backgroundColor: 'transparent', pointBackgroundColor: grey, pointRadius: 4, borderWidth: 2, borderDash: [5,3] },
+        { label: 'Actual', data: [7432, 7866, 8212, 8541, 9116], borderColor: green, backgroundColor: 'rgba(56,161,105,0.08)', fill: true, pointBackgroundColor: green, pointRadius: 4, borderWidth: 2 }
+      ]
+    },
+    options: { ...defaultOpts, scales: { ...defaultOpts.scales, y: { ...defaultOpts.scales.y, beginAtZero: false, min: 6500, ticks: { ...defaultOpts.scales.y.ticks, callback: v => '$' + (v/1000).toFixed(1) + 'K' } } } }
+  });
+
+})();
+</script>
+
+
+</body>
+</html>
