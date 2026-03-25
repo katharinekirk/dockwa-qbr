@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dockwa Sales Funnel: 2025 - Q1 2026</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f6fa; color: #2d3436; }
+        .dashboard { max-width: 1280px; margin: 0 auto; padding: 24px; }
+        .header { margin-bottom: 28px; }
+        .header h1 { font-size: 22px; font-weight: 600; color: #1a1a2e; }
+        .header .subtitle { font-size: 13px; color: #636e72; margin-top: 4px; }
+        .filters { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+        .filter-btn { padding: 6px 16px; border: 1px solid #dfe6e9; border-radius: 6px; background: #fff; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.15s; }
+        .filter-btn.active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
+        .filter-btn:hover:not(.active) { background: #f0f0f5; }
+
+        .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 28px; }
+        .kpi-card { background: #fff; border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .kpi-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #636e72; font-weight: 600; }
+        .kpi-card .value { font-size: 28px; font-weight: 700; margin-top: 6px; color: #1a1a2e; }
+        .kpi-card .change { font-size: 12px; margin-top: 4px; }
+        .kpi-card .change.up { color: #00b894; }
+        .kpi-card .change.down { color: #d63031; }
+        .kpi-card .change.neutral { color: #636e72; }
+
+        .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
+        .chart-card { background: #fff; border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .chart-card.full { grid-column: 1 / -1; }
+        .chart-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 16px; color: #1a1a2e; }
+        .chart-container { position: relative; height: 280px; }
+
+        .table-section { background: #fff; border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); margin-bottom: 20px; }
+        .table-section h3 { font-size: 14px; font-weight: 600; margin-bottom: 16px; color: #1a1a2e; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th { text-align: left; padding: 10px 12px; border-bottom: 2px solid #dfe6e9; font-weight: 600; color: #636e72; font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; }
+        td { padding: 10px 12px; border-bottom: 1px solid #f0f0f5; }
+        tr:hover td { background: #f8f9fa; }
+        .num { text-align: right; font-variant-numeric: tabular-nums; }
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+        .tag-nb { background: #e8f0fe; color: #1a73e8; }
+        .tag-exp { background: #fef3e8; color: #e67e22; }
+
+        .footer { text-align: center; font-size: 11px; color: #b2bec3; padding: 12px 0; }
+
+        @media (max-width: 768px) {
+            .chart-grid { grid-template-columns: 1fr; }
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard">
+    <div class="header">
+        <h1>Dockwa Sales Funnel</h1>
+        <div class="subtitle">Accounts Worked &rarr; Opps Created &rarr; ARR Closed Won &nbsp;|&nbsp; Q1 2025 through Q1 2026 (in progress)</div>
+        <div class="filters">
+            <button class="filter-btn active" onclick="setFilter('all')">All</button>
+            <button class="filter-btn" onclick="setFilter('nb')">New Business</button>
+            <button class="filter-btn" onclick="setFilter('exp')">Expansion</button>
+        </div>
+    </div>
+
+    <div class="kpi-row" id="kpi-row"></div>
+
+    <div class="chart-grid">
+        <div class="chart-card full">
+            <h3>Funnel by Quarter</h3>
+            <div class="chart-container"><canvas id="funnelChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+            <h3>ARR Closed Won by Quarter</h3>
+            <div class="chart-container"><canvas id="arrChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+            <h3>Opp-to-Win Conversion Rate</h3>
+            <div class="chart-container"><canvas id="convChart"></canvas></div>
+        </div>
+    </div>
+
+    <div class="table-section">
+        <h3>Quarterly Detail</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Quarter</th>
+                    <th>Type</th>
+                    <th class="num">Accounts Worked</th>
+                    <th class="num">Opps Created</th>
+                    <th class="num">Opps Won</th>
+                    <th class="num">Win Rate</th>
+                    <th class="num">Pipeline ARR</th>
+                    <th class="num">ARR Closed</th>
+                    <th class="num">ARR Conversion</th>
+                </tr>
+            </thead>
+            <tbody id="detail-table"></tbody>
+        </table>
+    </div>
+
+    <div class="footer">Source: Salesforce (Dockwa) &middot; Data pulled March 25, 2026 &middot; Q1 2026 is in progress</div>
+</div>
+
+<script>
+const QUARTERS = ['Q1 2025','Q2 2025','Q3 2025','Q4 2025','Q1 2026'];
+
+// Opps Created data (from CreatedDate grouping)
+const created = {
+    nb: [
+        { q:'Q1 2025', accounts: 164, opps: 166, pipelineARR: 1027641.36 },
+        { q:'Q2 2025', accounts: 173, opps: 174, pipelineARR: 1118444.31 },
+        { q:'Q3 2025', accounts: 193, opps: 194, pipelineARR: 1449980.75 },
+        { q:'Q4 2025', accounts: 235, opps: 236, pipelineARR: 1533916.84 },
+        { q:'Q1 2026', accounts: 246, opps: 248, pipelineARR: 1587398.42 },
+    ],
+    exp: [
+        { q:'Q1 2025', accounts: 190, opps: 219, pipelineARR: 1349781.22 },
+        { q:'Q2 2025', accounts: 195, opps: 213, pipelineARR: 1145397.56 },
+        { q:'Q3 2025', accounts: 157, opps: 167, pipelineARR: 1123592.23 },
+        { q:'Q4 2025', accounts: 137, opps: 144, pipelineARR: 842255.82 },
+        { q:'Q1 2026', accounts: 192, opps: 196, pipelineARR: 1615898.87 },
+    ]
+};
+
+// Closed Won data (from CloseDate grouping)
+const won = {
+    nb: [
+        { q:'Q1 2025', accounts: 61, opps: 61, arr: 319945.50 },
+        { q:'Q2 2025', accounts: 71, opps: 71, arr: 442448.04 },
+        { q:'Q3 2025', accounts: 56, opps: 56, arr: 331408.33 },
+        { q:'Q4 2025', accounts: 54, opps: 55, arr: 324806.07 },
+        { q:'Q1 2026', accounts: 59, opps: 59, arr: 340055.39 },
+    ],
+    exp: [
+        { q:'Q1 2025', accounts: 200, opps: 209, arr: 1290406.24 },
+        { q:'Q2 2025', accounts: 154, opps: 154, arr: 881584.96 },
+        { q:'Q3 2025', accounts: 100, opps: 101, arr: 796887.27 },
+        { q:'Q4 2025', accounts: 103, opps: 108, arr: 848610.41 },
+        { q:'Q1 2026', accounts: 206, opps: 207, arr: 1832508.83 },
+    ]
+};
+
+let currentFilter = 'all';
+let charts = {};
+
+function getData() {
+    return QUARTERS.map((q, i) => {
+        let accts, opps, pARR, wonOpps, wonAccts, closedARR;
+        if (currentFilter === 'nb') {
+            accts = created.nb[i].accounts;
+            opps = created.nb[i].opps;
+            pARR = created.nb[i].pipelineARR;
+            wonOpps = won.nb[i].opps;
+            wonAccts = won.nb[i].accounts;
+            closedARR = won.nb[i].arr;
+        } else if (currentFilter === 'exp') {
+            accts = created.exp[i].accounts;
+            opps = created.exp[i].opps;
+            pARR = created.exp[i].pipelineARR;
+            wonOpps = won.exp[i].opps;
+            wonAccts = won.exp[i].accounts;
+            closedARR = won.exp[i].arr;
+        } else {
+            accts = created.nb[i].accounts + created.exp[i].accounts;
+            opps = created.nb[i].opps + created.exp[i].opps;
+            pARR = created.nb[i].pipelineARR + created.exp[i].pipelineARR;
+            wonOpps = won.nb[i].opps + won.exp[i].opps;
+            wonAccts = won.nb[i].accounts + won.exp[i].accounts;
+            closedARR = won.nb[i].arr + won.exp[i].arr;
+        }
+        return { q, accts, opps, pARR, wonOpps, wonAccts, closedARR };
+    });
+}
+
+function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+function fmtK(n) { return n >= 1000000 ? '$' + (n/1000000).toFixed(1) + 'M' : '$' + Math.round(n/1000).toLocaleString() + 'K'; }
+function pct(a,b) { return b === 0 ? '0%' : (a/b*100).toFixed(1) + '%'; }
+
+function renderKPIs(data) {
+    const total = data.reduce((acc, d) => ({
+        accts: acc.accts + d.accts,
+        opps: acc.opps + d.opps,
+        pARR: acc.pARR + d.pARR,
+        wonOpps: acc.wonOpps + d.wonOpps,
+        closedARR: acc.closedARR + d.closedARR
+    }), { accts:0, opps:0, pARR:0, wonOpps:0, closedARR:0 });
+
+    const cur = data[data.length - 1];
+    const prev = data[data.length - 2];
+    const arrDelta = prev.closedARR > 0 ? ((cur.closedARR - prev.closedARR) / prev.closedARR * 100) : 0;
+    const oppDelta = prev.opps > 0 ? ((cur.opps - prev.opps) / prev.opps * 100) : 0;
+
+    const kpis = [
+        { label: 'Total Accounts Worked', value: total.accts.toLocaleString(), change: null },
+        { label: 'Total Opps Created', value: total.opps.toLocaleString(), change: null },
+        { label: 'Total Opps Won', value: total.wonOpps.toLocaleString(), change: null },
+        { label: 'Total ARR Closed', value: fmtK(total.closedARR), change: null },
+        { label: 'Q1 2026 Opps Created', value: cur.opps.toLocaleString(), change: oppDelta.toFixed(1) + '% vs Q4' },
+        { label: 'Q1 2026 ARR Closed', value: fmtK(cur.closedARR), change: arrDelta.toFixed(1) + '% vs Q4' },
+    ];
+
+    document.getElementById('kpi-row').innerHTML = kpis.map(k => {
+        let changeClass = 'neutral';
+        if (k.change) {
+            const val = parseFloat(k.change);
+            changeClass = val > 0 ? 'up' : val < 0 ? 'down' : 'neutral';
+        }
+        return `<div class="kpi-card">
+            <div class="label">${k.label}</div>
+            <div class="value">${k.value}</div>
+            ${k.change ? `<div class="change ${changeClass}">${parseFloat(k.change) > 0 ? '&#9650;' : '&#9660;'} ${k.change}</div>` : ''}
+        </div>`;
+    }).join('');
+}
+
+function renderFunnelChart(data) {
+    const ctx = document.getElementById('funnelChart').getContext('2d');
+    if (charts.funnel) charts.funnel.destroy();
+
+    charts.funnel = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: QUARTERS,
+            datasets: [
+                {
+                    label: 'Accounts Worked',
+                    data: data.map(d => d.accts),
+                    backgroundColor: '#b2bec3',
+                    borderRadius: 4,
+                    barPercentage: 0.7,
+                    categoryPercentage: 0.8,
+                },
+                {
+                    label: 'Opps Created',
+                    data: data.map(d => d.opps),
+                    backgroundColor: '#74b9ff',
+                    borderRadius: 4,
+                    barPercentage: 0.7,
+                    categoryPercentage: 0.8,
+                },
+                {
+                    label: 'Opps Won',
+                    data: data.map(d => d.wonOpps),
+                    backgroundColor: '#00b894',
+                    borderRadius: 4,
+                    barPercentage: 0.7,
+                    categoryPercentage: 0.8,
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'top', labels: { usePointStyle: true, pointStyle: 'rectRounded', padding: 20, font: { size: 12 } } },
+                tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toLocaleString() } }
+            },
+            scales: {
+                y: { beginAtZero: true, grid: { color: '#f0f0f5' }, ticks: { font: { size: 11 } } },
+                x: { grid: { display: false }, ticks: { font: { size: 12, weight: '600' } } }
+            }
+        }
+    });
+}
+
+function renderARRChart(data) {
+    const ctx = document.getElementById('arrChart').getContext('2d');
+    if (charts.arr) charts.arr.destroy();
+
+    if (currentFilter === 'all') {
+        charts.arr = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: QUARTERS,
+                datasets: [
+                    {
+                        label: 'New Business ARR',
+                        data: QUARTERS.map((q, i) => won.nb[i].arr),
+                        backgroundColor: '#1a73e8',
+                        borderRadius: 4,
+                        barPercentage: 0.6,
+                    },
+                    {
+                        label: 'Expansion ARR',
+                        data: QUARTERS.map((q, i) => won.exp[i].arr),
+                        backgroundColor: '#e67e22',
+                        borderRadius: 4,
+                        barPercentage: 0.6,
+                    }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { usePointStyle: true, pointStyle: 'rectRounded', padding: 16, font: { size: 11 } } },
+                    tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + fmtK(ctx.parsed.y) } }
+                },
+                scales: {
+                    x: { stacked: true, grid: { display: false }, ticks: { font: { size: 11 } } },
+                    y: { stacked: true, beginAtZero: true, grid: { color: '#f0f0f5' }, ticks: { callback: v => fmtK(v), font: { size: 11 } } }
+                }
+            }
+        });
+    } else {
+        charts.arr = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: QUARTERS,
+                datasets: [{
+                    label: 'ARR Closed Won',
+                    data: data.map(d => d.closedARR),
+                    backgroundColor: currentFilter === 'nb' ? '#1a73e8' : '#e67e22',
+                    borderRadius: 4,
+                    barPercentage: 0.5,
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => fmtK(ctx.parsed.y) } } },
+                scales: {
+                    x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+                    y: { beginAtZero: true, grid: { color: '#f0f0f5' }, ticks: { callback: v => fmtK(v), font: { size: 11 } } }
+                }
+            }
+        });
+    }
+}
+
+function renderConvChart(data) {
+    const ctx = document.getElementById('convChart').getContext('2d');
+    if (charts.conv) charts.conv.destroy();
+
+    if (currentFilter === 'all') {
+        charts.conv = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: QUARTERS,
+                datasets: [
+                    {
+                        label: 'New Business',
+                        data: QUARTERS.map((q, i) => won.nb[i].opps / created.nb[i].opps * 100),
+                        borderColor: '#1a73e8', backgroundColor: '#1a73e822',
+                        tension: 0.3, fill: false, pointRadius: 5, pointBackgroundColor: '#1a73e8',
+                    },
+                    {
+                        label: 'Expansion',
+                        data: QUARTERS.map((q, i) => won.exp[i].opps / created.exp[i].opps * 100),
+                        borderColor: '#e67e22', backgroundColor: '#e67e2222',
+                        tension: 0.3, fill: false, pointRadius: 5, pointBackgroundColor: '#e67e22',
+                    }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { usePointStyle: true, padding: 16, font: { size: 11 } } },
+                    tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + '%' } }
+                },
+                scales: {
+                    x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+                    y: { beginAtZero: true, grid: { color: '#f0f0f5' }, ticks: { callback: v => v + '%', font: { size: 11 } } }
+                }
+            }
+        });
+    } else {
+        charts.conv = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: QUARTERS,
+                datasets: [{
+                    label: 'Win Rate',
+                    data: data.map(d => d.opps > 0 ? d.wonOpps / d.opps * 100 : 0),
+                    borderColor: currentFilter === 'nb' ? '#1a73e8' : '#e67e22',
+                    backgroundColor: (currentFilter === 'nb' ? '#1a73e8' : '#e67e22') + '22',
+                    tension: 0.3, fill: true, pointRadius: 5,
+                    pointBackgroundColor: currentFilter === 'nb' ? '#1a73e8' : '#e67e22',
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.parsed.y.toFixed(1) + '%' } } },
+                scales: {
+                    x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+                    y: { beginAtZero: true, grid: { color: '#f0f0f5' }, ticks: { callback: v => v + '%', font: { size: 11 } } }
+                }
+            }
+        });
+    }
+}
+
+function renderTable() {
+    const rows = [];
+    QUARTERS.forEach((q, i) => {
+        ['nb','exp'].forEach(type => {
+            if (currentFilter !== 'all' && currentFilter !== type) return;
+            const c = created[type][i];
+            const w = won[type][i];
+            const winRate = c.opps > 0 ? (w.opps / c.opps * 100).toFixed(1) + '%' : '-';
+            const arrConv = c.pipelineARR > 0 ? (w.arr / c.pipelineARR * 100).toFixed(1) + '%' : '-';
+            const tag = type === 'nb' ? '<span class="tag tag-nb">New Biz</span>' : '<span class="tag tag-exp">Expansion</span>';
+            rows.push(`<tr>
+                <td>${q}</td>
+                <td>${tag}</td>
+                <td class="num">${c.accounts.toLocaleString()}</td>
+                <td class="num">${c.opps.toLocaleString()}</td>
+                <td class="num">${w.opps.toLocaleString()}</td>
+                <td class="num">${winRate}</td>
+                <td class="num">${fmtK(c.pipelineARR)}</td>
+                <td class="num">${fmtK(w.arr)}</td>
+                <td class="num">${arrConv}</td>
+            </tr>`);
+        });
+    });
+    document.getElementById('detail-table').innerHTML = rows.join('');
+}
+
+function setFilter(f) {
+    currentFilter = f;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    render();
+}
+
+function render() {
+    const data = getData();
+    renderKPIs(data);
+    renderFunnelChart(data);
+    renderARRChart(data);
+    renderConvChart(data);
+    renderTable();
+}
+
+render();
+</script>
+</body>
+</html>
