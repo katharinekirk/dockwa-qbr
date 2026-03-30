@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q2 2026 Company Rocks</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+html { scroll-behavior: smooth; scroll-padding-top: 60px; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Open Sans', sans-serif; background: #f5f7fa; color: #2d3748; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; color: #172C4D; }
+h1 { font-size: 26px; margin-bottom: 4px; }
+h2 { font-size: 20px; margin: 32px 0 14px; padding-bottom: 6px; border-bottom: 2px solid #6ACCE0; }
+h3 { font-size: 16px; margin: 20px 0 8px; color: #023C8F; }
+h4 { font-size: 15px; margin: 0 0 8px; }
+p { margin-bottom: 12px; font-size: 15px; }
+ul { margin: 8px 0 16px 20px; font-size: 15px; }
+li { margin-bottom: 6px; }
+a { color: #023C8F; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 14px; }
+th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+th { background: #172C4D; color: white; font-weight: 600; font-size: 13px; }
+td { background: white; vertical-align: top; }
+td ul { margin: 0 0 0 18px; font-size: 14px; }
+td li { margin-bottom: 4px; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.green { color: #16a34a; font-weight: 600; }
+.red { color: #dc2626; font-weight: 600; }
+.yellow { color: #d97706; font-weight: 600; }
+.blue { color: #2563eb; font-weight: 600; }
+.obs-block { background: white; border-radius: 8px; padding: 20px 24px; margin: 16px 0; border-left: 4px solid #023C8F; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.obs-block.warning { border-left-color: #d97706; }
+.obs-block.risk { border-left-color: #dc2626; }
+.obs-block.positive { border-left-color: #16a34a; }
+.response-card { background: #f0f9ff; border: 1px solid #6ACCE0; border-radius: 8px; padding: 16px 20px; margin: 12px 0 24px; }
+.response-card h4 { margin-bottom: 8px; font-size: 14px; }
+.response-card p { margin-bottom: 8px; font-size: 14px; }
+.response-card ul { margin: 8px 0 12px 20px; font-size: 14px; }
+.chip { display: inline-block; background: #6ACCE0; color: #172C4D; font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 12px; margin-right: 8px; vertical-align: middle; }
+.owner-badge { display: inline-block; background: #172C4D; color: white; font-size: 12px; font-weight: 600; padding: 3px 12px; border-radius: 12px; margin-left: 8px; }
+.stage-bar { background: #172C4D; color: white; padding: 10px 20px; border-radius: 8px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; font-family: 'Poppins', sans-serif; }
+.stage-bar .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+.stage-bar .title { font-size: 20px; font-weight: 600; }
+.nav-row { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 14px; }
+.rock-box { background: white; border-radius: 8px; padding: 20px 24px; margin: 12px 0; border-left: 4px solid #172C4D; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.rock-box h4 { margin-bottom: 8px; }
+.note-callout { background: #fef9ee; border: 1px solid #fde68a; border-radius: 6px; padding: 12px 16px; margin: 12px 0; font-size: 14px; }
+.note-callout strong { color: #92400e; }
+.divider { height: 2px; background: #e2e8f0; margin: 40px 0; }
+.sub-table-label { font-size: 13px; color: #023C8F; font-weight: 600; margin-top: 16px; margin-bottom: 8px; }
+.closing-note { font-size: 14px; color: #555; margin: 12px 0; font-style: italic; }
+.engineering-stats { background: white; border-radius: 8px; padding: 20px 24px; margin: 16px 0; }
+.stats-row { display: flex; gap: 24px; margin: 12px 0; flex-wrap: wrap; }
+.stat-item { flex: 1; min-width: 200px; }
+.stat-number { font-size: 24px; font-weight: 600; color: #172C4D; }
+@media print { body { background: white; } .container { padding: 20px; } }
+
+.global-nav { position: sticky; top: 0; z-index: 100; background: #172C4D; padding: 0; font-family: 'Poppins', sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.global-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; overflow-x: auto; gap: 0; padding: 0 20px; }
+.global-nav a { display: block; padding: 10px 14px; text-decoration: none; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; white-space: nowrap; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; }
+.global-nav a:hover { color: white; }
+.global-nav a.active { color: white; border-bottom-color: #6ACCE0; }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > .nav-dropdown-label { display: flex; align-items: center; gap: 5px; padding: 10px 14px; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; white-space: nowrap; cursor: pointer; border-bottom: 2px solid transparent; transition: color 0.15s; }
+  .nav-dropdown > .nav-dropdown-label:hover { color: white; }
+  .nav-dropdown > .nav-dropdown-label.active { color: white; border-bottom-color: #6ACCE0; }
+  .nav-dropdown-arrow { font-size: 9px; margin-top: 1px; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #172C4D; min-width: 200px; border-radius: 0 0 6px 6px; box-shadow: 0 8px 24px rgba(0,0,0,0.25); padding: 6px 0; z-index: 300; }
+  .nav-dropdown-menu a { display: block; padding: 8px 18px; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; text-decoration: none; border-bottom: none; transition: background 0.1s, color 0.1s; }
+  .nav-dropdown-menu a:hover { background: rgba(255,255,255,0.08); color: white; }
+  .nav-dropdown-menu a.active { color: white; background: rgba(106,204,224,0.12); }
+  .nav-dropdown:hover > .nav-dropdown-menu { display: block; }
+  .nav-dropdown:hover > .nav-dropdown-label { color: white; }
+/* Layout: sidebar + content */
+.page-layout { display: flex; max-width: 1200px; margin: 0 auto; min-height: calc(100vh - 42px); }
+.sidebar { width: 200px; flex-shrink: 0; position: sticky; top: 42px; height: calc(100vh - 42px); overflow-y: auto; padding: 32px 0 32px 0; }
+.sidebar-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #718096; font-weight: 600; padding: 0 20px 12px; font-family: 'Poppins', sans-serif; }
+.sidebar a { display: block; padding: 6px 20px; font-size: 13px; color: #4A5568; text-decoration: none; line-height: 1.4; border-left: 3px solid transparent; transition: all 0.15s; }
+.sidebar a:hover { color: #023C8F; background: #f0f4f8; }
+.sidebar a.active { color: #023C8F; font-weight: 600; border-left-color: #6ACCE0; background: #f0f9ff; }
+.content-area { flex: 1; min-width: 0; border-left: 1px solid #e2e8f0; }
+.container { max-width: 860px; padding: 40px 48px; }
+@media (max-width: 960px) { .sidebar { display: none; } .page-layout { display: block; } .container { padding: 32px 20px; } }
+
+.rock-section { margin-bottom: 48px; }
+.rock-header { margin-bottom: 20px; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.rock-header h2 { margin-bottom: 0; }
+.rock-header .owner-badge { flex-shrink: 0; position: relative; top: -2px; }
+.rock-statement { font-size: 18px; font-weight: 600; color: #172C4D; margin-bottom: 6px; line-height: 1.5; font-family: 'Poppins', sans-serif; }
+.deps-risks { background: white; border-radius: 8px; padding: 20px 24px; margin: 12px 0 16px; border-left: 4px solid #d97706; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.deps-risks ul { margin: 0 0 0 20px; font-size: 14px; }
+.deps-risks li { margin-bottom: 8px; }
+.milestone-group { margin: 20px 0; }
+.milestone-label { font-size: 13px; color: #023C8F; font-weight: 600; margin-bottom: 6px; }
+.milestone-content { margin-left: 0; }
+.milestone-content ul { margin-left: 20px; }
+</style>
+</head>
+<body>
+<nav class="global-nav">
+  <div class="global-nav-inner">
+    <a href="index.html" style="display:flex;align-items:center;padding:6px 16px 6px 4px;border:none;"><img src="https://assets.dockwa.com/assets/logo/dockwa-white-f6ced7057af8043f1db50689b3d608c81bd415a0fc483a2eb15a9586695385ba.png" alt="Dockwa" style="height:22px;"></a>
+    <a href="index.html">Home</a>
+    <a href="q2-rocks.html" class="active">Q2 Rocks</a>
+    <div class="nav-dropdown">
+      <div class="nav-dropdown-label">Q1 2026 Retro <span class="nav-dropdown-arrow">&#9662;</span></div>
+      <div class="nav-dropdown-menu">
+        <a href="q1-funnel-awareness.html">Awareness</a>
+        <a href="q1-funnel-engagement.html">Engagement</a>
+        <a href="q1-funnel-acquisition.html">Acquisition</a>
+        <a href="q1-funnel-implementation.html">Implementation</a>
+        <a href="q1-funnel-activation.html">Activation</a>
+        <a href="q1-funnel-adoption.html">Adoption</a>
+        <a href="q1-funnel-retention.html">Retention</a>
+        <a href="q1-product.html">Product</a>
+        <a href="q1-support.html">Support</a>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="page-layout">
+<aside class="sidebar">
+  <div class="sidebar-title">On this page</div>
+    <a href="#rock-1-financing">Close the Financing Event</a>
+    <a href="#rock-2-vp-eng">VP of Engineering Hire</a>
+    <a href="#rock-3-service-mvp">Service Work Orders MVP</a>
+    <a href="#rock-4-rate-management">Transient Self-Service</a>
+    <a href="#rock-5-enterprise">Enterprise Team & Playbook</a>
+    <a href="#discussion-notes">Discussion Notes</a>
+</aside>
+<div class="content-area">
+<div class="container">
+
+<div class="stage-bar">
+  <div>
+    <div class="label">Q2 2026 | Company Rocks</div>
+    <div class="title">Q2 2026 Company Rocks</div>
+  </div>
+</div>
+
+<p style="font-size: 13px; color: #718096; margin-bottom: 24px;">For Leadership Review</p>
+
+<!-- ROCK 1: CLOSE THE FINANCING EVENT -->
+<div class="rock-section" id="rock-1-financing">
+<div class="rock-header">
+  <h2>Close the Financing Event</h2>
+  <span class="owner-badge">Mike Melillo</span>
+</div>
+
+<div class="rock-statement">Close the financing round by end of Q2, resulting in signed term sheet and funds committed.</div>
+
+<h3>Measurable Outcome</h3>
+<div class="response-card">
+  <p>Signed term sheet with committed capital by June 30, 2026.</p>
+</div>
+
+<h3>Why This Matters</h3>
+<div class="obs-block positive">
+  <p>Closing the round cleans up the cap table, consolidating around fewer stakeholders who are more aligned with the long-term success of the business. It shores up the core business with the capital needed to execute on product and go-to-market investments, while freeing Mike up to focus on building new revenue streams through partnerships, M&A, and strategic growth initiatives.</p>
+</div>
+
+<h3>Key Dependencies & Risks</h3>
+<div class="deps-risks">
+  <ul>
+    <li>TBD</li>
+  </ul>
+</div>
+</div>
+
+<!-- ROCK 2: VP OF ENGINEERING HIRE -->
+<div class="rock-section" id="rock-2-vp-eng">
+<div class="rock-header">
+  <h2>VP of Engineering Hire Advanced to Final Stage</h2>
+  <span class="owner-badge">Katharine Kirk</span>
+</div>
+
+<div class="rock-statement">Advance the VP of Engineering search to a final candidate with an accepted offer or a confirmed finalist in final-round interviews by end of Q2.</div>
+
+<h3>Measurable Outcome</h3>
+<div class="response-card">
+  <p>Offer accepted or finalist confirmed with decision date by June 30, 2026.</p>
+</div>
+
+<h3>Why This Matters</h3>
+<div class="obs-block positive">
+  <p>The technology team is operating without a dedicated engineering leader. This hire is foundational to executing the Service MVP, enterprise feature set, and infrastructure investments needed for the next phase of growth.</p>
+</div>
+
+<h3>Milestone Schedule</h3>
+
+<table>
+<tr><th>Timeframe</th><th>Deliverables</th></tr>
+<tr><td><strong>30 Days (April 30)</strong></td><td><ul>
+  <li>Towerhill engagement reactivated with refreshed search criteria reflecting updated org needs</li>
+  <li>Interview loop alignment session completed with interview stakeholders (what to screen for, updated from CTO search criteria)</li>
+  <li>Pipeline of 3-5 qualified candidates in active screening</li>
+</ul></td></tr>
+<tr><td><strong>60 Days (May 31)</strong></td><td><ul>
+  <li>2-3 candidates have completed full interview loops (technical, leadership, team fit, Mike final round)</li>
+  <li>Reference checks initiated on top candidate(s)</li>
+  <li>Compensation and equity package modeled (contingent on raise timeline)</li>
+</ul></td></tr>
+<tr><td><strong>90 Days (June 30)</strong></td><td><ul>
+  <li>Offer extended and accepted, OR confirmed finalist in final-round interviews with clear decision timeline</li>
+  <li>30-60-90 day onboarding plan drafted</li>
+</ul></td></tr>
+</table>
+
+<h3>Key Dependencies & Risks</h3>
+<div class="deps-risks">
+  <ul>
+    <li><strong>Contingent Equity Packaging:</strong> If the raise hasn't closed, the equity component of the offer is harder to structure. May need to present a contingent equity package tied to post-close grant.</li>
+    <li><strong>Downstream Hiring Impact:</strong> This hire unlocks downstream key hires; delays here delay the rest of our hiring plan.</li>
+  </ul>
+</div>
+</div>
+
+<!-- ROCK 3: SERVICE WORK ORDERS MVP -->
+<div class="rock-section" id="rock-3-service-mvp">
+<div class="rock-header">
+  <h2>Service Work Orders MVP in Beta with Pilot Customers</h2>
+  <span class="owner-badge">Kristen Karpen</span>
+</div>
+
+<div class="rock-statement">Deliver the Service Work Orders MVP to beta with pilot marinas creating, tracking, and billing service work through Dockwa by end of Q2.</div>
+
+<h3>Measurable Outcomes</h3>
+<div class="response-card">
+  <ul>
+    <li>3 beta marinas actively billing service work through Dockwa</li>
+    <li>Service GPV flowing through the platform (target: initial proof of concept, not volume)</li>
+  </ul>
+</div>
+
+<h3>Why This Matters</h3>
+<div class="obs-block positive">
+  <p>Service is Dockwa's single largest module gap. 40% of Dockwa marinas list service as an amenity, representing an estimated $360M+ in annual service revenue flowing through competing systems or offline workflows. In Q1, service-related functionality gaps accounted for $144K of $220K in closed-lost ARR (65%). 242 marina associations on the Jira feature request board. This is the #1 product investment.</p>
+</div>
+
+<h3>Milestones</h3>
+
+<div class="rock-box">
+  <div class="milestone-label">A. ARR Lift Sizing + Timing (Matt + Tabitha)</div>
+  <div class="milestone-content">
+    <ul>
+      <li>Financial model for Service module revenue impact in Q3 and Q4 2026</li>
+      <li>Assumptions: marina segmentation, attach rates, service GPV per marina, processing revenue</li>
+      <li>Output: Board-ready projection for inclusion in fundraise narrative</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rock-box">
+  <div class="milestone-label">B. Defined MVP Feature Set Socialized with Sales (Kristen + Matt)</div>
+  <div class="milestone-content">
+    <ul>
+      <li>Documented MVP scope: work order creation, job/line item management (labor, parts, charges), status tracking, PDF estimates, billing/invoicing through Dockwa, boater payment</li>
+      <li>"What we can sell" brief for AE team: target profile (L1 marinas, 1-4 service staff, seasonal/ad-hoc work)</li>
+      <li>"What we're still disqualified from" list: marinas requiring estimates/approvals, technician assignment, inventory management, scheduling/capacity planning</li>
+      <li>Sales enablement session delivered</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rock-box">
+  <div class="milestone-label">C. First Tranche of Pilot Customers (Kristen)</div>
+  <div class="milestone-content">
+    <ul>
+      <li>Beta partners confirmed</li>
+      <li>Pilot marinas creating work orders, tracking jobs, and billing through Dockwa</li>
+      <li>Feedback loop established for V2 prioritization</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rock-box">
+  <div class="milestone-label">D. Resource and Capacity Assessment (Kristen)</div>
+  <div class="milestone-content">
+    <ul>
+      <li>Identify expertise or capacity gaps for V2 (estimates module, technician tools, customer portal)</li>
+      <li>Recommendation on whether external expertise (design, QA) is needed for summer delivery</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rock-box">
+  <div class="milestone-label">E. Biz Ops Considerations (Kristen)</div>
+  <div class="milestone-content">
+    <ul>
+      <li>Reporting readiness: Service GPV measurement in scorecards</li>
+      <li>Support team readiness: KB articles, escalation paths for service billing questions</li>
+      <li>Implementation team impact: how pilot marinas get onboarded to the module</li>
+      <li>Pricing/packaging recommendation</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Milestone Schedule</h3>
+
+<table>
+<tr><th>Timeframe</th><th>Deliverables</th></tr>
+<tr><td><strong>30 Days (April 30)</strong></td><td><ul><li>TBD</li></ul></td></tr>
+<tr><td><strong>60 Days (May 31)</strong></td><td><ul><li>TBD</li></ul></td></tr>
+<tr><td><strong>90 Days (June 30)</strong></td><td><ul><li>TBD</li></ul></td></tr>
+</table>
+
+<h3>Key Dependencies & Risks</h3>
+<div class="deps-risks">
+  <ul>
+    <li>No specific dependencies or risks specified yet.</li>
+  </ul>
+</div>
+</div>
+
+<!-- ROCK 4: TRANSIENT SELF-SERVICE / RATE MANAGEMENT -->
+<div class="rock-section" id="rock-4-rate-management">
+<div class="rock-header">
+  <h2>Expand Transient Self-Service via Improved Rate Management</h2>
+  <span class="owner-badge">Tyler Kneisel</span>
+</div>
+
+<div class="rock-statement">Make 95% of the marketplace "rate ready" by end of Q2 through Rates v3 UX improvements, proper analytics instrumentation, and a marina nurturing program, while establishing clear marketplace ownership.</div>
+
+<h3>Measurable Outcomes</h3>
+<div class="response-card">
+  <ul>
+    <li>95% of marketplace marinas have current, valid rates configured</li>
+    <li>Amplitude instrumentation live on rate configuration flows</li>
+    <li>Inquiry-to-booking conversion rate improved (baseline to be established in April)</li>
+    <li>Implementation team hours spent on OTA onboarding reduced toward zero</li>
+  </ul>
+</div>
+
+<h3>Why This Matters</h3>
+<div class="obs-block positive">
+  <p>The network strategy depends on converting claimed/published marinas into transacting marinas. Today, 2,780 marinas are published and can receive inquiries, but only a fraction can accept transient bookings because rates aren't configured. Rate setup is the critical gate between "published" and "bookable."</p>
+</div>
+
+<h3>Milestones</h3>
+
+<div class="rock-box">
+  <div class="milestone-label">A. Rates v3: UX Improvements (Product/Eng)</div>
+  <div class="milestone-content">
+    <ul>
+      <li>Address known UX friction in rate configuration that causes marina drop-off</li>
+      <li>Amplitude event instrumentation on Rates v2 (currently zero events tracked per Mike's audit)</li>
+      <li>Chameleon-guided tour for first-time rate setup (create season, set strategy, map to calendar)</li>
+      <li>Target: measurable improvement in rate setup completion rate</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rock-box">
+  <div class="milestone-label">B. Rates v3: Proper Data Logging (Tyler + Eng)</div>
+  <div class="milestone-content">
+    <ul>
+      <li>Amplitude events implemented across rate configuration, modification, and deletion</li>
+      <li>Baseline established for rate setup funnel (start > complete > go live)</li>
+      <li>Data available for product team to identify and address drop-off points</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rock-box">
+  <div class="milestone-label">C. Marina Nurturing Program (Tyler + Marketing)</div>
+  <div class="milestone-content">
+    <ul>
+      <li>Systematic outreach to published marinas without rates configured for 2026</li>
+      <li>Defined nurturing workflow: identify > outreach > guide through setup > confirm bookable</li>
+      <li>Coordination with MSM team on proactive rate-readiness touchpoints during pre-season calls</li>
+      <li>Progress tracked against 95% rate-ready target</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rock-box">
+  <div class="milestone-label">D. Marketplace Ownership: Documented & Operationalized</div>
+  <div class="milestone-content">
+    <ul>
+      <li>Documented owner role and responsibilities for marketplace health</li>
+      <li>Marketplace ground rules operationalized</li>
+      <li>Regular reporting cadence on marketplace health metrics: rate readiness, inquiry response rate, booking conversion</li>
+      <li>Escalation path for rate discrepancy and policy violations</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Milestone Schedule</h3>
+
+<table>
+<tr><th>Timeframe</th><th>Deliverables</th></tr>
+<tr><td><strong>30 Days (April 30)</strong></td><td><ul><li>TBD</li></ul></td></tr>
+<tr><td><strong>60 Days (May 31)</strong></td><td><ul><li>TBD</li></ul></td></tr>
+<tr><td><strong>90 Days (June 30)</strong></td><td><ul><li>TBD</li></ul></td></tr>
+</table>
+
+<h3>Key Dependencies & Risks</h3>
+<div class="deps-risks">
+  <ul>
+    <li><strong>Engineering Capacity Constraints:</strong> Product/Eng capacity for Rates v3 Amplitude instrumentation and UX work is required. Chameleon integration for guided tour implementation needed.</li>
+    <li><strong>Self-Serve Flow Staging:</strong> The self-serve "claimed to bookable" flow involves technical work across feature flags, Salesforce sync, and processing fee configuration. If engineering capacity is consumed by Service MVP, the full self-serve path may need to be staged.</li>
+    <li><strong>Rate-Ready Target Aggressiveness:</strong> The 95% rate-ready target is aggressive. Establishing the baseline in April will tell us whether this is realistic or aspirational. Recommend treating it as directional with a "best achievable" framing.</li>
+  </ul>
+</div>
+</div>
+
+<!-- ROCK 5: ENTERPRISE TEAM AND PLAYBOOK -->
+<div class="rock-section" id="rock-5-enterprise">
+<div class="rock-header">
+  <h2>Enterprise Team and Implementation Playbook Established</h2>
+  <span class="owner-badge">Matt Fradette</span>
+</div>
+
+<div class="rock-statement">Define and operationalize the enterprise customer lifecycle from contract through implementation through ongoing success, including the team structure, playbook, feature requirements, and hiring plan to support it.</div>
+
+<h3>Measurable Outcomes</h3>
+<div class="response-card">
+  <ul>
+    <li>Enterprise implementation intake process standardized and deployed for all new enterprise accounts</li>
+    <li>Enterprise playbook documented and in use for active deals</li>
+    <li>Enterprise feature gap clearly mapped with delivery timelines</li>
+    <li>Accounting integration implementation time measured and baselined</li>
+  </ul>
+</div>
+
+<h3>Why This Matters</h3>
+<div class="obs-block positive">
+  <p>Dockwa is signing larger, more complex marina groups that require structured implementation, accounting integrations, POS configuration, and multi-location management. Our current enterprise deals already expose gaps in how we sell, onboard, and support these accounts. The enterprise pod also serves as a proving ground for building best practices and operational standards across implementation, support, and product delivery that we can fold back into the core mid-market organization over time.</p>
+</div>
+
+<h3>Milestones</h3>
+
+<div class="rock-box">
+  <div class="milestone-label">A. Enterprise Contracts: Must-Haves and Principles (Matt + Legal)</div>
+  <div class="milestone-content">
+    <ul>
+      <li>Documented contract framework: what terms are standard, what's negotiable, what's a dealbreaker</li>
+      <li>MSA template updated for enterprise accounts</li>
+      <li>Pricing and packaging principles for multi-location deals</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rock-box">
+  <div class="milestone-label">B. Enterprise Implementation POV (Matt + Jared)</div>
+  <div class="milestone-content">
+    <ul>
+      <li>Written point of view on how Dockwa treats implementation for enterprise contracts</li>
+      <li>Distinction between self-serve onboarding vs. white-glove enterprise implementation</li>
+      <li>Defined SLAs: timeline expectations, resource commitments, escalation paths</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rock-box">
+  <div class="milestone-label">C. Customer Expectations Framework (Matt + Jared + Abby)</div>
+  <div class="milestone-content">
+    <ul>
+      <li>Documented expectations we set with enterprise customers at point of sale</li>
+      <li>Covers: timeline to go-live, customer responsibilities, Dockwa responsibilities</li>
+      <li>Handoff protocol from sales to implementation</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rock-box">
+  <div class="milestone-label">D. Implementation Intake Process (Matt + Jared)</div>
+  <div class="milestone-content">
+    <ul>
+      <li>Standardized intake form/checklist for new enterprise accounts covering: accounting integration requirements, POS setup, data migration scope, multi-location architecture</li>
+      <li>Intake details flow into project plan template with milestone tracking</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rock-box">
+  <div class="milestone-label">E. Enterprise Feature Set Definition (Matt + Kristen + Adrian)</div>
+  <div class="milestone-content">
+    <ul>
+      <li>Documented enterprise feature requirements mapped to product roadmap: roles & permissions (WorkOS RBAC bet, 6-8 week cycle), multi-marina management / "god view", audit trails</li>
+      <li>"What we can sell today" vs. "what requires product investment" clearly articulated for sales</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rock-box">
+  <div class="milestone-label">F. Hiring Plan (Matt + KK)</div>
+  <div class="milestone-content">
+    <ul>
+      <li>Headcount plan for enterprise team buildout: Implementation Specialists, Enterprise AE, CS resources</li>
+      <li>Hiring timeline aligned with deal pipeline and revenue plan</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rock-box">
+  <div class="milestone-label">G. Accounting Integration Process (Matt + Jared + Adrian)</div>
+  <div class="milestone-content">
+    <ul>
+      <li>Documented accounting integration implementation process</li>
+      <li>QBO Certification for key team members</li>
+      <li>Defined intake questions for accounting setup</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Milestone Schedule</h3>
+
+<table>
+<tr><th>Timeframe</th><th>Deliverables</th></tr>
+<tr><td><strong>30 Days (April 30)</strong></td><td><ul><li>TBD</li></ul></td></tr>
+<tr><td><strong>60 Days (May 31)</strong></td><td><ul><li>TBD</li></ul></td></tr>
+<tr><td><strong>90 Days (June 30)</strong></td><td><ul><li>TBD</li></ul></td></tr>
+</table>
+
+<h3>Key Dependencies & Risks</h3>
+<div class="deps-risks">
+  <ul>
+    <li><strong>Rock Scope and Prioritization:</strong> This rock is broad. Matt will need to prioritize ruthlessly. Recommendation: front-load the intake process and feature mapping (most immediately useful for active deals), and let the playbook formalize over Q2.</li>
+    <li><strong>Engineering Capacity for Enterprise Features:</strong> Enterprise feature work (RBAC, god view) depends on engineering capacity that's also committed to Service MVP. Sequencing needs to be explicit.</li>
+  </ul>
+</div>
+</div>
+
+<!-- DISCUSSION NOTES -->
+<div class="divider"></div>
+
+<div id="discussion-notes">
+<h2>Discussion Notes</h2>
+
+<div class="obs-block warning">
+  <h4>Engineering Capacity is the Binding Constraint</h4>
+  <p>Engineering capacity is the binding constraint across Rocks 3, 4, and 5. Service MVP (Rock 3) is the highest-revenue-impact bet. Self-serve transient infrastructure (Rock 4) and enterprise features (Rock 5) both need engineering time. Need explicit sequencing and trade-off decisions.</p>
+</div>
+
+<div class="obs-block warning">
+  <h4>Rock 5 Scope Consideration</h4>
+  <p>Rock 5 is the broadest rock. It covers contracts, implementation process, feature requirements, hiring, and accounting integrations. Consider whether this should be two rocks (Enterprise Sales Readiness + Enterprise Implementation Process) to improve accountability and tracking.</p>
+</div>
+
+<div class="obs-block">
+  <h4>Rate-Ready Target Baseline</h4>
+  <p>The 95% rate-ready target (Rock 4) is aggressive. Establishing the baseline in April will tell us whether this is realistic or aspirational. Recommend treating it as directional with a "best achievable" framing.</p>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+(function() {
+  const links = document.querySelectorAll('.sidebar a');
+  const sections = [];
+  links.forEach(a => {
+    const id = a.getAttribute('href');
+    if (id && id.startsWith('#')) {
+      const el = document.querySelector(id);
+      if (el) sections.push({ el, link: a });
+    }
+  });
+  function onScroll() {
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.el.getBoundingClientRect().top <= 80) current = s;
+    }
+    links.forEach(a => a.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+})();
+</script>
+</body>
+</html>

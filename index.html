@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dockwa Q1 2026 Business Review</title>
+<title>Dockwa Quarterly Planning</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -539,10 +539,21 @@
   }
 
   .global-nav { position: sticky; top: 0; z-index: 200; background: var(--dark-blue); padding: 0; font-family: 'Poppins', sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
-  .global-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; overflow-x: auto; gap: 0; padding: 0 12px; }
-  .global-nav a { display: block; padding: 10px 14px; text-decoration: none; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; white-space: nowrap; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; }
+  .global-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: stretch; gap: 0; padding: 0 12px; }
+  .global-nav a { display: flex; align-items: center; padding: 10px 14px; text-decoration: none; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; white-space: nowrap; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; }
   .global-nav a:hover { color: white; }
   .global-nav a.active { color: white; border-bottom-color: var(--light-blue); }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > .nav-dropdown-label { display: flex; align-items: center; gap: 5px; padding: 10px 14px; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; white-space: nowrap; cursor: pointer; border-bottom: 2px solid transparent; transition: color 0.15s; }
+  .nav-dropdown > .nav-dropdown-label:hover { color: white; }
+  .nav-dropdown > .nav-dropdown-label.active { color: white; border-bottom-color: var(--light-blue); }
+  .nav-dropdown-arrow { font-size: 9px; margin-top: 1px; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: var(--dark-blue); min-width: 200px; border-radius: 0 0 6px 6px; box-shadow: 0 8px 24px rgba(0,0,0,0.25); padding: 6px 0; z-index: 300; }
+  .nav-dropdown-menu a { display: block; padding: 8px 18px; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; text-decoration: none; border-bottom: none; transition: background 0.1s, color 0.1s; }
+  .nav-dropdown-menu a:hover { background: rgba(255,255,255,0.08); color: white; }
+  .nav-dropdown-menu a.active { color: white; background: rgba(106,204,224,0.12); }
+  .nav-dropdown:hover > .nav-dropdown-menu { display: block; }
+  .nav-dropdown:hover > .nav-dropdown-label { color: white; }
 </style>
 </head>
 <body>
@@ -550,15 +561,21 @@
   <div class="global-nav-inner">
     <a href="index.html" style="display:flex;align-items:center;padding:6px 16px 6px 4px;border:none;"><img src="https://assets.dockwa.com/assets/logo/dockwa-white-f6ced7057af8043f1db50689b3d608c81bd415a0fc483a2eb15a9586695385ba.png" alt="Dockwa" style="height:22px;"></a>
     <a href="index.html" class="active">Home</a>
-    <a href="q1-funnel-awareness.html">Awareness</a>
-    <a href="q1-funnel-engagement.html">Engagement</a>
-    <a href="q1-funnel-acquisition.html">Acquisition</a>
-    <a href="q1-funnel-implementation.html">Implementation</a>
-    <a href="q1-funnel-activation.html">Activation</a>
-    <a href="q1-funnel-adoption.html">Adoption</a>
-    <a href="q1-funnel-retention.html">Retention</a>
-    <a href="q1-product.html">Product</a>
-    <a href="q1-support.html">Support</a>
+    <a href="q2-rocks.html">Q2 Rocks</a>
+    <div class="nav-dropdown">
+      <div class="nav-dropdown-label">Q1 2026 Retro <span class="nav-dropdown-arrow">&#9662;</span></div>
+      <div class="nav-dropdown-menu">
+        <a href="q1-funnel-awareness.html">Awareness</a>
+        <a href="q1-funnel-engagement.html">Engagement</a>
+        <a href="q1-funnel-acquisition.html">Acquisition</a>
+        <a href="q1-funnel-implementation.html">Implementation</a>
+        <a href="q1-funnel-activation.html">Activation</a>
+        <a href="q1-funnel-adoption.html">Adoption</a>
+        <a href="q1-funnel-retention.html">Retention</a>
+        <a href="q1-product.html">Product</a>
+        <a href="q1-support.html">Support</a>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -567,82 +584,76 @@
      ════════════════════════════════════════════ -->
 <section class="hero">
   <div class="container hero-content">
-    <h1>Dockwa Q1 2026 Business Review</h1>
-    <p>Quarterly business performance across all key business drivers and strategic initiatives. Performance through March 20, 2026.</p>
+    <h1>Dockwa Quarterly Planning</h1>
+    <p>Q1 2026 performance, company scorecard, and proposed Q2 rocks. Use the navigation above to review funnel stage deep dives and the full Q2 rock proposals.</p>
   </div>
 </section>
 
 <!-- ════════════════════════════════════════════
-     DAY 1 AGENDA
+     Q2 2026 COMPANY ROCKS OVERVIEW
      ════════════════════════════════════════════ -->
 <section class="section">
   <div class="container">
     <div class="section-header">
-      <div class="section-badge">Day 1 Agenda</div>
-      <h2>Q1 Business Review</h2>
-      <p class="section-desc">Tuesday, March 24, 2026 / 10:00 AM - 3:00 PM</p>
+      <div class="section-badge">Q2 Planning</div>
+      <h2>Q2 2026 Company Rocks</h2>
+      <p class="section-desc">For Leadership Review. Five proposed rocks for Q2 execution.</p>
     </div>
 
-    <table style="margin-top: 8px;">
-      <thead>
-        <tr>
-          <th style="width: 130px;">Time</th>
-          <th style="width: 220px;">Block</th>
-          <th>Description</th>
-          <th style="width: 160px;">Owner</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>10:00 - 10:15</td>
-          <td><strong>Opening & Ground Rules</strong></td>
-          <td>Set the frame: today is about honest assessment and surfacing everything, not solving.</td>
-          <td>Katharine</td>
-        </tr>
-        <tr>
-          <td>10:15 - 11:45</td>
-          <td><strong>Funnel Review: Where Did We Land?</strong></td>
-          <td>Walk through each team's Q1 retro. Cover metrics, Rocks, and key issues identified.</td>
-          <td>Katharine (facilitates), team owners present</td>
-        </tr>
-        <tr>
-          <td>11:45 - 12:00</td>
-          <td><strong>Break</strong></td>
-          <td>Thoughtspot Demo</td>
-          <td>Rich</td>
-        </tr>
-        <tr>
-          <td>12:30 - 1:00</td>
-          <td><strong>Lunch</strong></td>
-          <td><a href="https://www.newportsandwichco.com/" target="_blank" style="color: var(--medium-blue); font-weight: 600;">Newport Sandwich Co</a> - DM KK your order</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>1:00 - 1:45</td>
-          <td><strong>Funnel Stage Retros (Part 1)</strong></td>
-          <td>Split into two concurrent groups. Each group walks their funnel stages and refines issues.<br><br><span style="color: var(--medium-blue); font-weight: 600;">Group A (Pre-Sale):</span> Awareness, Engagement, Acquisition<br><span style="color: var(--medium-blue); font-weight: 600;">Group B (Post-Sale):</span> Implementation, Activation, Adoption, Retention</td>
-          <td>Group A: Matt leads<br>Group B: Jared/Abby lead</td>
-        </tr>
-        <tr>
-          <td>1:45 - 2:30</td>
-          <td><strong>Funnel Stage Retros (Part 2)</strong></td>
-          <td>Groups swap and review each other's issues. Add, clarify, challenge.</td>
-          <td>Same leads</td>
-        </tr>
-        <tr>
-          <td>2:30 - 2:45</td>
-          <td><strong>Functional Issue Generation</strong></td>
-          <td>Team gets 15 min to add issues that don't fit neatly into the funnel. Think: people gaps, process breakdowns, tool limitations, capability needs, cross-functional friction.</td>
-          <td>All</td>
-        </tr>
-        <tr>
-          <td>2:45 - 3:00</td>
-          <td><strong>Issue Bank Read-Out & Close</strong></td>
-          <td>Read the full list aloud. Do a first-pass grouping into rough themes. Identify obvious duplicates. The goal is a visible, comprehensive issue bank that leadership can work from tomorrow.</td>
-          <td>Katharine</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="rock-grid">
+
+      <div class="rock-card">
+        <h4>Rock 1: Close the Financing Event</h4>
+        <div class="rock-status at-risk" style="background: rgba(2,60,143,0.1); color: var(--medium-blue);">Mike Melillo</div>
+        <p style="font-size: 13px; margin-top: 8px; color: var(--text-secondary);">Close the financing round by end of Q2, resulting in signed term sheet and funds committed.</p>
+        <div class="key-insight" style="margin-top: 12px;">
+          <strong>Measurable outcome:</strong> Signed term sheet with committed capital by June 30, 2026.
+        </div>
+      </div>
+
+      <div class="rock-card">
+        <h4>Rock 2: VP of Engineering Hire</h4>
+        <div class="rock-status at-risk" style="background: rgba(2,60,143,0.1); color: var(--medium-blue);">Katharine Kirk</div>
+        <p style="font-size: 13px; margin-top: 8px; color: var(--text-secondary);">Advance the VP of Engineering search to a final candidate with an accepted offer or confirmed finalist by end of Q2.</p>
+        <div class="key-insight" style="margin-top: 12px;">
+          <strong>Measurable outcome:</strong> Offer accepted or finalist confirmed with decision date by June 30, 2026.
+        </div>
+      </div>
+
+      <div class="rock-card">
+        <h4>Rock 3: Service Work Orders MVP</h4>
+        <div class="rock-status at-risk" style="background: rgba(2,60,143,0.1); color: var(--medium-blue);">Kristen Karpen</div>
+        <p style="font-size: 13px; margin-top: 8px; color: var(--text-secondary);">Deliver the Service Work Orders MVP to beta with pilot marinas creating, tracking, and billing service work through Dockwa.</p>
+        <div class="key-insight" style="margin-top: 12px;">
+          <strong>Measurable outcome:</strong> 3 beta marinas actively billing service work through Dockwa by June 30, 2026.
+        </div>
+      </div>
+
+      <div class="rock-card">
+        <h4>Rock 4: Transient Self-Service via Rate Management</h4>
+        <div class="rock-status at-risk" style="background: rgba(2,60,143,0.1); color: var(--medium-blue);">Tyler Kneisel</div>
+        <p style="font-size: 13px; margin-top: 8px; color: var(--text-secondary);">Make 95% of the marketplace "rate ready" through Rates v3 UX improvements, analytics instrumentation, and a marina nurturing program.</p>
+        <div class="key-insight" style="margin-top: 12px;">
+          <strong>Measurable outcome:</strong> 95% of marketplace marinas have current, valid rates configured.
+        </div>
+      </div>
+
+      <div class="rock-card">
+        <h4>Rock 5: Enterprise Team & Implementation Playbook</h4>
+        <div class="rock-status at-risk" style="background: rgba(2,60,143,0.1); color: var(--medium-blue);">Matt Fradette</div>
+        <p style="font-size: 13px; margin-top: 8px; color: var(--text-secondary);">Define and operationalize the enterprise customer lifecycle from contract through implementation through ongoing success.</p>
+        <div class="key-insight" style="margin-top: 12px;">
+          <strong>Measurable outcome:</strong> Enterprise implementation intake process standardized and deployed for all new enterprise accounts.
+        </div>
+      </div>
+
+      <div class="rock-card" style="border-left: none; grid-column: 1 / -1; background: linear-gradient(135deg, var(--dark-blue) 0%, var(--medium-blue) 100%); text-align: center; padding: 32px 24px;">
+        <h4 style="color: white; font-size: 17px; margin-bottom: 8px;">Ready to go deeper?</h4>
+        <p style="font-size: 14px; color: rgba(255,255,255,0.75); margin-bottom: 16px;">Milestones, dependencies, and discussion notes for each rock.</p>
+        <a href="q2-rocks.html" style="display: inline-block; padding: 10px 24px; background: var(--light-blue); border-radius: 6px; text-decoration: none; color: var(--dark-blue); font-size: 14px; font-weight: 600;">View Q2 Rocks Deep Dive</a>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -821,8 +832,8 @@
      ════════════════════════════════════════════ -->
 <footer class="footer">
   <div class="container">
-    <p><strong>Dockwa Q1 2026 Business Review</strong></p>
-    <p>Performance through March 31, 2026</p>
+    <p><strong>Dockwa Quarterly Planning</strong></p>
+    <p>Q1 2026 Review and Q2 2026 Planning</p>
   </div>
 </footer>
 

@@ -60,6 +60,17 @@ td { background: white; }
 .global-nav a { display: block; padding: 10px 14px; text-decoration: none; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; white-space: nowrap; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; }
 .global-nav a:hover { color: white; }
 .global-nav a.active { color: white; border-bottom-color: #6ACCE0; }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > .nav-dropdown-label { display: flex; align-items: center; gap: 5px; padding: 10px 14px; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; white-space: nowrap; cursor: pointer; border-bottom: 2px solid transparent; transition: color 0.15s; }
+  .nav-dropdown > .nav-dropdown-label:hover { color: white; }
+  .nav-dropdown > .nav-dropdown-label.active { color: white; border-bottom-color: #6ACCE0; }
+  .nav-dropdown-arrow { font-size: 9px; margin-top: 1px; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #172C4D; min-width: 200px; border-radius: 0 0 6px 6px; box-shadow: 0 8px 24px rgba(0,0,0,0.25); padding: 6px 0; z-index: 300; }
+  .nav-dropdown-menu a { display: block; padding: 8px 18px; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; text-decoration: none; border-bottom: none; transition: background 0.1s, color 0.1s; }
+  .nav-dropdown-menu a:hover { background: rgba(255,255,255,0.08); color: white; }
+  .nav-dropdown-menu a.active { color: white; background: rgba(106,204,224,0.12); }
+  .nav-dropdown:hover > .nav-dropdown-menu { display: block; }
+  .nav-dropdown:hover > .nav-dropdown-label { color: white; }
 /* Layout: sidebar + content */
 .page-layout { display: flex; max-width: 1200px; margin: 0 auto; min-height: calc(100vh - 42px); }
 .sidebar { width: 200px; flex-shrink: 0; position: sticky; top: 42px; height: calc(100vh - 42px); overflow-y: auto; padding: 32px 0 32px 0; }
@@ -77,15 +88,21 @@ td { background: white; }
   <div class="global-nav-inner">
     <a href="index.html" style="display:flex;align-items:center;padding:6px 16px 6px 4px;border:none;"><img src="https://assets.dockwa.com/assets/logo/dockwa-white-f6ced7057af8043f1db50689b3d608c81bd415a0fc483a2eb15a9586695385ba.png" alt="Dockwa" style="height:22px;"></a>
     <a href="index.html">Home</a>
-    <a href="q1-funnel-awareness.html">Awareness</a>
-    <a href="q1-funnel-engagement.html">Engagement</a>
-    <a href="q1-funnel-acquisition.html" class="active">Acquisition</a>
-    <a href="q1-funnel-implementation.html">Implementation</a>
-    <a href="q1-funnel-activation.html">Activation</a>
-    <a href="q1-funnel-adoption.html">Adoption</a>
-    <a href="q1-funnel-retention.html">Retention</a>
-    <a href="q1-product.html">Product</a>
-    <a href="q1-support.html">Support</a>
+    <a href="q2-rocks.html">Q2 Rocks</a>
+    <div class="nav-dropdown">
+      <div class="nav-dropdown-label active">Q1 2026 Retro <span class="nav-dropdown-arrow">&#9662;</span></div>
+      <div class="nav-dropdown-menu">
+        <a href="q1-funnel-awareness.html">Awareness</a>
+        <a href="q1-funnel-engagement.html">Engagement</a>
+        <a href="q1-funnel-acquisition.html" class="active">Acquisition</a>
+        <a href="q1-funnel-implementation.html">Implementation</a>
+        <a href="q1-funnel-activation.html">Activation</a>
+        <a href="q1-funnel-adoption.html">Adoption</a>
+        <a href="q1-funnel-retention.html">Retention</a>
+        <a href="q1-product.html">Product</a>
+        <a href="q1-support.html">Support</a>
+      </div>
+    </div>
   </div>
 </nav>
 <div class="page-layout">
