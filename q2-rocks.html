@@ -126,7 +126,7 @@ td li { margin-bottom: 4px; }
     <a href="#rock-1-financing">Close the Financing Event</a>
     <a href="#rock-2-vp-eng">VP of Engineering Hire</a>
     <a href="#rock-3-service-mvp">Service Work Orders MVP</a>
-    <a href="#rock-4-rate-management">Transient Self-Service</a>
+    <a href="#rock-4-rate-management">Rate Configuration</a>
     <a href="#rock-5-enterprise">Enterprise Team & Playbook</a>
     <a href="#discussion-notes">Discussion Notes</a>
 </aside>
@@ -317,43 +317,32 @@ td li { margin-bottom: 4px; }
 <!-- ROCK 4: TRANSIENT SELF-SERVICE / RATE MANAGEMENT -->
 <div class="rock-section" id="rock-4-rate-management">
 <div class="rock-header">
-  <h2>Expand Transient Self-Service via Improved Rate Management</h2>
+  <h2>Fix the Transient Rate Configuration Experience</h2>
   <span class="owner-badge">Tyler Kneisel</span>
 </div>
 
-<div class="rock-statement">Make 95% of the marketplace "rate ready" by end of Q2 through Rates v3 UX improvements, proper analytics instrumentation, and a marina nurturing program, while establishing clear marketplace ownership.</div>
+<div class="rock-statement">Fix the rate configuration UX, build the measurement infrastructure, and drive marina adoption so existing customers can self-manage transient rates and the marketplace moves toward rate-readiness at scale.</div>
 
 <h3>Measurable Outcomes</h3>
 <div class="response-card">
   <ul>
-    <li>95% of marketplace marinas have current, valid rates configured</li>
-    <li>Amplitude instrumentation live on rate configuration flows</li>
-    <li>Inquiry-to-booking conversion rate improved (baseline to be established in April)</li>
-    <li>Implementation team hours spent on OTA onboarding reduced toward zero</li>
+    <li>Amplitude instrumentation live across the full rate configuration flow</li>
+    <li>Rate setup completion funnel baselined with drop-off points identified</li>
+    <li>Known UX friction in rate configuration addressed, with measurable improvement in setup completion rate</li>
+    <li>Marketplace rate-readiness improved from current baseline (to be established in April)</li>
   </ul>
 </div>
 
 <h3>Why This Matters</h3>
 <div class="obs-block positive">
-  <p>The network strategy depends on converting claimed/published marinas into transacting marinas. Today, 2,780 marinas are published and can receive inquiries, but only a fraction can accept transient bookings because rates aren't configured. Rate setup is the critical gate between "published" and "bookable."</p>
+  <p>Rate configuration is the single biggest blocker in Dockwa's transient self-service journey. Today, thousands of published marinas can receive inquiries but can't accept transient bookings because rates aren't configured, and we have zero instrumentation to understand why setup stalls.</p>
+  <p>This rock is part of a multi-quarter arc. In Q4 2025 we scoped the self-service model. In Q1 2026 we identified implementation bottlenecks that consume team hours and limit our ability to scale the Transient module. This quarter, we fix the rate experience, build the measurement layer, and drive existing customer adoption. Getting this right unlocks two things downstream: self-service implementation for new customers (reducing onboarding dependency on our team) and eventually self-service purchase for new OTA customers via the Claim-to-OTA model. None of that works if existing customers can't manage their own rates.</p>
 </div>
 
 <h3>Milestones</h3>
 
 <div class="rock-box">
-  <div class="milestone-label">A. Rates v3: UX Improvements (Product/Eng)</div>
-  <div class="milestone-content">
-    <ul>
-      <li>Address known UX friction in rate configuration that causes marina drop-off</li>
-      <li>Amplitude event instrumentation on Rates v2 (currently zero events tracked per Mike's audit)</li>
-      <li>Chameleon-guided tour for first-time rate setup (create season, set strategy, map to calendar)</li>
-      <li>Target: measurable improvement in rate setup completion rate</li>
-    </ul>
-  </div>
-</div>
-
-<div class="rock-box">
-  <div class="milestone-label">B. Rates v3: Proper Data Logging (Tyler + Eng)</div>
+  <div class="milestone-label">A. Amplitude Instrumentation (Tyler + Eng)</div>
   <div class="milestone-content">
     <ul>
       <li>Amplitude events implemented across rate configuration, modification, and deletion</li>
@@ -364,23 +353,33 @@ td li { margin-bottom: 4px; }
 </div>
 
 <div class="rock-box">
-  <div class="milestone-label">C. Marina Nurturing Program (Tyler + Marketing)</div>
+  <div class="milestone-label">B. Rates v3: UX Improvements (Product/Eng)</div>
   <div class="milestone-content">
     <ul>
-      <li>Systematic outreach to published marinas without rates configured for 2026</li>
-      <li>Defined nurturing workflow: identify > outreach > guide through setup > confirm bookable</li>
-      <li>Coordination with MSM team on proactive rate-readiness touchpoints during pre-season calls</li>
-      <li>Progress tracked against 95% rate-ready target</li>
+      <li>Address known UX friction in rate configuration that causes marina drop-off</li>
+      <li>Chameleon-guided tour for first-time rate setup (create season, set strategy, map to calendar)</li>
+      <li>Target: measurable improvement in rate setup completion rate vs. April baseline</li>
     </ul>
   </div>
 </div>
 
 <div class="rock-box">
-  <div class="milestone-label">D. Marketplace Ownership: Documented & Operationalized</div>
+  <div class="milestone-label">C. Marina Rate-Readiness Program (Tyler + Marketing)</div>
+  <div class="milestone-content">
+    <ul>
+      <li>Systematic outreach to published marinas without rates configured for 2026</li>
+      <li>Defined nurturing workflow: identify > outreach > guide through setup > confirm bookable</li>
+      <li>Coordination with MSM team on proactive rate-readiness touchpoints during pre-season calls</li>
+      <li>Progress tracked against rate-readiness target</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rock-box">
+  <div class="milestone-label">D. Marketplace Ownership (Tyler)</div>
   <div class="milestone-content">
     <ul>
       <li>Documented owner role and responsibilities for marketplace health</li>
-      <li>Marketplace ground rules operationalized</li>
       <li>Regular reporting cadence on marketplace health metrics: rate readiness, inquiry response rate, booking conversion</li>
       <li>Escalation path for rate discrepancy and policy violations</li>
     </ul>
@@ -399,9 +398,9 @@ td li { margin-bottom: 4px; }
 <h3>Key Dependencies & Risks</h3>
 <div class="deps-risks">
   <ul>
-    <li><strong>Engineering Capacity Constraints:</strong> Product/Eng capacity for Rates v3 Amplitude instrumentation and UX work is required. Chameleon integration for guided tour implementation needed.</li>
-    <li><strong>Self-Serve Flow Staging:</strong> The self-serve "claimed to bookable" flow involves technical work across feature flags, Salesforce sync, and processing fee configuration. If engineering capacity is consumed by Service MVP, the full self-serve path may need to be staged.</li>
-    <li><strong>Rate-Ready Target Aggressiveness:</strong> The 95% rate-ready target is aggressive. Establishing the baseline in April will tell us whether this is realistic or aspirational. Recommend treating it as directional with a "best achievable" framing.</li>
+    <li><strong>Engineering Capacity:</strong> Product/Eng capacity required for Amplitude instrumentation and UX work. Chameleon integration needed for guided tour. If engineering capacity is consumed by Service MVP, this work may need to be staged.</li>
+    <li><strong>Instrumentation Before Optimization:</strong> We can't measure improvement until instrumentation is live and a baseline is established. Milestone A needs to land first to inform everything else.</li>
+    <li><strong>Rate-Readiness Baseline:</strong> The rate-readiness target is directional until we establish the April baseline. Recommend treating it as "best achievable" rather than committing to a specific percentage before we know the starting point.</li>
   </ul>
 </div>
 </div>
