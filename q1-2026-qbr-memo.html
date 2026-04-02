@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dockwa Q1 2026 QBR Pre-Read</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Open Sans', sans-serif; background: #f5f7fa; color: #2d3748; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; color: #172C4D; }
+h1 { font-size: 28px; margin-bottom: 8px; }
+h2 { font-size: 22px; margin: 40px 0 16px; padding-bottom: 8px; border-bottom: 2px solid #6ACCE0; }
+h3 { font-size: 17px; margin: 24px 0 10px; color: #023C8F; }
+p { margin-bottom: 12px; font-size: 15px; }
+ul { margin: 8px 0 16px 20px; font-size: 15px; }
+li { margin-bottom: 6px; }
+.subtitle { color: #64748b; font-size: 15px; margin-bottom: 32px; }
+
+table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 14px; }
+th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+th { background: #172C4D; color: white; font-weight: 600; font-size: 13px; }
+td { background: white; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.green { color: #16a34a; font-weight: 600; }
+.red { color: #dc2626; font-weight: 600; }
+.yellow { color: #d97706; font-weight: 600; }
+.gray { color: #9ca3af; font-style: italic; }
+
+.obs-block { background: white; border-radius: 8px; padding: 20px 24px; margin: 16px 0; border-left: 4px solid #023C8F; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.obs-block.warning { border-left-color: #d97706; }
+.obs-block.risk { border-left-color: #dc2626; }
+.obs-block.positive { border-left-color: #16a34a; }
+
+.chip { display: inline-block; background: #6ACCE0; color: #172C4D; font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 12px; margin-right: 8px; vertical-align: middle; }
+
+/* Funnel navigation */
+.funnel-nav { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; margin: 24px 0; }
+.funnel-stage { text-align: center; padding: 14px 6px 10px; color: white; font-size: 12px; font-weight: 600; font-family: 'Poppins', sans-serif; text-decoration: none; position: relative; transition: opacity 0.2s; }
+.funnel-stage:hover { opacity: 0.85; }
+.funnel-stage span.owner { display: block; font-size: 10px; font-weight: 400; opacity: 0.85; margin-top: 2px; }
+.funnel-stage:nth-child(1) { background: #172C4D; border-radius: 6px 0 0 6px; }
+.funnel-stage:nth-child(2) { background: #023C8F; }
+.funnel-stage:nth-child(3) { background: #1a5cc8; }
+.funnel-stage:nth-child(4) { background: #2980d6; }
+.funnel-stage:nth-child(5) { background: #6ACCE0; color: #172C4D; }
+.funnel-stage:nth-child(6) { background: #4db8a7; }
+.funnel-stage:nth-child(7) { background: #16a34a; border-radius: 0 6px 6px 0; }
+
+.section-group { margin-bottom: 6px; }
+.section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; margin-bottom: 2px; }
+
+/* Rock status */
+.rock-row td:nth-child(3) { font-weight: 600; }
+.rock-on { color: #16a34a; }
+.rock-tbd { color: #9ca3af; font-style: italic; }
+
+.stale-flag { background: #fef3c7; color: #92400e; font-size: 12px; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+
+@media print { body { background: white; } .container { padding: 20px; } }
+</style>
+</head>
+<body>
+<script>
+(function(){
+  if(sessionStorage.getItem('dockwa_qbr_auth')!=='29560c1cb86aa128a23ec32fc44da828bc244371358db12fedf150b88b4fe5ac'){
+    window.location.href='login.html?redirect='+encodeURIComponent(location.pathname.split('/').pop()||'index.html');
+  }
+})();
+</script>
+<div class="container">
+
+<h1>Q1 2026 QBR Pre-Read Memo</h1>
+<p class="subtitle">Prepared March 9, 2026 by Katharine Kirk. Data through end of February + March MTD where available.<br>
+Metric and initiative owners: please verify the analysis and reply where prompted before the QBR.</p>
+
+<!-- ===== FUNNEL NAVIGATION ===== -->
+<h2><span class="chip">Funnel</span>Deep Dives by Stage</h2>
+<p style="font-size:14px; margin-bottom:16px;">Click any stage to see metrics, observations, and key initiatives.</p>
+
+<div class="funnel-nav">
+  <a class="funnel-stage" href="q1-funnel-awareness.html">Awareness<span class="owner">Erin / Matt</span></a>
+  <a class="funnel-stage" href="q1-funnel-engagement.html">Engagement<span class="owner">Erin / Matt</span></a>
+  <a class="funnel-stage" href="q1-funnel-acquisition.html">Acquisition<span class="owner">Matt</span></a>
+  <a class="funnel-stage" href="q1-funnel-implementation.html">Implementation<span class="owner">Jared</span></a>
+  <a class="funnel-stage" href="q1-funnel-activation.html">Activation<span class="owner">Abby</span></a>
+  <a class="funnel-stage" href="q1-funnel-adoption.html">Adoption<span class="owner">Abby</span></a>
+  <a class="funnel-stage" href="q1-funnel-retention.html">Retention<span class="owner">Abby</span></a>
+</div>
+
+<!-- ===== HEADLINE NUMBERS ===== -->
+<h2><span class="chip">Company</span>Headline Numbers</h2>
+
+<h3>Total ARR</h3>
+<table>
+<tr><th>Metric</th><th class="num">Q1 Budget</th><th class="num">Q1 QTD Actual</th><th class="num">Attainment</th><th>Trend Note</th></tr>
+<tr style="background:#f0f4f8;"><td><strong>Total ARR</strong></td><td class="num"><strong>$10.23M</strong></td><td class="num"><strong>$10.51M</strong></td><td class="num green"><strong>102.7%</strong></td><td>$2.7M above Q1 2025 QTD ($7.55M)</td></tr>
+</table>
+
+<h4 style="margin-top:20px;">Marina Business</h4>
+<table>
+<tr><th>Metric</th><th class="num">Q1 Budget</th><th class="num">Q1 QTD Actual</th><th class="num">Attainment</th><th>Trend Note</th></tr>
+<tr><td>&nbsp;&nbsp;Subscription ARR</td><td class="num" colspan="4"><span class="stale-flag">STALE DATA</span> Needs breakout from Company Scorecard</td></tr>
+<tr><td>&nbsp;&nbsp;Payments ARR</td><td class="num" colspan="4"><span class="stale-flag">STALE DATA</span> Needs breakout from Company Scorecard</td></tr>
+<tr><td><strong>Total Marina ARR</strong></td><td class="num">$9.87M</td><td class="num">$10.19M</td><td class="num green">103.2%</td><td>Subscription + Payments both above budget</td></tr>
+<tr><td>Paying Marinas</td><td class="num">1,125</td><td class="num">1,120</td><td class="num yellow">99.6%</td><td>Essentially flat</td></tr>
+<tr><td>Avg ARR per Marina</td><td class="num">$8,777</td><td class="num">$9,096</td><td class="num green">103.6%</td><td>Up from ~$6.7K in Q1 2025 (+36% YoY)</td></tr>
+</table>
+
+<h4>Boater Business (Dockwa+)</h4>
+<table>
+<tr><th>Metric</th><th class="num">Q1 Budget</th><th class="num">Q1 QTD Actual</th><th class="num">Attainment</th><th>Trend Note</th></tr>
+<tr><td>Boater ARR</td><td class="num">$353K</td><td class="num">$320K</td><td class="num red">90.5%</td><td>Below budget every month (93%, 93%, 91%)</td></tr>
+<tr><td>Paying Boaters</td><td class="num">4,780</td><td class="num">4,410</td><td class="num red">92.3%</td><td>370 subscribers short</td></tr>
+</table>
+
+<h3 style="margin-top:28px;">GPV</h3>
+<table>
+<tr><th>Metric</th><th class="num">Q1 Budget</th><th class="num">Q1 QTD Actual</th><th class="num">Attainment</th><th>Trend Note</th></tr>
+<tr style="background:#f0f4f8;"><td><strong>Total GPV</strong></td><td class="num"><strong>$85.6M</strong></td><td class="num"><strong>$76.5M</strong></td><td class="num yellow"><strong>89.4%</strong></td><td></td></tr>
+<tr><td>&nbsp;&nbsp;Transient</td><td class="num"></td><td class="num">69.6% of target</td><td class="num red">69.6%</td><td>Biggest GPV gap; likely seasonal component</td></tr>
+<tr><td>&nbsp;&nbsp;Contracts</td><td class="num"></td><td class="num">98.8% of target</td><td class="num green">98.8%</td><td>On track</td></tr>
+<tr><td>&nbsp;&nbsp;Fuel + POS</td><td class="num"></td><td class="num">86.5% of target</td><td class="num yellow">86.5%</td><td>Behind</td></tr>
+<tr><td>&nbsp;&nbsp;CC GPV</td><td class="num" colspan="4"><span class="stale-flag">STALE DATA</span> Needs breakout</td></tr>
+<tr><td>&nbsp;&nbsp;ACH GPV</td><td class="num" colspan="4"><span class="stale-flag">STALE DATA</span> Needs breakout</td></tr>
+</table>
+
+<!-- ===== COMPANY ROCKS ===== -->
+<h2><span class="chip">Rocks</span>Q1 Company Rock Review</h2>
+
+<table>
+<tr><th>Company Rock</th><th>Funnel Stage</th><th>Key Measures</th><th>Status</th></tr>
+<tr class="rock-row">
+  <td><strong>Acquisition Rock</strong><br>Pipeline Sufficiency Benchmarks</td>
+  <td>Engagement</td>
+  <td>Pipeline sufficiency benchmarks defined; fully ramped AEs at &ge;70% monthly quota</td>
+  <td class="rock-on">On Track</td>
+</tr>
+<tr class="rock-row">
+  <td><strong>Implementation Rock</strong><br>Standardize Throughput</td>
+  <td>Implementation</td>
+  <td>25 modules/month throughput; ISS capacity aligned</td>
+  <td class="rock-on">On Track</td>
+</tr>
+<tr class="rock-row">
+  <td><strong>Retention Rock</strong><br>Retention Ceremonies</td>
+  <td>Activation</td>
+  <td>Retention ceremonies defined and active; MSMs at 80% completion rate</td>
+  <td class="rock-on">On Track</td>
+</tr>
+</table>
+
+<div class="obs-block warning">
+  <ul>
+    <li>All 3 company rocks report "On Track." The Acquisition Rock's pipeline benchmarks are rolling out (Land Team active, Canada driving 20% of opps), but the $285K ARR pipeline gap flagged in the March 5 Pulse suggests the benchmarks may need recalibration.</li>
+    <li>The Retention Rock's ceremonies are defined and rolling out, but leading indicators haven't moved yet: activation stall rates remain 70-93% across modules and the 60-day activation ratio is 38.2% (target 50%).</li>
+    <li>Implementation Rock status needs verification from Jared: throughput data and capacity alignment numbers are <span class="stale-flag">STALE DATA</span> and should be updated for the QBR.</li>
+  </ul>
+</div>
+
+<!-- ===== CROSS-CUTTING THEMES ===== -->
+<h2><span class="chip">Synthesis</span>Cross-Cutting Themes for QBR Discussion</h2>
+
+<div class="obs-block">
+  <h4>1. ARR is strong, but growth quality mix deserves scrutiny</h4>
+  <ul>
+    <li>Expansion is overperforming (226% ARR attainment) and masking a new business slowdown (77.4% ARR attainment).</li>
+    <li>Expansion ACV is $2,665 vs $4,917 budget, suggesting lots of small module adds rather than strategic upsells.</li>
+    <li>If expansion normalizes, the new business pipeline gap becomes the binding constraint on growth.</li>
+  </ul>
+</div>
+
+<div class="obs-block warning">
+  <h4>2. Activation is the #1 retention lever and it's stuck</h4>
+  <ul>
+    <li>Modules that don't activate drive 58% of churn. Activation stall rates are 70-93% across products.</li>
+    <li>Implementation is overloaded (75% of team above forecast caseload).</li>
+    <li>The retention ceremonies rock is "on track" but hasn't moved the needle yet.</li>
+    <li>Key QBR question: what's the time-to-impact on activation initiatives, and is it fast enough?</li>
+  </ul>
+</div>
+
+<div class="obs-block warning">
+  <h4>3. Downgrades are an unbudgeted bleed</h4>
+  <ul>
+    <li>$69K in downgrades across 15 accounts with zero budgeted.</li>
+    <li>Needs root cause analysis: module-specific? Account-type-specific? Broader dissatisfaction signal?</li>
+  </ul>
+</div>
+
+<div class="obs-block">
+  <h4>4. Marketing funnel is underdelivering on expansion</h4>
+  <ul>
+    <li>Expansion MQLs at 19% of plan (12 vs 63 target). Expansion playbook is still missing per Pulse meeting.</li>
+    <li>Sales is self-sourcing NB effectively (SQL at 128% of NB budget), but expansion marketing is nearly absent.</li>
+    <li>This needs to become a Q2 priority if it isn't already.</li>
+  </ul>
+</div>
+
+<div class="obs-block">
+  <h4>5. Boater business is falling short</h4>
+  <ul>
+    <li>Dockwa+ has missed budget every month this quarter. 370 subscribers short of target.</li>
+    <li>Fuel deals are essentially not launched. Subscriber acquisition or retention (or both) is lagging.</li>
+    <li>Needs clarity on what's been tried and what's blocking faster growth.</li>
+  </ul>
+</div>
+
+<p style="margin-top: 40px; padding: 16px; background: #eef6fa; border-radius: 8px; font-size: 14px; color: #172C4D;">
+<strong>Next steps:</strong> Metric and initiative owners, please reply to the prompts in each funnel stage page by [date TBD]. Replies will be incorporated into the QBR issues list and added to the Q1 Review site. A separate list of issues surfaced from Slack, Drive, Jira, and email is available <a href="q1-2026-issues-list.html">here</a>.
+</p>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dockwa Quarterly Planning</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background: linear-gradient(135deg, #172C4D 0%, #1F2632 40%, #023C8F 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .login-card {
+    background: white;
+    border-radius: 12px;
+    padding: 48px 40px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    text-align: center;
+  }
+  .login-card img {
+    height: 28px;
+    margin-bottom: 32px;
+  }
+  .login-card h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #172C4D;
+    margin-bottom: 8px;
+  }
+  .login-card p {
+    font-size: 14px;
+    color: #718096;
+    margin-bottom: 28px;
+  }
+  .input-group {
+    position: relative;
+    margin-bottom: 16px;
+  }
+  .input-group input {
+    width: 100%;
+    padding: 12px 16px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .input-group input:focus {
+    border-color: #6ACCE0;
+  }
+  .input-group input.error {
+    border-color: #DD272C;
+  }
+  .login-btn {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    background: #172C4D;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .login-btn:hover {
+    background: #023C8F;
+  }
+  .error-msg {
+    color: #DD272C;
+    font-size: 13px;
+    margin-top: 12px;
+    display: none;
+  }
+  .error-msg.visible {
+    display: block;
+  }
+</style>
+</head>
+<body>
+<div class="login-card">
+  <img src="https://assets.dockwa.com/assets/logo/dockwa-logotype-color-35dd1a2e02a6eed65d498b0c3aa5fb068e71fc085e296f9b89e98b6cca8e56e1.png" alt="Dockwa">
+  <h1>Quarterly Planning</h1>
+  <p>Enter the password to continue.</p>
+  <form id="loginForm">
+    <div class="input-group">
+      <input type="password" id="password" placeholder="Password" autocomplete="off" autofocus>
+    </div>
+    <button type="submit" class="login-btn">Continue</button>
+    <div class="error-msg" id="errorMsg">Incorrect password. Try again.</div>
+  </form>
+</div>
+<script>
+async function hashPassword(pw) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(pw);
+  const hash = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  var pw = document.getElementById('password').value;
+  var hash = await hashPassword(pw);
+  if (hash === '29560c1cb86aa128a23ec32fc44da828bc244371358db12fedf150b88b4fe5ac') {
+    sessionStorage.setItem('dockwa_qbr_auth', hash);
+    var dest = new URLSearchParams(window.location.search).get('redirect') || 'index.html';
+    window.location.href = dest;
+  } else {
+    document.getElementById('password').classList.add('error');
+    document.getElementById('errorMsg').classList.add('visible');
+  }
+});
+document.getElementById('password').addEventListener('input', function() {
+  this.classList.remove('error');
+  document.getElementById('errorMsg').classList.remove('visible');
+});
+</script>
+</body>
+</html>

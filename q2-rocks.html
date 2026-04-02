@@ -99,6 +99,13 @@ td li { margin-bottom: 4px; }
 </style>
 </head>
 <body>
+<script>
+(function(){
+  if(sessionStorage.getItem('dockwa_qbr_auth')!=='29560c1cb86aa128a23ec32fc44da828bc244371358db12fedf150b88b4fe5ac'){
+    window.location.href='login.html?redirect='+encodeURIComponent(location.pathname.split('/').pop()||'index.html');
+  }
+})();
+</script>
 <nav class="global-nav">
   <div class="global-nav-inner">
     <a href="index.html" style="display:flex;align-items:center;padding:6px 16px 6px 4px;border:none;"><img src="https://assets.dockwa.com/assets/logo/dockwa-white-f6ced7057af8043f1db50689b3d608c81bd415a0fc483a2eb15a9586695385ba.png" alt="Dockwa" style="height:22px;"></a>

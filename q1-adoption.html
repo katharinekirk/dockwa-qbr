@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q1 2026 Deep Dive: Adoption & Retention</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark-blue:#172C4D; --navy:#1F2632; --brand-red:#DD272C;
+    --light-blue:#6ACCE0; --medium-blue:#023C8F; --ice-blue:#f2fbfc;
+    --light-grey-blue:#EFF4FA; --secondary-grey:#f1f5f8; --white:#ffffff;
+    --text-primary:#172C4D; --text-secondary:#4A5568; --text-light:#718096;
+    --green:#38A169; --yellow:#D69E2E; --red-soft:#E53E3E;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;scroll-padding-top:56px;}
+  body{font-family:'Open Sans',sans-serif;color:var(--text-primary);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4,h5{font-family:'Poppins',sans-serif;font-weight:600;line-height:1.2;}
+  .container{max-width:960px;margin:0 auto;padding:0 32px;}
+  .back-nav{background:var(--dark-blue);padding:12px 0;}
+  .back-nav a{color:rgba(255,255,255,0.7);text-decoration:none;font-family:'Poppins',sans-serif;font-size:13px;font-weight:500;transition:color 0.2s;}
+  .back-nav a:hover{color:white;}
+  .back-nav .sep{color:rgba(255,255,255,0.3);margin:0 8px;}
+  .hero-sub{background:linear-gradient(135deg,var(--dark-blue) 0%,var(--navy) 50%,#5a3d0a 100%);color:white;padding:60px 0 80px;position:relative;overflow:hidden;}
+  .hero-sub::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:60px;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,30 C360,60 720,0 1080,30 C1260,50 1380,40 1440,30 L1440,60 L0,60 Z' fill='%23ffffff'/%3E%3C/svg%3E") no-repeat bottom;background-size:cover;}
+  .hero-sub .badge{display:inline-block;background:rgba(214,158,46,0.2);color:#ECC94B;font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;padding:4px 14px;border-radius:16px;letter-spacing:0.5px;margin-bottom:16px;border:1px solid rgba(214,158,46,0.3);}
+  .hero-sub h1{font-size:40px;font-weight:700;margin-bottom:8px;}
+  .hero-sub .subtitle{font-size:17px;color:rgba(255,255,255,0.65);max-width:600px;}
+  .section{padding:48px 0;}
+  .section-alt{background:var(--ice-blue);}
+  .section h2{font-size:24px;color:var(--dark-blue);margin-bottom:6px;}
+  .section .section-desc{font-size:15px;color:var(--text-secondary);margin-bottom:28px;max-width:700px;}
+  .commitment-block{background:var(--light-grey-blue);border-left:4px solid var(--medium-blue);border-radius:0 12px 12px 0;padding:24px 28px;margin-bottom:32px;}
+  .commitment-block h3{font-size:14px;text-transform:uppercase;letter-spacing:0.8px;color:var(--medium-blue);margin-bottom:12px;}
+  .commitment-block ul{list-style:none;padding:0;}
+  .commitment-block li{padding:8px 0;border-bottom:1px solid rgba(23,44,77,0.08);font-size:14px;display:flex;justify-content:space-between;align-items:center;}
+  .commitment-block li:last-child{border-bottom:none;}
+  .data-table{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;}
+  .data-table thead th{font-family:'Poppins',sans-serif;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-light);padding:10px 14px;text-align:left;border-bottom:2px solid var(--light-grey-blue);}
+  .data-table tbody td{padding:12px 14px;border-bottom:1px solid var(--light-grey-blue);}
+  .data-table tbody tr:last-child td{border-bottom:none;}
+  .pill{display:inline-block;font-size:11px;font-weight:600;padding:3px 10px;border-radius:12px;}
+  .pill-green{background:#E6F7ED;color:#276749;}
+  .pill-yellow{background:#FEF5E7;color:#975A16;}
+  .pill-red{background:#FEE2E2;color:#9B2C2C;}
+  .pill-grey{background:var(--light-grey-blue);color:var(--text-secondary);}
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px;}
+  .kpi-item{text-align:center;padding:20px 8px;background:var(--white);border-radius:12px;box-shadow:0 2px 12px rgba(23,44,77,0.05);border:1px solid rgba(23,44,77,0.06);}
+  .kpi-item .kpi-value{font-family:'Poppins',sans-serif;font-size:28px;font-weight:700;color:var(--dark-blue);}
+  .kpi-item .kpi-label{font-size:12px;color:var(--text-light);margin-top:2px;}
+  .card{background:var(--white);border-radius:14px;padding:28px;box-shadow:0 2px 12px rgba(23,44,77,0.05);border:1px solid rgba(23,44,77,0.06);margin-bottom:20px;}
+  .card h3{font-size:18px;color:var(--dark-blue);margin-bottom:4px;}
+  .card .card-sub{font-size:13px;color:var(--text-light);margin-bottom:16px;}
+  .callout{background:linear-gradient(135deg,rgba(2,60,143,0.04) 0%,rgba(106,204,224,0.06) 100%);border:1px solid rgba(106,204,224,0.2);border-radius:12px;padding:16px 20px;margin-top:16px;font-size:14px;color:var(--text-secondary);}
+  .callout strong{color:var(--dark-blue);}
+  .callout-red{background:linear-gradient(135deg,rgba(229,62,62,0.04) 0%,rgba(229,62,62,0.06) 100%);border:1px solid rgba(229,62,62,0.15);}
+  .question-block{margin-bottom:28px;}
+  .question-block .question{font-family:'Poppins',sans-serif;font-size:15px;font-weight:600;color:var(--dark-blue);margin-bottom:8px;padding-left:16px;border-left:3px solid var(--yellow);}
+  .question-block .context{font-size:13px;color:var(--text-light);margin-bottom:8px;padding-left:16px;}
+  .question-block .answer-area{min-height:80px;padding:14px 16px;background:var(--white);border-radius:10px;box-shadow:0 1px 6px rgba(23,44,77,0.04);border:1px solid rgba(23,44,77,0.06);font-size:14px;color:var(--text-light);cursor:text;}
+  .question-block .answer-area:hover{border-color:rgba(106,204,224,0.4);}
+  .question-block .answer-area:focus{outline:none;border-color:var(--light-blue);box-shadow:0 0 0 3px rgba(106,204,224,0.15);}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .wave-divider{height:50px;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,25 C240,50 480,0 720,25 C960,50 1200,0 1440,25 L1440,50 L0,50 Z' fill='%23f2fbfc'/%3E%3C/svg%3E") no-repeat bottom;background-size:cover;}
+  .wave-divider-reverse{height:50px;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,25 C240,0 480,50 720,25 C960,0 1200,50 1440,25 L1440,0 L0,0 Z' fill='%23f2fbfc'/%3E%3C/svg%3E") no-repeat top;background-size:cover;}
+  .footer{background:var(--dark-blue);color:rgba(255,255,255,0.5);padding:32px 0;text-align:center;font-size:13px;}
+  .footer strong{color:rgba(255,255,255,0.8);font-family:'Poppins',sans-serif;}
+  @media(max-width:768px){.kpi-row{grid-template-columns:repeat(2,1fr);}.two-col{grid-template-columns:1fr;}.hero-sub h1{font-size:28px;}}
+</style>
+</head>
+<body>
+<script>
+(function(){
+  if(sessionStorage.getItem('dockwa_qbr_auth')!=='29560c1cb86aa128a23ec32fc44da828bc244371358db12fedf150b88b4fe5ac'){
+    window.location.href='login.html?redirect='+encodeURIComponent(location.pathname.split('/').pop()||'index.html');
+  }
+})();
+</script>
+
+<div class="back-nav">
+  <div class="container">
+    <a href="dockwa-q1-2026-review.html">Q1 2026 Review</a>
+    <span class="sep">/</span>
+    <a href="#" style="color:white;">Adoption & Retention Deep Dive</a>
+  </div>
+</div>
+
+<section class="hero-sub">
+  <div class="container">
+    <div class="badge">Funnel Stage 3</div>
+    <h1>Adoption & Retention</h1>
+    <p class="subtitle">Module activation, full adoption, churn dynamics, and the path to retention.</p>
+  </div>
+</section>
+
+<!-- ── What We Said We'd Do ── -->
+<section class="section">
+  <div class="container">
+    <h2>What We Said We'd Do</h2>
+    <p class="section-desc">Q1 rocks and commitments as stated at the start of the quarter.</p>
+
+    <div class="commitment-block">
+      <h3>Q1 Rocks</h3>
+      <ul>
+        <li>
+          <span>Define, monitor, and execute core customer retention ceremonies</span>
+          <span class="pill pill-green">On Track</span>
+        </li>
+        <li>
+          <span>Deliver Activation SOPs for all module types</span>
+          <span class="pill pill-green">On Track</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="commitment-block">
+      <h3>Annual Targets</h3>
+      <ul>
+        <li>
+          <span>Churn budget: $873K ARR churned/downsold</span>
+          <span class="pill pill-grey">Annual</span>
+        </li>
+        <li>
+          <span>Monthly logo churn: 9% target</span>
+          <span class="pill pill-grey">Annual</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── Key Metrics ── -->
+<div class="wave-divider"></div>
+<section class="section section-alt">
+  <div class="container">
+    <h2>Key Metrics</h2>
+    <p class="section-desc">Adoption penetration, churn performance, and activation health.</p>
+
+    <div class="kpi-row">
+      <div class="kpi-item">
+        <div class="kpi-value">317</div>
+        <div class="kpi-label">Marinas in Full Adoption</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">29%</div>
+        <div class="kpi-label">% of Logos</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">$3.24M</div>
+        <div class="kpi-label">Full Adoption ARR</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value" style="color:var(--red-soft);">Off Track</div>
+        <div class="kpi-label">Q1 Churn Status</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3>Churn Drivers</h3>
+        <p class="card-sub">Primary ARR impact by churn reason</p>
+        <table class="data-table">
+          <thead><tr><th>Driver</th><th>ARR Impact</th></tr></thead>
+          <tbody>
+            <tr><td>Corporate Decisions (M&A, closures)</td><td>$32K</td></tr>
+            <tr><td>Price Sensitivity</td><td>$25K</td></tr>
+            <tr><td>Product Limitations</td><td>$8.6K</td></tr>
+          </tbody>
+        </table>
+        <div class="callout callout-red">
+          <strong>Critical:</strong> 58% of churn comes from modules that never activated. 59% of churned modules were never in retention status.
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Activation Stall</h3>
+        <p class="card-sub">% of modules stalled at 60+ days by type</p>
+        <table class="data-table">
+          <thead><tr><th>Module</th><th>% Stalled 60+ Days</th></tr></thead>
+          <tbody>
+            <tr><td>Insights</td><td><span class="pill pill-red">93%</span></td></tr>
+            <tr><td>Storage</td><td><span class="pill pill-red">87%</span></td></tr>
+            <tr><td>Transient</td><td><span class="pill pill-red">77%</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout callout-red">
+          <strong>Install base risk:</strong> 215 accounts (20% of install base) have zero modules in retention.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="wave-divider-reverse"></div>
+
+<!-- ── Analysis Questions ── -->
+<section class="section">
+  <div class="container">
+    <h2>Analysis</h2>
+    <p class="section-desc">Answer each question with data and specifics.</p>
+
+    <div class="question-block">
+      <div class="question">We committed to defining and executing core retention ceremonies. Which ceremonies are live and running?</div>
+      <div class="context">What's the cadence, who owns each one, and what early signal are you seeing on effectiveness?</div>
+      <div class="answer-area" contenteditable="true">Enter your response here...</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">We committed to delivering Activation SOPs for all module types. Which are deployed vs. still in draft?</div>
+      <div class="context">Where are we ahead or behind the original plan? What's blocking the remaining ones?</div>
+      <div class="answer-area" contenteditable="true">Enter your response here...</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">58% of churn came from modules that never activated. What's the window where we lose them?</div>
+      <div class="context">At what point in the lifecycle does a non-activated module become unrecoverable? What intervention would actually change the outcome?</div>
+      <div class="answer-area" contenteditable="true">Enter your response here...</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">215 accounts (20% of install base) have zero modules in retention. Who are they?</div>
+      <div class="context">What do they have in common? Segment by size, tenure, modules sold, and implementation status. Are they saveable or already gone?</div>
+      <div class="answer-area" contenteditable="true">Enter your response here...</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">Which activation SOPs are showing results and which aren't?</div>
+      <div class="context">Where's the biggest gap between what we designed and what's actually happening on the ground? Is this a process problem or a capacity problem?</div>
+      <div class="answer-area" contenteditable="true">Enter your response here...</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">On the $25K in price-sensitivity churn: are these accounts that were mispriced, underusing the product, or something else?</div>
+      <div class="context">Could we have seen this coming? Is there a leading indicator we should be tracking?</div>
+      <div class="answer-area" contenteditable="true">Enter your response here...</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">What's the relationship between implementation completion and eventual churn?</div>
+      <div class="context">Do accounts that take longer to implement churn at higher rates? Is there a time threshold where risk spikes?</div>
+      <div class="answer-area" contenteditable="true">Enter your response here...</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">What's the single most important thing to change in Q2 to improve retention outcomes?</div>
+      <div class="context">Given everything above, what's the highest-leverage move?</div>
+      <div class="answer-area" contenteditable="true">Enter your response here...</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Data Sources ── -->
+<div class="wave-divider"></div>
+<section class="section section-alt">
+  <div class="container">
+    <h2>Data Sources</h2>
+    <p class="section-desc">Link the scorecards, dashboards, and pages you pulled from.</p>
+    <div class="card">
+      <div class="answer-area" contenteditable="true" style="min-height:100px;">1. [Link]
+2. [Link]
+3. [Link]</div>
+    </div>
+  </div>
+</section>
+<div class="wave-divider-reverse"></div>
+
+<footer class="footer">
+  <div class="container">
+    <p><strong>Dockwa</strong> &middot; Q1 2026 Adoption & Retention Deep Dive &middot; <a href="dockwa-q1-2026-review.html" style="color:var(--light-blue);text-decoration:none;">Back to main review</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

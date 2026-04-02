@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q1 2026 QBR Issues List (Draft for Verification)</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dk-dark: #172C4D;
+  --dk-red: #DD272C;
+  --dk-blue: #6ACCE0;
+  --dk-med: #023C8F;
+  --bg: #F8F9FB;
+  --card: #FFFFFF;
+  --border: #E2E8F0;
+  --text: #1E293B;
+  --muted: #64748B;
+  --green: #16A34A;
+  --yellow: #D97706;
+  --red: #DC2626;
+  --purple: #7C3AED;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Open Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+.header { background: var(--dk-dark); color: white; padding: 2rem; }
+.header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 600; }
+.header p { color: #94A3B8; font-size: 0.875rem; margin-top: 0.25rem; }
+.instructions { background: #FEF3C7; border-left: 4px solid var(--yellow); padding: 1rem 1.25rem; margin: 1.5rem; border-radius: 0 6px 6px 0; font-size: 0.875rem; }
+.instructions strong { color: var(--yellow); }
+.container { max-width: 960px; margin: 0 auto; padding: 0 1.5rem 3rem; }
+.category { margin-top: 2rem; }
+.category-header { font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--dk-dark); padding-bottom: 0.5rem; border-bottom: 2px solid var(--dk-dark); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.badge { font-size: 0.7rem; background: var(--dk-dark); color: white; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
+.issue-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 0.75rem; position: relative; }
+.issue-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.issue-title { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.95rem; color: var(--dk-dark); margin-bottom: 0.35rem; }
+.issue-desc { font-size: 0.85rem; color: var(--text); margin-bottom: 0.5rem; }
+.issue-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; font-size: 0.75rem; }
+.tag { padding: 2px 8px; border-radius: 4px; font-weight: 500; }
+.tag-source { background: #EEF2FF; color: var(--med); }
+.tag-severity-high { background: #FEE2E2; color: var(--red); }
+.tag-severity-med { background: #FEF3C7; color: var(--yellow); }
+.tag-severity-low { background: #DCFCE7; color: var(--green); }
+.tag-area { background: #F1F5F9; color: var(--muted); }
+.tag-positive { background: #DCFCE7; color: var(--green); }
+.verify-checkbox { position: absolute; top: 1rem; right: 1rem; display: flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; color: var(--muted); }
+.verify-checkbox input { width: 16px; height: 16px; accent-color: var(--dk-med); }
+.summary-bar { display: flex; gap: 1.5rem; padding: 1rem 1.5rem; background: white; border: 1px solid var(--border); border-radius: 8px; margin: 1.5rem; font-size: 0.85rem; flex-wrap: wrap; }
+.summary-item { display: flex; align-items: center; gap: 0.35rem; }
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot-high { background: var(--red); }
+.dot-med { background: var(--yellow); }
+.dot-low { background: var(--green); }
+.dot-pos { background: var(--dk-blue); }
+.footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.75rem; }
+@media print {
+  .header { padding: 1rem; }
+  .issue-card { break-inside: avoid; }
+  .verify-checkbox input { -webkit-appearance: checkbox; }
+}
+</style>
+</head>
+<body>
+<script>
+(function(){
+  if(sessionStorage.getItem('dockwa_qbr_auth')!=='29560c1cb86aa128a23ec32fc44da828bc244371358db12fedf150b88b4fe5ac'){
+    window.location.href='login.html?redirect='+encodeURIComponent(location.pathname.split('/').pop()||'index.html');
+  }
+})();
+</script>
+
+<div class="header">
+  <h1>Q1 2026 QBR: Uncaptured Issues List</h1>
+  <p>Draft for Katharine's verification | Compiled March 9, 2026 | Sources: Slack, Confluence, Google Drive, Gmail</p>
+</div>
+
+<div class="instructions">
+  <strong>How to use this:</strong> These issues were surfaced from system searches and are NOT in the scorecards or Q1 rocks. Check the box next to each issue you want included in the QBR. Unchecked items will be excluded.
+</div>
+
+<div class="summary-bar">
+  <div class="summary-item"><div class="dot dot-high"></div> <strong>10</strong> High severity</div>
+  <div class="summary-item"><div class="dot dot-med"></div> <strong>9</strong> Medium severity</div>
+  <div class="summary-item"><div class="dot dot-low"></div> <strong>7</strong> Low severity</div>
+  <div class="summary-item"><div class="dot dot-pos"></div> <strong>4</strong> Positive signals</div>
+  <div class="summary-item" style="margin-left:auto; color:var(--muted);">30 total items</div>
+</div>
+
+<div class="container">
+
+<!-- PRODUCT / ENGINEERING -->
+<div class="category">
+  <div class="category-header">Product & Engineering <span class="badge">12</span></div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">1. ThoughtSpot Analytics Dashboards: Booking vs. Served Data Confusion</div>
+    <div class="issue-desc">Safe Harbor analytics kickoff revealed dashboards default to booking metrics when marinas need served metrics for revenue planning. Terminology is misleading ("booking metrics" vs "confirmed reservations"). Served tab layout doesn't match booking tab. No prior-year comparisons on served view. Timeframe filter broken during demo.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack #shm, Mar 4</span>
+      <span class="tag tag-severity-high">High</span>
+      <span class="tag tag-area">Product / Safe Harbor</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">2. Waitlist Data Quality Bug</div>
+    <div class="issue-desc">Reservations that pass through the waitlist at any point remain labeled "waitlisted" permanently in reports, even after confirmation. Skews all reporting downstream. Steph McLaughlin (SH Regional VP) raised this directly. Hannah following up with specific examples.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack #shm, Mar 4</span>
+      <span class="tag tag-severity-high">High</span>
+      <span class="tag tag-area">Product / Data Quality</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">3. RevRec Dates Default to Today Instead of Reservation Dates</div>
+    <div class="issue-desc">When adding line items (electric, trailer, etc.) to a reservation, revenue recognition dates default to today's date rather than the reservation start/end date. Requires manual correction every time. Causes reporting errors for marinas using accrual accounting. Adrian committed to submitting a quick-win product fix; Hannah writing the ticket.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack #shm, Mar 4</span>
+      <span class="tag tag-severity-high">High</span>
+      <span class="tag tag-area">Product / Finance</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">4. Dockwa Chat Email Reply-To Bug (Gmail Domains)</div>
+    <div class="issue-desc">Emails sent from gmail.com addresses fail to forward replies back into Dockwa Chat threads. Issue has persisted since at least November 2025. Blocks communication workflows for marinas relying on Chat for boater correspondence.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack #troubleshooting</span>
+      <span class="tag tag-severity-med">Medium</span>
+      <span class="tag tag-area">Product / Support</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">5. Boater Account Linkage / Authentication Failure</div>
+    <div class="issue-desc">Boater accounts are not automatically linked on authentication even when email addresses match. Boaters get stuck in endless login loops. Blocks the boater onboarding experience and reduces activation.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack #troubleshooting</span>
+      <span class="tag tag-severity-high">High</span>
+      <span class="tag tag-area">Product / Boater Experience</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">6. Space Group Configuration is a "Black Box"</div>
+    <div class="issue-desc">Tyler called space groups "something of a black box" that are "very challenging to troubleshoot." Boats with no dimensions get routed to waitlist instead of error. Recommendation field shows full/irrelevant space groups in pending reservations, creating scrolling issues. Multiple marinas affected (Brunswick Landing, Port of South Whidbey).</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack #product_experts, Feb-Mar</span>
+      <span class="tag tag-severity-med">Medium</span>
+      <span class="tag tag-area">Product / MMS</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">7. Rates v2 Limitations and $0 Rate Bug</div>
+    <div class="issue-desc">Rates v2 doesn't support Storage spaces (Dock/Mooring only), no biannual or annual timeframes. $0 rate bug causes boaters to get stuck at the pricing step. Past Rates toggle returns empty results for v2 marinas. View Rates button only appears on post-migration reservations.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack #troubleshooting, Mar 2</span>
+      <span class="tag tag-severity-med">Medium</span>
+      <span class="tag tag-area">Product / Pricing</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">8. Contract Import Custom Rates Defaulting to Group Default</div>
+    <div class="issue-desc">Pope's Island Marina: ~200 contracts with custom prices all defaulted to group default rate on import. Import sheet may have issues or there's a platform bug. CS-1768 filed. Requires manual rate correction per contract if import can't be fixed.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack #product_experts, Dec 9</span>
+      <span class="tag tag-severity-med">Medium</span>
+      <span class="tag tag-area">Product / Implementation</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">9. Receipt/Invoice Merge Logic Bug</div>
+    <div class="issue-desc">Edge case involving specific invoice setup with multiple items, a product return, and invoice merging in a specific direction. TB-2634 filed. Unclear if it's merge logic or presentation logic. Maggie documented extensively.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack #marina-pod, Jan 14</span>
+      <span class="tag tag-severity-low">Low</span>
+      <span class="tag tag-area">Product / POS</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">10. QBO Integration Sync Failures</div>
+    <div class="issue-desc">Multiple accounts hitting "Failed" Accounts and Items Sync status. Products created in QBO not appearing in Dockwa products list. Jared escalated to Adrian/Scott on Mar 9. Comes right as QBO integration is a key competitive differentiator.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack #troubleshooting, Mar 9</span>
+      <span class="tag tag-severity-high">High</span>
+      <span class="tag tag-area">Product / Integrations</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">11. Boatless Contracts Gap vs. Molo</div>
+    <div class="issue-desc">Will flagged boatless contracts as "Reason #1 Molo beats us on." Feature gap in how Dockwa handles contracts without an associated vessel record. Competitive disadvantage in storage-heavy marinas.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack #product_experts, Mar 3</span>
+      <span class="tag tag-severity-med">Medium</span>
+      <span class="tag tag-area">Product / Competitive</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">12. Multi-Property Aggregated View Not Yet Available</div>
+    <div class="issue-desc">Safe Harbor needs company-wide and regional aggregated pacing views with drill-down to individual marinas. Adrian confirmed it's on the roadmap. Also raised: data visibility concern about whether any user on a multi-property account can view financials for all locations.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack #shm + #product_experts, Mar 4</span>
+      <span class="tag tag-severity-med">Medium</span>
+      <span class="tag tag-area">Product / Safe Harbor</span>
+    </div>
+  </div>
+</div>
+
+<!-- FINANCIAL / REPORTING -->
+<div class="category">
+  <div class="category-header">Financial & Reporting <span class="badge">3</span></div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">13. Revenue Attribution at Transaction Level: "Credibility Issue"</div>
+    <div class="issue-desc">Mike called the inability to attribute revenue at the transaction level a "credibility issue" and "real liability with larger groups." Undermines reporting confidence for enterprise accounts and hinders Series D data story.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack, Q1</span>
+      <span class="tag tag-severity-high">High</span>
+      <span class="tag tag-area">Finance / Product</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">14. Failed ACH Refund Reappearing in Reports</div>
+    <div class="issue-desc">Pat Moran $1,000 ACH refund from October 2025 resurfaced in February 2026 accrual reports. Ghost transactions in financial data erode trust in reporting accuracy and create audit risk.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack #finance</span>
+      <span class="tag tag-severity-med">Medium</span>
+      <span class="tag tag-area">Finance / Payments</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">15. NetSuite Integration Mismatch</div>
+    <div class="issue-desc">Safe Harbor's accounting team pulls raw Dockwa data and reformulates it, leading to inconsistencies between Dockwa reports and NetSuite. Accrual projection report is useful but doesn't match what goes into NetSuite (accounting may be using cash report instead). Larger integration conversation planned with Tammy and Mark.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack #shm, Mar 4</span>
+      <span class="tag tag-severity-med">Medium</span>
+      <span class="tag tag-area">Finance / Safe Harbor</span>
+    </div>
+  </div>
+</div>
+
+<!-- WINDWARD / SAFE HARBOR OPS -->
+<div class="category">
+  <div class="category-header">Windward / Safe Harbor Operations <span class="badge">4</span></div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">16. Windward Auto-Settle Payment Validation Errors</div>
+    <div class="issue-desc">Payment validation errors occurring during auto-settle at Windward properties. Blocks automated payment collection, requiring manual intervention. Part of the broader Windward operational fire consuming engineering bandwidth.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack #troubleshooting</span>
+      <span class="tag tag-severity-high">High</span>
+      <span class="tag tag-area">Operations / Windward</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">17. CC Fee Tax Exemption for Government Contracts</div>
+    <div class="issue-desc">Windward needs CC fee tax exemption handling for government contracts. Current system doesn't accommodate tax-exempt processing requirements, creating manual workarounds and compliance risk.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack #troubleshooting</span>
+      <span class="tag tag-severity-low">Low</span>
+      <span class="tag tag-area">Product / Payments</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">18. Windward Accounting Integration Consuming Droz's Bandwidth</div>
+    <div class="issue-desc">Droz is tied up with "high priority accounting integration work for Windward." This is pulling senior engineering capacity away from other product work. Unclear timeline for completion.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack, Q1</span>
+      <span class="tag tag-severity-high">High</span>
+      <span class="tag tag-area">Engineering / Capacity</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">19. Safe Harbor Membership Discount Configuration Gaps</div>
+    <div class="issue-desc">Port Annapolis (newly acquired by SH) not automatically giving member transient discounts. Process to onboard new SH acquisitions into discount system unclear. Membership auto-connect question for republished marinas still open. Configuration relies on Salesforce parent/child account structure.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack #troubleshooting + #product_experts</span>
+      <span class="tag tag-severity-low">Low</span>
+      <span class="tag tag-area">Operations / Safe Harbor</span>
+    </div>
+  </div>
+</div>
+
+<!-- GTM / COMPETITIVE -->
+<div class="category">
+  <div class="category-header">GTM & Competitive <span class="badge">3</span></div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">20. Service/Work Orders: #1 Functional Sales Blocker</div>
+    <div class="issue-desc">Bet Commissioning data shows 503 closed-lost opportunities cite missing service/work order management as the reason. Confirmed in pulse reviews as the top functional gap blocking new business. Directly limits TAM expansion into full-service marinas.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Confluence: Bet Commissioning</span>
+      <span class="tag tag-severity-high">High</span>
+      <span class="tag tag-area">Product / Sales</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">21. Molo Competitive Pressure on Pricing and Features</div>
+    <div class="issue-desc">Multiple deal desk discussions show Molo undercutting on price (Semiahmoo, English Landing). Bahia Mar (Suntex) churned to Molo on renewal. Will noted Dockwa was "more expensive than both Sharper and Molo." Monthly billing without surcharge is a Molo standard that Dockwa charges for. Zebra barcode scanner compatibility gap for Molo switchers.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack #deal-desk + #renewal_desk</span>
+      <span class="tag tag-severity-med">Medium</span>
+      <span class="tag tag-area">Sales / Competitive</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">22. Expansion MQL Generation at 19% of Plan</div>
+    <div class="issue-desc">Already in scorecard but worth flagging: expansion MQLs at 12 vs 63 target (19%). Expansion opps at 36.8% of plan. Marketing funnel for existing customer growth is severely underperforming. This compounds the downgrade/churn pressure.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Scorecard + Confluence pulse reviews</span>
+      <span class="tag tag-severity-high">High</span>
+      <span class="tag tag-area">Marketing / Growth</span>
+    </div>
+  </div>
+</div>
+
+<!-- ORG / CAPACITY -->
+<div class="category">
+  <div class="category-header">Organization & Capacity <span class="badge">4</span></div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">23. Implementation Caseload 75% Above Forecast</div>
+    <div class="issue-desc">IS caseload running 75% above forecast. T30 backlog ratio at 2.05:1, T90 at 1.61:1. Creates risk of delayed go-lives, which feeds directly into churn (Failure to Launch was $27.6K of churned ARR in Q1). Staffing capacity flagged in IS & MSM Funnel Review.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Confluence: Implementation Pulse</span>
+      <span class="tag tag-severity-high">High</span>
+      <span class="tag tag-area">Operations / Capacity</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">24. Tyler's Sabbatical: Support Leadership Gap Starting June 2026</div>
+    <div class="issue-desc">Tyler starts sabbatical June 2026. Jared is planned to take on Support leadership. Concerns: limited accounting integration expertise on the team, capacity already stretched with implementation backlog. Google Drive doc "Implementation & Support Leadership Structure" documents the transition plan and open questions.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Google Drive discussion doc</span>
+      <span class="tag tag-severity-med">Medium</span>
+      <span class="tag tag-area">Org / Leadership</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">25. Three Key Hires Still Open</div>
+    <div class="issue-desc">2026 Hiring Strategy doc lists Director of Sales, Director of Boater Growth, and VP Engineering backfill as top 3 priorities. Freelance-first approach for Product Marketing. No indication of timeline or pipeline status from Slack searches. Each role has downstream impact on Q2+ execution.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Google Drive: 2026 Hiring Strategy</span>
+      <span class="tag tag-severity-med">Medium</span>
+      <span class="tag tag-area">Org / Hiring</span>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">26. Support Team Bandwidth Already Strained</div>
+    <div class="issue-desc">Eric White noted the support team was "a bit thin on the bandwidth" during a routine customer escalation in December. Jennifer Shih asked to "prioritize this bug ticket" because it's "blocking marinas from converting/completing tasks" in March. Pattern of reactive prioritization suggests capacity is running tight ahead of peak season.</div>
+    <div class="issue-meta">
+      <span class="tag tag-source">Slack #customer_support, Dec + Mar</span>
+      <span class="tag tag-severity-low">Low</span>
+      <span class="tag tag-area">Operations / Support</span>
+    </div>
+  </div>
+</div>
+
+<!-- POSITIVE SIGNALS -->
+<div class="category">
+  <div class="category-header" style="color: var(--green); border-color: var(--green);">Positive Signals (Not Issues) <span class="badge" style="background: var(--green);">4</span></div>
+
+  <div class="issue-card" style="border-left: 3px solid var(--green);">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">A. Safe Harbor NE Regional Meeting: Strong Relationship Signal</div>
+    <div class="issue-desc">Hanna and Abby presented to 60+ DMs, GMs, and RVPs at Safe Harbor NE. GMs approached them unprompted to say they love Dockwa. Audience asked about getting back on Dockwa (Mystic location). RVPs confirmed their most critical data comes from Dockwa. SH concierge team presentation was driven by Dockwa data.</div>
+    <div class="issue-meta">
+      <span class="tag tag-positive">Positive</span>
+      <span class="tag tag-source">Slack #general, Mar 4</span>
+      <span class="tag tag-area">Sales / Safe Harbor</span>
+    </div>
+  </div>
+
+  <div class="issue-card" style="border-left: 3px solid var(--green);">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">B. QBO Integration Driving Competitor Wins</div>
+    <div class="issue-desc">US Marina Group (7 FL locations, $8-10M GPV, on Molo 4 years) ready to switch after QBO integration demo. Accountant was "literally jumping out of her chair." Late fees, messages on customer tab, and LIL QBO integration specifically cited as differentiators. Matt noted it's making a "big difference" in competitive deals.</div>
+    <div class="issue-meta">
+      <span class="tag tag-positive">Positive</span>
+      <span class="tag tag-source">Slack #marina-pod, Jan 6</span>
+      <span class="tag tag-area">Product / Sales</span>
+    </div>
+  </div>
+
+  <div class="issue-card" style="border-left: 3px solid var(--green);">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">C. Native Dockwalk iOS Beta Launched</div>
+    <div class="issue-desc">Native Dockwalk iOS app launched in beta with 5 marinas. Team looking to expand to 10-15 beta sites. Milestone for mobile marina operations.</div>
+    <div class="issue-meta">
+      <span class="tag tag-positive">Positive</span>
+      <span class="tag tag-source">Slack, Q1</span>
+      <span class="tag tag-area">Product</span>
+    </div>
+  </div>
+
+  <div class="issue-card" style="border-left: 3px solid var(--green);">
+    <label class="verify-checkbox"><input type="checkbox"> Include</label>
+    <div class="issue-title">D. AI Tools (Dockbot + Spotter) Gaining Traction</div>
+    <div class="issue-desc">Dockbot actively used by support and product expert teams for troubleshooting. Spotter (AI chatbot for marina data queries) previewed to Safe Harbor with positive reception. Interest in scenario projections (upside/base/downside). Blaine asked to submit sample questions for training.</div>
+    <div class="issue-meta">
+      <span class="tag tag-positive">Positive</span>
+      <span class="tag tag-source">Slack #shm + #product_experts</span>
+      <span class="tag tag-area">Product / Innovation</span>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  Compiled from Slack, Confluence, Google Drive, and Gmail searches across Q1 2026.<br>
+  Items are candidates for the QBR issues list. Katharine to verify which to include.
+</div>
+
+<script>
+// Simple counter for checked items
+document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    const checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    const total = document.querySelectorAll('input[type="checkbox"]').length;
+    document.title = `(${checked}/${total} selected) Q1 2026 QBR Issues List`;
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q1 2026 Deep Dive: Implementation</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark-blue: #172C4D; --navy: #1F2632; --brand-red: #DD272C;
+    --light-blue: #6ACCE0; --medium-blue: #023C8F; --ice-blue: #f2fbfc;
+    --light-grey-blue: #EFF4FA; --secondary-grey: #f1f5f8; --white: #ffffff;
+    --text-primary: #172C4D; --text-secondary: #4A5568; --text-light: #718096;
+    --green: #38A169; --yellow: #D69E2E; --red-soft: #E53E3E;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; scroll-padding-top:56px; }
+  body { font-family:'Open Sans',sans-serif; color:var(--text-primary); background:var(--white); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,h4,h5 { font-family:'Poppins',sans-serif; font-weight:600; line-height:1.2; }
+  .container { max-width:960px; margin:0 auto; padding:0 32px; }
+  .back-nav { background:var(--dark-blue); padding:12px 0; }
+  .back-nav a { color:rgba(255,255,255,0.7); text-decoration:none; font-family:'Poppins',sans-serif; font-size:13px; font-weight:500; transition:color 0.2s; }
+  .back-nav a:hover { color:white; }
+  .back-nav .sep { color:rgba(255,255,255,0.3); margin:0 8px; }
+  .hero-sub { background:linear-gradient(135deg,var(--dark-blue) 0%,var(--navy) 50%,#0c3d5e 100%); color:white; padding:60px 0 80px; position:relative; overflow:hidden; }
+  .hero-sub::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:60px; background:url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,30 C360,60 720,0 1080,30 C1260,50 1380,40 1440,30 L1440,60 L0,60 Z' fill='%23ffffff'/%3E%3C/svg%3E") no-repeat bottom; background-size:cover; }
+  .hero-sub .badge { display:inline-block; background:rgba(106,204,224,0.2); color:var(--light-blue); font-family:'Poppins',sans-serif; font-size:12px; font-weight:600; padding:4px 14px; border-radius:16px; letter-spacing:0.5px; margin-bottom:16px; border:1px solid rgba(106,204,224,0.3); }
+  .hero-sub h1 { font-size:40px; font-weight:700; margin-bottom:8px; }
+  .hero-sub .subtitle { font-size:17px; color:rgba(255,255,255,0.65); max-width:600px; }
+  .section { padding:48px 0; }
+  .section-alt { background:var(--ice-blue); }
+  .section h2 { font-size:24px; color:var(--dark-blue); margin-bottom:6px; }
+  .section .section-desc { font-size:15px; color:var(--text-secondary); margin-bottom:28px; max-width:700px; }
+  .commitment-block { background:var(--light-grey-blue); border-left:4px solid var(--medium-blue); border-radius:0 12px 12px 0; padding:24px 28px; margin-bottom:32px; }
+  .commitment-block h3 { font-size:14px; text-transform:uppercase; letter-spacing:0.8px; color:var(--medium-blue); margin-bottom:12px; }
+  .commitment-block ul { list-style:none; padding:0; }
+  .commitment-block li { padding:8px 0; border-bottom:1px solid rgba(23,44,77,0.08); font-size:14px; display:flex; justify-content:space-between; align-items:center; }
+  .commitment-block li:last-child { border-bottom:none; }
+  .data-table { width:100%; border-collapse:separate; border-spacing:0; font-size:14px; }
+  .data-table thead th { font-family:'Poppins',sans-serif; font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-light); padding:10px 14px; text-align:left; border-bottom:2px solid var(--light-grey-blue); }
+  .data-table tbody td { padding:12px 14px; border-bottom:1px solid var(--light-grey-blue); }
+  .data-table tbody tr:last-child td { border-bottom:none; }
+  .pill { display:inline-block; font-size:11px; font-weight:600; padding:3px 10px; border-radius:12px; }
+  .pill-green { background:#E6F7ED; color:#276749; }
+  .pill-yellow { background:#FEF5E7; color:#975A16; }
+  .pill-red { background:#FEE2E2; color:#9B2C2C; }
+  .pill-blue { background:#E0F2FE; color:#0C5A97; }
+  .pill-grey { background:var(--light-grey-blue); color:var(--text-secondary); }
+  .kpi-row { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:32px; }
+  .kpi-item { text-align:center; padding:20px 8px; background:var(--white); border-radius:12px; box-shadow:0 2px 12px rgba(23,44,77,0.05); border:1px solid rgba(23,44,77,0.06); }
+  .kpi-item .kpi-value { font-family:'Poppins',sans-serif; font-size:28px; font-weight:700; color:var(--dark-blue); }
+  .kpi-item .kpi-label { font-size:12px; color:var(--text-light); margin-top:2px; }
+  .card { background:var(--white); border-radius:14px; padding:28px; box-shadow:0 2px 12px rgba(23,44,77,0.05); border:1px solid rgba(23,44,77,0.06); margin-bottom:20px; }
+  .card h3 { font-size:18px; color:var(--dark-blue); margin-bottom:4px; }
+  .card .card-sub { font-size:13px; color:var(--text-light); margin-bottom:16px; }
+  .callout { background:linear-gradient(135deg,rgba(2,60,143,0.04) 0%,rgba(106,204,224,0.06) 100%); border:1px solid rgba(106,204,224,0.2); border-radius:12px; padding:16px 20px; margin-top:16px; font-size:14px; color:var(--text-secondary); }
+  .callout strong { color:var(--dark-blue); }
+  .question-block { margin-bottom:28px; }
+  .question-block .question { font-family:'Poppins',sans-serif; font-size:15px; font-weight:600; color:var(--dark-blue); margin-bottom:8px; padding-left:16px; border-left:3px solid var(--light-blue); }
+  .question-block .context { font-size:13px; color:var(--text-light); margin-bottom:8px; padding-left:16px; }
+  .question-block .answer-area { min-height:80px; padding:14px 16px; background:var(--white); border-radius:10px; box-shadow:0 1px 6px rgba(23,44,77,0.04); border:1px solid rgba(23,44,77,0.06); font-size:14px; color:var(--text-light); cursor:text; }
+  .question-block .answer-area:hover { border-color:rgba(106,204,224,0.4); }
+  .question-block .answer-area:focus { outline:none; border-color:var(--light-blue); box-shadow:0 0 0 3px rgba(106,204,224,0.15); }
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .wave-divider { height:50px; background:url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,25 C240,50 480,0 720,25 C960,50 1200,0 1440,25 L1440,50 L0,50 Z' fill='%23f2fbfc'/%3E%3C/svg%3E") no-repeat bottom; background-size:cover; }
+  .wave-divider-reverse { height:50px; background:url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,25 C240,0 480,50 720,25 C960,0 1200,50 1440,25 L1440,0 L0,0 Z' fill='%23f2fbfc'/%3E%3C/svg%3E") no-repeat top; background-size:cover; }
+  .footer { background:var(--dark-blue); color:rgba(255,255,255,0.5); padding:32px 0; text-align:center; font-size:13px; }
+  .footer strong { color:rgba(255,255,255,0.8); font-family:'Poppins',sans-serif; }
+  @media (max-width:768px) { .kpi-row{grid-template-columns:repeat(2,1fr);} .two-col{grid-template-columns:1fr;} .hero-sub h1{font-size:28px;} }
+</style>
+</head>
+<body>
+<script>
+(function(){
+  if(sessionStorage.getItem('dockwa_qbr_auth')!=='29560c1cb86aa128a23ec32fc44da828bc244371358db12fedf150b88b4fe5ac'){
+    window.location.href='login.html?redirect='+encodeURIComponent(location.pathname.split('/').pop()||'index.html');
+  }
+})();
+</script>
+
+<div class="back-nav">
+  <div class="container">
+    <a href="dockwa-q1-2026-review.html">Q1 2026 Review</a>
+    <span class="sep">/</span>
+    <a href="#" style="color:white;">Implementation Deep Dive</a>
+  </div>
+</div>
+
+<section class="hero-sub">
+  <div class="container">
+    <div class="badge">Funnel Stage 2</div>
+    <h1>Implementation</h1>
+    <p class="subtitle">Throughput, success rates, backlog health, and what's driving case aging.</p>
+  </div>
+</section>
+
+<!-- ── What We Said We'd Do ── -->
+<section class="section">
+  <div class="container">
+    <h2>What We Said We'd Do</h2>
+    <p class="section-desc">Q1 rocks and commitments as stated at the start of the quarter.</p>
+
+    <div class="commitment-block">
+      <h3>Q1 Rocks</h3>
+      <ul>
+        <li>
+          <span>Standardize metrics for implementation throughput</span>
+          <span class="pill pill-blue">Complete</span>
+        </li>
+        <li>
+          <span>Analyze implementation bottlenecks and identify root causes</span>
+          <span class="pill pill-green">On Track</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── Key Metrics ── -->
+<div class="wave-divider"></div>
+<section class="section section-alt">
+  <div class="container">
+    <h2>Key Metrics</h2>
+    <p class="section-desc">Core throughput and backlog health indicators for Q1.</p>
+
+    <div class="kpi-row">
+      <div class="kpi-item">
+        <div class="kpi-value">84.2%</div>
+        <div class="kpi-label">Success Rate</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">112</div>
+        <div class="kpi-label">Completed</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">21</div>
+        <div class="kpi-label">Declined</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-value">283</div>
+        <div class="kpi-label">Cases in Backlog</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3>Backlog Ratios</h3>
+        <p class="card-sub">Throughput vs. intake health</p>
+        <table class="data-table">
+          <thead><tr><th>Metric</th><th>Q1 Actual</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>30-Day Backlog Ratio</td><td>0.81:1</td><td><span class="pill pill-green">On Track</span></td></tr>
+            <tr><td>90-Day Backlog Ratio</td><td>1.15:1</td><td><span class="pill pill-red">Off Track</span></td></tr>
+            <tr><td>% Cases Under 60 Days</td><td>38.2%</td><td><span class="pill pill-red">Off Track</span></td></tr>
+            <tr><td>Avg Case Age (Q1)</td><td>70.4 days</td><td><span class="pill pill-yellow">Elevated</span></td></tr>
+            <tr><td>Avg Case Age (TTM)</td><td>75.1 days</td><td><span class="pill pill-yellow">Elevated</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>Backlog Composition</h3>
+        <p class="card-sub">283 cases across 131 marinas</p>
+        <div style="text-align:center; padding:16px 0;">
+          <div style="font-family:'Poppins',sans-serif; font-size:48px; font-weight:700; color:var(--dark-blue);">46.5%</div>
+          <div style="font-size:14px; color:var(--text-light);">of backlog has only 1 module remaining</div>
+        </div>
+        <div class="callout">
+          <strong>Opportunity:</strong> Nearly half the backlog is one module away from completion. A focused push here could materially improve success rate and reduce overall case age.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="wave-divider-reverse"></div>
+
+<!-- ── Analysis Questions ── -->
+<section class="section">
+  <div class="container">
+    <h2>Analysis</h2>
+    <p class="section-desc">Answer each question with data and specifics.</p>
+
+    <div class="question-block">
+      <div class="question">The throughput metrics rock is marked complete. What metrics are we now tracking, and what did the first reads tell us?</div>
+      <div class="context">What baselines were established? Are there metrics we expected to track but couldn't?</div>
+      <div class="answer-area" contenteditable="true">Enter your response here...</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">The bottleneck analysis rock is on track. What have we found so far, and what actions came out of it?</div>
+      <div class="context">Specific bottlenecks identified, root causes, and any process changes already made or planned.</div>
+      <div class="answer-area" contenteditable="true">Enter your response here...</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">46.5% of backlog cases have one module left. What's actually blocking those from closing?</div>
+      <div class="context">Is it us, the marina, or the product? Break down the blockers by category if possible.</div>
+      <div class="answer-area" contenteditable="true">Enter your response here...</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">The 90-day backlog ratio is off track at 1.15:1. Is this getting worse, stable, or improving?</div>
+      <div class="context">What's driving the long tail? Is this a cohort effect from a specific period, or systemic?</div>
+      <div class="answer-area" contenteditable="true">Enter your response here...</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">Which modules take the longest to implement and why?</div>
+      <div class="context">Is there a pattern in what stalls? Does this correlate with marina size, type, or sales process?</div>
+      <div class="answer-area" contenteditable="true">Enter your response here...</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">Of the 21 declined cases, what were the top reasons?</div>
+      <div class="context">Are any of those preventable earlier in the funnel? Is sales setting expectations that implementation can't meet?</div>
+      <div class="answer-area" contenteditable="true">Enter your response here...</div>
+    </div>
+
+    <div class="question-block">
+      <div class="question">What's the single most important thing to change in Q2 to improve implementation outcomes?</div>
+      <div class="context">Given everything above, what's the highest-leverage move?</div>
+      <div class="answer-area" contenteditable="true">Enter your response here...</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Data Sources ── -->
+<div class="wave-divider"></div>
+<section class="section section-alt">
+  <div class="container">
+    <h2>Data Sources</h2>
+    <p class="section-desc">Link the scorecards, dashboards, and pages you pulled from.</p>
+    <div class="card">
+      <div class="answer-area" contenteditable="true" style="min-height:100px;">1. [Link]
+2. [Link]
+3. [Link]</div>
+    </div>
+  </div>
+</section>
+<div class="wave-divider-reverse"></div>
+
+<footer class="footer">
+  <div class="container">
+    <p><strong>Dockwa</strong> &middot; Q1 2026 Implementation Deep Dive &middot; <a href="dockwa-q1-2026-review.html" style="color:var(--light-blue); text-decoration:none;">Back to main review</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
